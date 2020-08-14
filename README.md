@@ -2,6 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.4.
 
+## Install
+
+0. Clone the repo and put it next to the backend repo
+1. Do `npm install`
+2. Do `npm install --only=dev`
+3. Run the frontend using `ng serve`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
