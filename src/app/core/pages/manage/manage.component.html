@@ -48,7 +48,7 @@
 
                             <tbody>
 <!--                            <tr ng-repeat="activity in activities | orderBy:sortTypeActivities:sortReverseActivities | filter:searchQueryActivities">-->
-                            <tr *ngFor="let activity of activities">
+                            <tr *ngFor="let activity of activities | filterPipe : activityCallback : searchQueryActivities">
                                 <td><a href="/activities/{{activity.id}}#signup">{{activity.name}}</a></td>
                                 <td>{{activity.date | date:'yyyy-MM-dd'}}</td>
                                 <td>{{activity.Organizer.displayName}}</td>
@@ -100,7 +100,7 @@
                             </thead>
 
                             <tbody>
-                            <tr *ngFor="let user of users">
+                            <tr *ngFor="let user of users | filterPipe : userCallback : searchQueryUsers">
 <!--                            <tr ng-repeat="user in users | orderBy:sortTypeUsers:sortReverseUsers | filter:searchQueryUsers">-->
                                 <td><a href="/user/{{user.id}}">{{user.displayName}}</a></td>
                                 <td>{{user.email}}</td>
@@ -146,7 +146,7 @@
                             </thead>
 
                             <tbody>
-                            <tr *ngFor="let group of groups">
+                            <tr *ngFor="let group of groups | filterPipe : groupCallback : searchQueryGroups">
 <!--                            <tr ng-repeat="group in groups | orderBy:sortTypeGroups:sortReverseGroups | filter:searchQueryGroups">-->
                                 <td><a href="/group/{{group.id}}">{{group.fullName}} ({{group.displayName}})</a></td>
                                 <td>{{group.email}}</td>

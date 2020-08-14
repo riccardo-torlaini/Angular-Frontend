@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../services/activities/activities.service";
+import {FilterPipe} from "../../pipes/filter.pipe";
 
 @Component({
     selector: 'app-manage',
@@ -18,16 +19,17 @@ export class ManageComponent implements OnInit {
     groups: any[];
     activities: any[];
 
-    sortTypeActivities: string;
-    sortReverseActivities: boolean;
-    searchQueryActivities: string;
+    sortTypeActivities = 'id';
+    sortReverseActivities = false;
+    searchQueryActivities = "";
 
-    sortTypeUsers: string;
-    sortReverseUsers: boolean;
-    searchQueryUsers: string;
-    sortTypeGroups: string;
-    sortReverseGroups: boolean;
-    searchQueryGroups: string;
+    sortTypeUsers = 'id';
+    sortReverseUsers = false;
+    searchQueryUsers = "";
+
+    sortTypeGroups = 'id';
+    sortReverseGroups = false;
+    searchQueryGroups = "";
 
     private datepicker: { open: boolean };
 
@@ -40,7 +42,8 @@ export class ManageComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
                 public authService: AuthService,
-                private activitiesService: ActivitiesService) {
+                private activitiesService: ActivitiesService,
+                private filterPipe: FilterPipe) {
         this.loading = true;
         this.f = {
             date: new Date()
@@ -49,17 +52,14 @@ export class ManageComponent implements OnInit {
         // Variables for tracking search & sorting in activities tab
         this.sortTypeActivities = 'id';
         this.sortReverseActivities = false;
-        this.searchQueryActivities = '';
 
         // Variables for tracking search & sorting in users tab
         this.sortTypeUsers = 'id';
         this.sortReverseUsers = false;
-        this.searchQueryUsers = '';
 
         // Variables for tracking search & sorting in groups tab
         this.sortTypeGroups = 'id';
         this.sortReverseGroups = false;
-        this.searchQueryGroups = '';
 
         this.datepicker = {open: false};
     }
@@ -131,6 +131,21 @@ export class ManageComponent implements OnInit {
             this.sortReverseGroups = false;
         }
         this.sortTypeGroups = type;
+    }
+
+    activityCallback(activity, query) {
+        return activity.Organizer.displayName.toLowerCase().includes(query.toLowerCase())
+            || activity.name.toLowerCase().includes(query.toLowerCase());
+    }
+
+    userCallback(user, query) {
+        return user.email.toLowerCase().includes(query.toLowerCase())
+            || user.displayName.toLowerCase().includes(query.toLowerCase());
+    }
+
+    groupCallback(group, query) {
+        return group.fullName.toLowerCase().includes(query.toLowerCase())
+            || group.email.toLowerCase().includes(query.toLowerCase());
     }
 
     // function for using datepicker in form for creating activities
