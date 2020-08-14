@@ -19,8 +19,8 @@ export class GroupEditComponent implements OnInit {
 
     group;
     private allUsers;
-    searchQueryUsersNotInGroup;
-    searchQueryUsersInGroup;
+    searchQueryUsersNotInGroup = "";
+    searchQueryUsersInGroup = "";
 
     loading: boolean;
 
@@ -74,6 +74,10 @@ export class GroupEditComponent implements OnInit {
         this.userGroup.splice(index, 1);
         this.usersNotInGroup.sort(this.compare);
         this.userGroup.sort(this.compare);
+    }
+
+    userCallbackFilter(user, query) {
+        return (user as any).name.toLowerCase().includes(query.toLowerCase());
     }
 
     submit() {
