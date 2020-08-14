@@ -1,0 +1,55 @@
+<div class="container">
+    <h2>Profile</h2>
+    <div class="profileTable">
+        <table>
+            <tr *ngIf="user.firstName">
+                <td><b>First name</b></td>
+                <td>{{user.firstName}}</td>
+            </tr>
+            <tr *ngIf="user.lastName">
+                <td><b>Last name</b></td>
+                <td>{{user.lastName}}</td>
+            </tr>
+            <tr *ngIf="user.email">
+                <td><b>TU/e email</b></td>
+                <td>{{user.email}}</td>
+            </tr>
+            <tr *ngIf="user.major">
+                <td><b>Major</b></td>
+                <td>{{user.major}}</td>
+            </tr>
+            <tr *ngIf="user.address">
+                <td><b>Address</b></td>
+                <td>{{user.address}}</td>
+            </tr>
+            <tr *ngIf="user.track">
+                <td><b>Honors track</b></td>
+                <td>{{user.track}}</td>
+            </tr>
+            <tr *ngIf="user.honorsGeneration">
+                <td><b>Honors generation</b></td>
+                <td>{{user.honorsGeneration}}</td>
+            </tr>
+            <tr *ngIf="user.honorsMembership">
+                <td><b>Confluente membership</b></td>
+                <td>{{user.honorsMembership}}</td>
+            </tr>
+            <tr *ngIf="user.campusCardNumber">
+                <td><b>Campus card number</b></td>
+                <td>{{user.campusCardNumber}}</td>
+            </tr>
+            <tr *ngIf="user.mobilePhoneNumber">
+                <td><b>Mobile phone number</b></td>
+                <td>{{user.mobilePhoneNumber}}</td>
+            </tr>
+            <tr>
+                <td><b>Consent to portrait right</b></td>
+                <td>{{user.consentWithPortraitRight}}</td>
+            </tr>
+        </table>
+    </div>
+    <h4 *ngIf="groups.length > 0">Groups</h4>
+    <p *ngFor="let group of groups"><a href="/group/{{group.id}}">{{group.fullName}}</a> <b>({{group.members[0].user_group.func}})</b></p>
+    <h4>Personal settings</h4>
+    <p><a href="manage/users/change_password/{{user.id}}">Change password</a></p>
+</div>

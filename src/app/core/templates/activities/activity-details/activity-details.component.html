@@ -1,0 +1,207 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-xs-6">
+            <ol class="breadcrumb small">
+                <li><a href="/activities"><b>&lt; Back to events</b></a></li>
+            </ol>
+        </div>
+
+        <div *ngIf="isUserOrganizing" class="col-xs-6">
+            <ol class="breadcrumb small text-right">
+                <li><a href="/manage/activities/{{activity.id}}"><b>Edit activity</b></a></li>
+                <li *ngIf="isUserOrganizing && !activity.published">
+                    <a (click)="publishActivity(activity)" href="/"><b>Publish Activity</b></a>
+                </li>
+                <li *ngIf="isUserOrganizing && activity.published">
+                    <a (click)="unpublishActivity(activity)" href="/"><b>Unpublish Activity</b></a>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <section class="row">
+
+        <div class="col-xs-12">
+
+            <h1>{{activity.name}}</h1>
+
+            <ul class="breadcrumb" id="activity-details">
+                <li *ngIf="activity.date">{{activity.date | date:'EEEE MMMM dd, yyyy'}}</li>
+
+                <li *ngIf="activity.startTime && activity.endTime">{{activity.startTime}} - {{activity.endTime}}</li>
+                <li *ngIf="activity.startTime && !activity.endTime">Starting at {{activity.startTime}}</li>
+                <li *ngIf="activity.endTime && !activity.startTime">Ending at {{activity.endTime}}</li>
+
+                <li *ngIf="activity.location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{activity.location}}
+                </li>
+
+                <li class="pull-right"><span class="small">Organized by </span><span class="hsa small">{{activity.Organizer.fullName}}</span>
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <hr>
+
+    <section class="row">
+
+
+        <div class="col-xs-12 col-md-8 col-lg-6">
+
+            <div>
+                <p *ngFor="let text of activityDescription; index as i">{{text}}</p>
+            </div>
+
+            <div *ngIf="activity.canSubscribe" class="block" id="activity-signup">
+
+                <p *ngIf="!deadlinePassed && !user.loggedIn" class="small">You need to <a href="/login"><b>login</b></a>
+                    to register for this event.</p>
+
+                <ul *ngIf="!deadlinePassed" class="list-inline" style="margin-bottom: 0">
+                    <li *ngIf="!deadlinePassed && !subscribed">
+                        <a href="#signup" *ngIf="user.loggedIn" class="btn btn-primary" data-toggle="collapse">Sign
+                            up</a>
+                    </li>
+                    <li *ngIf="subscribed">
+                        <a href="#signup" class="btn btn-success" data-toggle="collapse"><i class="fa fa-check"></i>
+                            Subscribed!</a>
+                    </li>
+
+                    <li *ngIf="activity.participationFee">Costs: &euro;{{activity.participationFee}}</li>
+                    <li *ngIf="!deadlinePassed" class="small">Registration closes on <b>{{activity.subscriptionDeadline
+                        | date:'MMMM dd, yyyy'}}</b></li>
+                </ul>
+
+                <div *ngIf="deadlinePassed" class="list-inline small">
+                    <li>Registration has closed.</li>
+                    <li *ngIf="activity.participationFee">Costs: &euro;{{activity.participationFee}}</li>
+                </div>
+
+
+                <div *ngIf="!deadlinePassed && user.loggedIn" id="signup" class="collapse">
+                    <form class="panel panel-default">
+
+                        <div class="panel-body">
+                            Sign up for <b>{{activity.name}}</b>:
+
+                            <div class="form-horizontal">
+                                <div class="form-group small">
+                                    <div class="col-xs-6">
+                                        <input type="text" [(ngModel)]="user.displayName" class="disabled-input"
+                                               id="activityName" [ngModelOptions]="{standalone: true}" disabled/>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <input type="text" [(ngModel)]="user.email" class="disabled-input text-right"
+                                               id="activityEmail" [ngModelOptions]="{standalone: true}" disabled/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div *ngFor="let question of activity.questionDescriptions; index as i">
+
+                                <div class="form-group" *ngIf="activity.typeOfQuestion[i] == '☰ text'">
+                                    <label for="activityView{{i}}">{{activity.questionDescriptions[i]}}
+                                        <span *ngIf="activity.required[i] !== 'true'">(optional)</span>
+                                    </label>
+                                    <input type="text" [(ngModel)]="answers[i]" class="form-control"
+                                           id="activityView{{i}}" [ngModelOptions]="{standalone: true}"/>
+                                </div>
+
+                                <div class="form-group" *ngIf="activity.typeOfQuestion[i] == '◉ multiple choice'">
+                                    <label>{{activity.questionDescriptions[i]}}
+                                        <span *ngIf="activity.required[i] !== 'true'">(optional)</span>
+                                    </label>
+                                    <div class="radio" *ngFor="let option of activity.formOptions[i]; index as j">
+                                        <label>
+                                            <input type="radio" value="{{option}}" [(ngModel)]="answers[i]" [ngModelOptions]="{standalone: true}">{{option}}
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" *ngIf="activity.typeOfQuestion[i] == '☑ checkboxes'">
+                                    <label>{{activity.questionDescriptions[i]}}
+                                        <span *ngIf="activity.required[i] === 'true'">(pick at least 1)</span>
+                                        <span *ngIf="activity.required[i] !== 'true'">(optional)</span>
+                                    </label>
+                                    <div class="checkbox" *ngFor="let option of activity.formOptions[i]; index as j">
+                                        <label>
+                                            <input type="checkbox" value="{{option}}"
+                                                   [(ngModel)]="answers[j][i]" [ngModelOptions]="{standalone: true}">{{option}}
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <button *ngIf="!subscribed" type="submit" class="btn btn-primary" (click)="submit()"
+                                    [disabled]="loading">Submit
+                            </button>
+                            <button *ngIf="subscribed" type="submit" class="btn btn-primary" (click)="submit()"
+                                    [disabled]="loading">Update
+                            </button>
+                            <button *ngIf="subscribed" class="btn btn-link" (click)="remove()">Unsubscribe</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="hidden-xs hidden-sm col-xs-12 col-md-4 col-lg-6" *ngIf="activity.hasCoverImage">
+            <img class="img-responsive center" src="./assets/img/activities/{{activity.coverImage}}">
+        </div>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <section *ngIf="activity.canSubscribe && user.loggedIn" class="section block">
+
+        <h3>Current Subscriptions</h3>
+
+        <div class="small table-responsive">
+            <table class="table table-hover">
+
+                <thead>
+                <tr>
+                    <th></th>
+                    <ng-container *ngFor="let question of activity.questionDescriptions; index as i">
+                        <th *ngIf="activity.privacyOfQuestions[i] === 'false' || isUserOrganizing">
+                            <div>{{question}}</div>
+                        </th>
+                    </ng-container>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngFor="let participant of activity.participants; index as i">
+                    <td>{{i + 1}}</td>
+                    <td *ngFor="let answer of participant.subscription.answers; index as j">
+                        <ng-container *ngIf="activity.privacyOfQuestions[j] || isUserOrganizing">
+                            <div>{{answer}}</div>
+                        </ng-container>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="section">
+            <button class="btn btn-sm btn-default" (click)="exportTable()"
+                    *ngIf="isUserOrganizing && !clickedExport">Export answers
+            </button>
+        </div>
+
+    </section>
+
+</div>

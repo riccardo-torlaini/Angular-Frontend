@@ -1,0 +1,84 @@
+<div class="container">
+    <h1>
+        <a class="btn btn-link" href="/manage"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+        Edit user
+    </h1>
+
+    <form>
+
+        <div class="form-group">
+            <label for="userCreate-firstName">First name (required)</label>
+            <input type="text" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-firstName">
+        </div>
+
+        <div class="form-group">
+            <label for="userCreate-lastName">Family name (required)</label>
+            <input type="text" [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-lastName">
+        </div>
+
+        <div class="form-group">
+            <label for="userCreate-email">TU/e Email address (required)</label>
+            <input type="text" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-email">
+        </div>
+
+        <div class="form-group">
+            <label for="userCreate-major">Major</label>
+            <input type="text" [(ngModel)]="user.major" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-major">
+        </div>
+
+        <div class="form-group">
+            <label for="userCreate-address">Address (Netherlands, optional)</label>
+            <input type="text" [(ngModel)]="user.address" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-address">
+        </div>
+
+        <b>Which honors track are you in:</b>
+        <select [(ngModel)]="user.track" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let track of tracks" [value]="track">{{track}}</option>
+        </select><br>
+
+        <b>In which year did you start at the honors academy</b>
+        <select [(ngModel)]="user.honorsGeneration" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let generation of generations" [value]="generation">{{generation}}</option>
+        </select><br>
+
+        <b>What is your membership status?</b>
+        <select [(ngModel)]="user.honorsMembership" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let membership of memberships" [value]="membership">{{membership}}</option>
+        </select><br>
+
+        <div class="form-group">
+            <label for="userCreate-cardNumber">What is your campuscard number? (needed to give you access to the honors
+                room door)</label>
+            <input type="text" [(ngModel)]="user.campusCardNumber" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-cardNumber">
+        </div>
+
+        <div class="form-group">
+            <label for="userCreate-phone">Mobile phone number</label>
+            <input type="text" [(ngModel)]="user.mobilePhoneNumber" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-phone">
+        </div>
+
+
+        <label>Role</label>
+        <div>
+            <div *ngFor="let r of role.roles">
+                <input type="radio" [(ngModel)]="selectedRole.id" [ngModelOptions]="{standalone: true}" value="{{r.id}}"/>
+                <span>{{r.id}}</span>
+            </div>
+        </div>
+
+        <label>Groups</label>
+        <div *ngFor="let group of groupSelection">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="selectedGroups[]" value="{{group.fullName}}" [(ngModel)]="group.selected" [ngModelOptions]="{standalone: true}"> {{group.fullName}}
+                    <select [(ngModel)]="group.role" [ngModelOptions]="{standalone: true}">
+                        <option *ngFor="let role of groupRoles" [value]="role">{{role}}</option>
+                    </select><br>
+                </label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-default" (click)="submit()" [disabled]="loading">Save</button>
+
+    </form>
+</div>

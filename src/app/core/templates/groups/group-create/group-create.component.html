@@ -1,0 +1,58 @@
+<div class="container">
+    <h1>
+        <a class="btn btn-link" href="/manage"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+        New Group
+    </h1>
+
+    <form>
+
+        <div class="form-group">
+            <label for="groupCreate-name">Group name</label>
+            <input type="text" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" class="form-control" id="groupCreate-name">
+        </div>
+
+        <div class="form-group">
+            <label for="groupEdit-fullName">Full name</label>
+            <input type="text" [(ngModel)]="fullName" [ngModelOptions]="{standalone: true}" class="form-control" id="groupEdit-fullName">
+        </div>
+
+        <div class="form-group">
+            <label for="groupCreate-desc">Description</label>
+            <textarea [(ngModel)]="description" [ngModelOptions]="{standalone: true}" class="form-control" id="groupCreate-desc"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="groupCreate-email">Email</label>
+            <input type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" class="form-control" id="groupCreate-email">
+        </div>
+
+        <div class="form-group">
+            <label>Type</label>
+            <div class="radio">
+                <label>
+                    <input type="radio" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="Committee" id="groupCreate-type1"/> Committee
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="Board" id="groupCreate-type2"/> Board
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" [value]="differentType"> Other:
+                    <input type="text" [(ngModel)]="differentType" [ngModelOptions]="{standalone: true}" class="form-control" id="groupCreate-type3">
+                </label>
+            </div>
+        </div>
+
+        <div class="checkbox">
+            <label for="groupCreate-canOrganize">
+                <input type="checkbox" [(ngModel)]="canOrganize" [ngModelOptions]="{standalone: true}" id="groupCreate-canOrganize"> Can this group organize events?
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-default" (click)="submit()" [disabled]="loading">Save</button>
+
+    </form>
+</div>

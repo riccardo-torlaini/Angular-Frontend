@@ -1,1 +1,664 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+/* == Import fonts ========================================================== */
+
+@font-face {
+  font-family: "Rounded Elegance";
+  src: url('assets/fonts/Rounded_Elegance.otf');
+}
+
+@font-face {
+  font-family: 'Assistant';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/fonts/Assistant-Regular.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Assistant';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('assets/fonts/Assistant-SemiBold.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'League Spartan';
+  src: url('assets/fonts/leaguespartan-bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
+
+/* == GENERAL =============================================================== */
+
+/* Set the text selection background */
+*::selection {  background-color: #b9dbe6 }
+
+/* Set the base font size */
+html { font-size: 16px }
+
+/* Add a scrollbar to *all* pages (prevents movement of the page center) */
+body {  overflow-y: scroll }
+
+/* Force the footer to the bottom of the screen */
+body { min-height: 100vh }
+#content {  flex-grow: 1 }
+
+/* Make text stronk */
+b, strong, th, label {
+  font-weight: 500
+}
+
+/* Make clickable links stronger, but keep navigation bars normal */
+a, .btn-link { font-weight: 500 }
+.nav li a { font-weight: 400 }
+
+/* Header margin */
+h1, .h1, h2, .h2, h3, .h3 { margin-top: 1.5rem; margin-bottom: .25rem }
+h4, .h4 { margin-top: 1.1rem; margin-bottom: 0.4rem }
+h5, .h5, h6, .h6 { margin-top: 0.7rem; margin-bottom: 0.1rem }
+
+/* Hamburger menu fix */
+.navbar-toggle { margin-top: 1rem; line-height: 2rem }
+
+/* Breadcrumb margin fix */
+.breadcrumb { margin-bottom: 0 }
+
+
+/* == USEFUL CLASSES ======================================================== */
+/*    Also take a look at https://getbootstrap.com/docs/3.4/css/              */
+
+
+/* Position in center */
+.center { margin-left: auto; margin-right: auto; float: none }
+
+/* Text align left */
+.text-left { text-align: left !important }
+
+/* Sticky */
+.sticky { position: sticky; top: 8px }
+
+/* Add padding */
+.block { padding-top: 1rem; padding-bottom: 1rem }
+
+/* Add margin */
+.section { margin-top: 1rem; margin-bottom: 1rem }
+
+/* Logo font */
+.hsa { font-family: "Rounded Elegance", sans-serif; font-weight: 400 }
+
+/* Black and white image, where the color is revealed on hover */
+.bw { filter: grayscale(100%); transition: filter 0.2s }
+.bw:hover, .bw:active, .bw:focus { filter: grayscale(0%) }
+
+/* Flexbox */
+.flex { display: flex; flex-wrap: wrap }
+.flex-end { justify-content: flex-end }
+.flex-column { flex-direction: column }
+.flex-around { justify-content: space-around }
+.flex-between { justify-content: space-between }
+.flex-center { align-items: center }
+
+/* Add Parallax scrolling effect */
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* H.S.A. Confluente logo */
+.logo {
+  background-image: url('assets/img/HSAConfluente.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.logo-small {
+  background-image: url('assets/img/logo-small.svg');
+  width: 40px;
+  height: 42px;
+  background-size: contain;
+}
+
+
+/* == SPECIFIC FIXES ======================================================== */
+/*    If you can't fix styling using then default classes (see above)
+      and the bootstrap website, add your custom lines below.                 */
+
+/* -- Mobile and Desktop show */
+.desktopshow {
+  display: block;
+}
+
+.mobileshow {
+  display: none;
+}
+
+@media screen and (max-width: 992px) {
+  .mobileshow {
+    display: block;
+  }
+
+  .desktopshow {
+    display: none;
+  }
+}
+
+/* MANAGEMENT DASHBOARD ----------------------------------------------------- */
+
+/* Toggle size*/
+.fa.fa-toggle-on, .fa.fa-toggle-off { font-size: 20px }
+
+/* Sorting arrow fix */
+#managePage th .fa { margin-left: 6px }
+
+/* Icons fix */
+.manage-table-action { user-select: none }
+.manage-table-action .btn {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Tabs positioning */
+@media (min-width:992px) {
+  #managePage ul.nav { display: inline-block }
+  .manage-actions { margin-top: -47px }
+}
+
+
+/* FORMS -------------------------------------------------------------------- */
+
+/* Checkbox and radio fix */
+.form-horizontal .checkbox, .form-horizontal .radio { min-height: 0; }
+input[type="checkbox"], input[type="radio"] { margin-top: 7px }
+.radio:first-of-type, .checkbox:first-of-type { margin-top: 0 }
+
+/* Disabled button style */
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn { opacity: 0.3 }
+
+/* Date input fix */
+.form-control {
+  line-height: 1.6rem !important;
+  padding: 6px 12px;
+  box-shadow: none;
+}
+
+/* Design when in focus */
+.form-control:focus {
+  border-width: 2px;
+  padding: 5px 11px;
+  box-shadow: none;
+}
+
+legend {
+  border: 0
+}
+
+
+/* NAVIGATION BAR ----------------------------------------------------------- */
+
+/* Remove border */
+.navbar { border: none }
+
+/* Icons + dropdown menu style */
+.navbar-nav .fa { margin-right: 0.7rem }
+.dropdown-menu { padding: 0 }
+
+/* Hover to open dropdown menu */
+@media (min-width: 992px) { .dropdown:hover .dropdown-menu { display: block } }
+
+/* Dropdown item styling */
+.dropdown-menu li a { padding: 0.7rem 1rem }
+
+/* Remove shadows */
+.dropdown-menu, .navbar-collapse { box-shadow: none }
+
+/* Divider fix */
+.dropdown-menu .divider { margin: 0 }
+
+/* Re-initialize toggle styling */
+.navbar-toggle.nav-toggle {
+  position: static;
+  float: none;
+  margin-right: initial;
+  margin-top: initial;
+  margin-bottom: initial;
+  background-color: initial;
+  background-image: initial;
+  border: initial;
+  border-radius: initial;
+}
+
+/* Text styling */
+.navbar, .dropdown-menu { font-size: 0.93rem }
+.navbar-brand { line-height: 1.1rem; font-size: 1rem; letter-spacing: 0.2px }
+
+
+/* FRONTPAGE ---------------------------------------------------------------- */
+
+/* Slogan */
+#frontpage-slogan {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 68%;
+}
+
+/* Partner bar logos */
+.img-logo { height: 26px; margin: 1rem 15px }
+#tno-logo { height: 36px; margin-top: 0; margin-bottom: 0 }
+
+/* List of activities bottom fix */
+#activity-overview { margin-bottom: 0 }
+
+
+/* FOOTER ------------------------------------------------------------------- */
+
+#footer { margin-bottom: 20px; margin-top: 40px }
+
+
+/* COMMITTEES --------------------------------------------------------------- */
+#carousel {
+  position: relative;
+  height: 400px;
+  top: 50%;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+#committees img {
+  width: 600px;
+}
+
+.committee-img-container {
+  position: relative;
+  height: calc(100% - 40px);
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-origin: content-box;
+  border-bottom: solid;
+  border-color: #296e82bf;
+}
+
+.committee-box {
+  height: 360px;
+  border: 1px solid #ddd;
+  padding: 0;
+}
+
+.committee-box-small {
+  height: 300px;
+  width: 300px;
+  padding: 0;
+}
+
+.committee-link {
+  text-decoration: none!important;
+  cursor: pointer;
+}
+
+.committee-text {
+  padding-left: 10px;
+  color: white!important;
+  vertical-align: middle;
+  line-height: 38px;
+  font-size: 30px;
+  font-weight: normal;
+}
+
+i.committee-text {
+  font-size: 15px!important;
+  margin-right: 10px;
+  float: right;
+}
+
+/* BOARDS ------------------------------------------------------------------- */
+
+.board-column {
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+
+.board-column img {
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .board-container {
+    display: flex;
+  }
+
+  .board-column {
+    width: 50%;
+    height: auto;
+  }
+}
+
+.board-content {
+  display: flex;
+  align-self: center;
+  padding-left: 20px;
+  font-size: 13px;
+}
+
+.board-content ul {
+  font-size: 20px;
+  list-style-type: none;
+}
+
+
+/* PARTNERS ----------------------------------------------------------------- */
+.partner-box {
+  height: 220px;
+  border: 1px solid #ddd;
+  padding: 0;
+}
+
+.partner-img-container {
+  position: relative;
+  height: calc(100% - 46px);
+  padding: 30px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  background-origin: content-box;
+}
+
+.partner-overlay {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s ease-in-out;
+  -moz-transition: opacity 0.2s ease-in-out;
+  -ms-transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.partner-overlay:hover {
+  opacity: 1;
+}
+
+.partner-text {
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  padding: 12px;
+  width: 100%;
+  top: 12%;
+  transform: translate(0, -20%);
+  line-height: 1.2em;
+  font-weight: normal;
+  height: 100%;
+}
+
+.partner-footer {
+  height: 46px;
+  width: 100%;
+  padding: 3px 0 0 0;
+}
+
+.partner-btnlist {
+  display: table;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.partner-btn-small {
+  border: 0;
+}
+
+.fa-ellipsis-h {
+  content: "\f141";
+}
+
+/* EVENTS ------------------------------------------------------------------- */
+
+#activity-details .fa {
+  margin: 0 4px;
+}
+#activity-details {
+  padding: 0;
+}
+
+.activity-content .module {
+  margin: 0 0 1em 0;
+  overflow: hidden;
+}
+
+.activity-content .module p {
+  margin: 0;
+}
+
+.activity-content p {
+  line-height: 1.5em;
+}
+
+.activity-content .fade {
+  position: relative;
+  height: 6em; /* exactly 4 lines */
+  opacity: 1;
+}
+
+.activity-content .fade:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70%;
+  height: 1.2em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+#activity-signup .disabled-input {
+  background: none;
+  border: none;
+  font-family: inherit;
+  width: 100%;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* HONORS ACADEMY (EDUCATION) ----------------------------------------------- */
+.HA-col-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.HA-col {
+  border: none;
+  margin-bottom: 0;
+  flex: 1;
+  position: relative;
+  height: 650px;
+}
+
+.button-holder {
+  position: absolute;
+  bottom: 10px;
+  width: calc(100% - 8px);
+}
+
+.HA-button {
+  width: 100%;
+}
+
+/* LOGIN PAGE --------------------------------------------------------------- */
+
+.login-input {
+  font-weight: bolder;
+  font-size: 15px;
+  line-height: 1.2;
+  color: #333;
+  display: block;
+  width: 100%;
+  background: #fff;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 30px 0 30px;
+}
+
+.login-input:focus {
+  padding: 0 30px 0 30px;
+}
+
+.login-btn {
+  width: 100% !important;
+  border-radius: 25px !important;
+}
+
+.login-form {
+  border: 1px solid #ccc !important;
+  padding: 10px 10px 40px 10px;
+  border-radius: 20px;
+  margin: 10px 20px 10px 20px;
+}
+
+@media (max-width: 992px) {
+  .HA-col {
+    height: 750px;
+  }
+}
+
+@media (max-width: 767px) {
+  .HA-col {
+    height: 600px;
+  }
+}
+
+@media (max-width: 560px) {
+  .HA-col {
+    height: 700px;
+  }
+}
+
+@media (max-width: 400px) {
+  .HA-col {
+    height: 800px;
+  }
+}
+
+/* TRACKS ------------------------------------------------------------------- */
+
+.track-title {
+  padding-left: 0;
+  width: 100%;
+}
+
+.nav-pad {
+  padding-top: 100px;
+}
+
+@media (max-width: 992px) {
+  .nav-pad {
+    padding-top: 0px;
+  }
+}
+
+/* --Subscription forms */
+.subscriptionForm {
+  width: 50%;
+  background-color: lightgray;
+  padding: 10px;
+}
+
+@media (max-width: 560px) {
+  .subscriptionForm {
+    width: 100%;
+  }
+}
+
+.overflowTableCell {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#answerTable {
+  table-layout: fixed;
+  max-width: 100%;
+  width: 100%;
+  min-width: 100%;
+}
+
+/* --Profile */
+.profileTable table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 3px;
+}
+
+.profileTable td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 3px;
+}
+
+.profileTable tr {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 3px;
+}
+
+/* -- Frontpage */
+.home-section{
+  opacity: 0;
+  -moz-transition: all 700ms linear;
+  -webkit-transition: all 700ms linear;
+  -o-transition: all 700ms linear;
+  transition: all 700ms linear;
+  -moz-transform: translate3d(-100px, 0px, 0px);
+  -webkit-transform: translate3d(-100px, 0px, 0px);
+  -o-transform: translate(-100px, 0px);
+  -ms-transform: translate(-100px, 0px);
+  transform: translate3d(-100px, 0px, 0px);
+}
+
+.home-section.in-view{
+  opacity: 1;
+  -moz-transform: translate3d(0px, 0px, 0px);
+  -webkit-transform: translate3d(0px, 0px, 0px);
+  -o-transform: translate(0px, 0px);
+  -ms-transform: translate(0px, 0px);
+  transform: translate3d(0px, 0px, 0px);
+}
+
+#magazine_container {
+  height: calc(100vh - 8rem);
+  overflow: hidden;
+}
+
+#magazine_notification {
+  position: absolute;
+  bottom: 0; left: 0; right: 0; margin: 0;
+}
+.no-overflow {
+  overflow: hidden;
+}
+.magazine div {
+  background-size: contain;
+  background-repeat: no-repeat
+}
+

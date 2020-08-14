@@ -1,0 +1,176 @@
+<section>
+    <div id="hero" class="carousel slide">
+
+        <!-- Indicators -->
+        <div class="container">
+            <ol class="carousel-indicators">
+                <li data-target="#hero" data-slide-to="0" class="active"></li>
+                <li data-target="#hero" data-slide-to="1"></li>
+            </ol>
+        </div>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+
+            <!-- Slide 1 -->
+            <div index="1" class="item active">
+                <div class="hero-accent"></div>
+                <div class="carousel-image"
+                     style="background-image: URL('./assets/img/frontpage-hero/slide1.jpeg')"></div>
+                <div class="container">
+                    <div class="hero-caption">
+                        <a class="h1" href="/education/honors_bachelor"><i class="fa fa-angle-right text-primary"></i>Explore
+                            the Honors tracks</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div index="2" class="item">
+                <div class="hero-accent"></div>
+                <div class="carousel-image"
+                     style="background-image: URL('./assets/img/frontpage-hero/slide2.jpg')"></div>
+                <div class="container">
+                    <div class="hero-caption">
+                        <a class="h1" href="/about/HR"><i class="fa fa-angle-right text-primary"></i>Housed in the
+                            Honors Room</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+
+        <div class="flex flex-between">
+            <p id="frontpage-slogan" class="block hsa hidden-xs">Connecting Honors students</p>
+
+            <ul class="row list-inline">
+                <li class="bw"><a href="/partners/sponsors"><img class="img-logo" alt="CQM"
+                                                                 src="./assets/img/logo_cqm.png"></a>
+                </li>
+                <li class="bw"><a href="/partners/sponsors/tno"><img class="img-logo" alt="TNO" id="tno-logo"
+                                                                     src="./assets/img/logo_tno.png"></a></li>
+                <li class="bw"><a href="/partners/sponsors/dnb"><img class="img-logo" alt="De Nederlandsche Bank"
+                                                                     src="./assets/img/logo_dnb.jpg"></a></li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <div class='col-xs-12 col-sm-8 col-md-7 col-lg-8'>
+                <h1 class='h2'>Welcome to H.S.A. Confluente</h1>
+                <p>H.S.A. Confluente is the study association of the Honors Academy at the
+                    Eindhoven University of Technology. H.S.A. Confluente aims a building a community where students
+                    from all of the different tracks come together to enjoy both educational and fun activities. When
+                    starting honors, students get to know the association through the awesome introduction weekend where
+                    they meet each other. From that point onwards, the community only grows further through different
+                    events like workshops from companies, game nights, dinners and an awesome study trip. Next to loads
+                    of fun and educational activities, students also get the opportunity to develop themselves
+                    professionally. This development is possible through network events and workshops for improving
+                    one's CV, or interview skills are provided for free. Additionally, H.S.A. Confluente is part of the
+                    Dutch Honors Community, which is a network of honors associations throughout the Netherlands.
+                    Together with these other associations, we regularly organize even more awesome activities.
+                </p>
+            </div>
+
+            <div class='section col-xs-12 col-sm-4 col-md-5 col-lg-4'>
+                <h4>Upcoming activities</h4>
+                <div id="activity-overview" class="list-group" *ngIf="!loading">
+                    <a *ngFor="let act of acts" href="/activities/{{act.id}}" class="list-group-item">
+                        <p class="h6">{{act.name}}</p>
+                        <p class="small">{{act.date | date:'EEEE MMMM dd'}}</p>
+                    </a>
+                </div>
+                <a href="/activities" class="btn btn-sm btn-link">See more activities</a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="section container">
+    <div class="row">
+
+        <div class='col-sm-12 text-center'>
+
+            <div class="block col-xs-6 col-md-3">
+                <span class='text-primary h1 info_graphic'>130</span>
+                <p>Honors students</p>
+            </div>
+            <div class="block col-xs-6 col-md-3">
+                <span class='text-primary h1 info_graphic'>190</span>
+                <p>Alumni</p>
+            </div>
+            <div class="block col-xs-6 col-md-3">
+                <span class='text-primary h1 info_graphic'>8</span>
+                <p>Committees</p>
+            </div>
+            <div class="block col-xs-6 col-md-3">
+                <span class='text-primary h1 info_graphic'>8</span>
+                <p>Tracks</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="block bg-info">
+    <div class="container home-section animation-element">
+        <div class="row">
+
+            <div class="col-xs-12 col-md-6">
+                <p class="h3">Connect</p>
+                <p>H.S.A. Confluente aims to expand both the <strong>social and professional network</strong> of Honors
+                    students.
+                    This is done through group activities, such as lunch lectures, workshops, drinks, study trips and
+                    more!</p>
+                <p>The association builds upon a strong <strong><a href="/about/alumni">Alumni
+                    network</a></strong> and has close ties with multiple entrepreneurs, student teams and corporations.
+                </p>
+                <p class="block"><a class="btn btn-primary" href="mailto:info@hsaconfluente.nl">Get in touch</a> <a
+                    class="btn btn-link" href="/activities">View the upcoming events</a></p>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <iframe width="100%" height="315px" src="https://www.youtube-nocookie.com/embed/fWZSonu0Z8Q"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<br>
+
+<section class="block">
+    <div class="container home-section animation-element">
+        <div class="row">
+
+            <div class="col-xs-12 col-md-6">
+                <p class="h3">CONTEXT</p>
+                <p>This year, the first edition of CONTEXT, the new magazine of H.S.A. Confluente, was created by the PR
+                    committee. The magazine contains fun articles about our history, the board, the committees and much
+                    more! Although physical copies of the magazine are ready to be read in the honors room, you can also
+                    read the magazine here online! </p>
+                <p class="block"><a class="btn btn-primary" href="/magazine">I want to read all of it!</a></p>
+            </div>
+
+            <div class="visible-md-block visible-lg-block col-md-6 no-overflow">
+                <div id="magazine" class="magazine">
+                    <div style="background-image: url('./assets/img/magazine/magazine V5-01.jpg')"></div>
+                    <div style="background-image: url('./assets/img/magazine/magazine V5-02.jpg')"></div>
+                    <div style="background-image: url('./assets/img/magazine/magazine V5-03.jpg')"></div>
+                    <div style="background-image: url('./assets/img/magazine/magazine V5-52.jpg')"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

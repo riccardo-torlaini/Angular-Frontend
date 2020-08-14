@@ -1,0 +1,86 @@
+/* Big info numbers */
+.info_graphic {
+    font-size: 3rem;
+    margin: 0;
+    line-height: 1.2;
+    font-family: 'League Spartan', 'Helvetica Neue', Arial, sans-serif
+}
+
+/* Image carousel container */
+#hero {
+    display: block;
+    height: 46vh;
+    margin-top: -1rem
+}
+
+/* Image carousel ajust image to container */
+#hero .carousel-image {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.carousel-inner, .carousel-inner > * {
+    height: 100%
+}
+
+/* Image carousel transition */
+.carousel-inner > .item {
+    transition: transform 0.6s cubic-bezier(.86, 0, .07, 1)
+}
+
+/* Image carousel add gradient */
+.hero-accent {
+    height: inherit;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, .3), 30%, rgba(0, 0, 0, 0));
+}
+
+/* Image carousel caption styling */
+.hero-caption {
+    height: inherit;
+    color: #fff;
+    padding-bottom: 4rem;
+    position: absolute;
+    bottom: 0;
+}
+
+.hero-caption .h1 {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6)
+}
+
+.hero-caption a:hover {
+    text-decoration: none
+}
+
+.hero-caption .fa {
+    margin-right: 8px
+}
+
+/* Image carousel slide indicators */
+.carousel-indicators {
+    user-select: none
+}
+
+.carousel-indicators li {
+    display: inline-block;
+    border-radius: 0;
+    cursor: pointer;
+    border: 1px solid #fff;
+    background-color: transparent;
+    transition: background-color 0.6s cubic-bezier(.19, 1, .22, 1);
+}
+
+.carousel-indicators li, .carousel-indicators .active {
+    width: 38px;
+    height: 8px;
+    margin: 1px
+}
+
+.carousel-indicators .active {
+    background: #fff
+}

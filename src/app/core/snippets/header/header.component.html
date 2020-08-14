@@ -1,0 +1,76 @@
+<nav role="navigation" class="navbar navbar-default">
+    <div class="alert alert-info" style="margin-bottom: 0; text-align: center"
+         *ngIf="user.loggedIn && !user.consentWithPortraitRight">You have not yet given consent to H.S.A. Confluente to
+        use your pictures! You can do so <a href="/consent_portrait_right">here</a>!
+    </div>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#main-navbar__content" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="fa fa-bars"></span>
+            </button>
+            <a class="navbar-brand hsa" href="/">Honors Study Association Confluente</a>
+        </div>
+        <div class="collapse navbar-collapse" id="main-navbar__content">
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        About <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="/about/association">Association</a></li>
+                        <li><a href="/about/boards">Boards</a></li>
+                        <li><a href="/about/committees">Committees</a></li>
+                        <li><a href="/about/alumni">Alumni</a></li>
+                        <li><a href="/about/HR">Honors Room</a></li>
+                    </ul>
+                </li>
+
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Education <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/education/honors_academy">Honors Academy</a></li>
+                        <li><a href="/education/student_council">Student Council</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="/activities_overview">Events</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        Partners <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/partners/sponsors">Sponsors</a></li>
+                        <li><a href="/partners/sister_associations">Sister Associations</a></li>
+                    </ul>
+                </li>
+                <li *ngIf="!user.loggedIn"><a href="/login">Student login</a></li>
+
+                <li *ngIf="user.loggedIn" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        {{user.displayName}} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user/profile"><span class="fa fa-user-circle"></span>Profile</a></li>
+                        <li *ngIf="user.isAdmin || user.canOrganize"><a href="/manage"><span
+                            class="fa fa-sliders"></span>Manage</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" (click)="logout()"><span class="fa fa-sign-out"></span>Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</nav>
