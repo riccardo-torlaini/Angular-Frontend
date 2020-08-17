@@ -42,6 +42,20 @@ export class ManageComponent implements OnInit {
         startingDay: 1
     };
 
+    typeSortMap = new Map([
+        ['id', this.sortPipe.numberSort],
+        ['name', this.sortPipe.lexicographicSort],
+        ['date', this.sortPipe.dateSort],
+        ['Organizer.displayName', this.sortPipe.lexicographicSort],
+        ['published', this.sortPipe.booleanSort],
+        ['displayName', this.sortPipe.lexicographicSort],
+        ['email', this.sortPipe.lexicographicSort],
+        ['isAdmin', this.sortPipe.booleanSort],
+        ['fullName', this.sortPipe.lexicographicSort],
+        ['email', this.sortPipe.lexicographicSort],
+        ['canOrganize', this.sortPipe.booleanSort]
+    ]);
+
     constructor(private activatedRoute: ActivatedRoute,
                 public authService: AuthService,
                 private activitiesService: ActivitiesService,
@@ -92,10 +106,6 @@ export class ManageComponent implements OnInit {
         });
     }
 
-    sortActivities(type) {
-        
-    }
-
     activityCallback(activity, query) {
         return activity.Organizer.displayName.toLowerCase().includes(query.toLowerCase())
             || activity.name.toLowerCase().includes(query.toLowerCase());
@@ -111,31 +121,31 @@ export class ManageComponent implements OnInit {
             || group.email.toLowerCase().includes(query.toLowerCase());
     }
 
-    dateCallback(activity, query) {
-        return activity.date >= new Date(query);
-    }
-
-    lexicographicSort(valueA: string, valueB: string) {
-        return valueA.localeCompare(valueB);
-    }
-
-    booleanSort(valueA: boolean, valueB: boolean) {
-        if (valueA === valueB) {
-            return 0;
-        } else if (valueA && !valueB) {
-            return 1;
+    // Ugly repeated code
+    sortActivities(type) {
+        if (this.sortTypeActivities === type) {
+            this.sortReverseActivities = !this.sortReverseActivities;
         } else {
-            return -1;
+            this.sortReverseActivities = false;
         }
+        this.sortTypeActivities = type;
     }
 
-    dateSort(valueA: Date, valueB: Date) {
-        if (valueA.getTime() === valueB.getTime()) {
-            return 0;
-        } else if (valueA.getTime() >= valueB.getTime()) {
-            return 1;
+    sortUsers(type) {
+        if (this.sortTypeUsers === type) {
+            this.sortReverseUsers = !this.sortReverseUsers;
         } else {
-            return -1;
+            this.sortReverseUsers = false;
         }
+        this.sortTypeUsers = type;
+    }
+
+    sortGroups(type) {
+        if (this.sortTypeGroups === type) {
+            this.sortReverseGroups = !this.sortReverseGroups;
+        } else {
+            this.sortReverseGroups = false;
+        }
+        this.sortTypeGroups = type;
     }
 }
