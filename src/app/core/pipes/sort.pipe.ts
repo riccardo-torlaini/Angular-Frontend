@@ -6,6 +6,15 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class SortPipe implements PipeTransform {
 
+    /**
+     * Sorts an array of objects based on an attribute (value), a callback comparison function and whether it needs
+     * to be in reverse order.
+     *
+     * @param items         The array of objects to sort.
+     * @param value         The attribute to sort on for each object.
+     * @param callback      The callback function to sort with.
+     * @param reverse       Whether it needs to be reversely sorted or not.
+     */
     transform(items: any[], value, callback: (a: any, b: any) => number, reverse: boolean): unknown {
         if (!items || !callback) {
             return items;
@@ -37,10 +46,20 @@ export class SortPipe implements PipeTransform {
         return o;
     }
 
+    /**
+     * Callback function for lexicographical (alphabetical) sort.
+     * @param valueA    First string to compare.
+     * @param valueB    Second string to compare.
+     */
     public lexicographicSort(valueA, valueB): number {
         return valueA.localeCompare(valueB);
     }
 
+    /**
+     * Callback function for boolean sort.
+     * @param valueA    First boolean to compare.
+     * @param valueB    Second boolean to compare.
+     */
     public booleanSort(valueA, valueB): number {
         if (valueA === valueB) {
             return 0;
@@ -51,6 +70,11 @@ export class SortPipe implements PipeTransform {
         }
     }
 
+    /**
+     * Callback function for date sort.
+     * @param valueA    First date to compare.
+     * @param valueB    Second date to compare.
+     */
     public dateSort(valueA, valueB): number {
         if (valueA.getTime() === valueB.getTime()) {
             return 0;
@@ -61,6 +85,11 @@ export class SortPipe implements PipeTransform {
         }
     }
 
+    /**
+     * Callback function for number sort.
+     * @param valueA    First number to compare.
+     * @param valueB    Second number to compare.
+     */
     public numberSort(valueA, valueB): number {
         if (valueA === valueB) {
             return 0;
