@@ -111,6 +111,10 @@ export class ManageComponent implements OnInit {
             || activity.name.toLowerCase().includes(query.toLowerCase());
     }
 
+    activityDateFilter(activity, query) {
+        return activity.date.getTime() >= new Date(query).getTime();
+    }
+
     userCallback(user, query) {
         return user.email.toLowerCase().includes(query.toLowerCase())
             || user.displayName.toLowerCase().includes(query.toLowerCase());

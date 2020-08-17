@@ -6,7 +6,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class SortPipe implements PipeTransform {
 
-    transform(items: any[], value, callback, reverse: boolean): unknown {
+    transform(items: any[], value, callback: (a: any, b: any) => number, reverse: boolean): unknown {
         if (!items || !callback) {
             return items;
         }
