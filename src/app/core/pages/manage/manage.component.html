@@ -24,7 +24,7 @@
                     <div class="col-xs-12 col-sm-6 col-md-3 col-md-offset-6">
                         <div class="input-group">
                             <span class="input-group-addon" id="manage-activities-filter">Show from</span>
-                            <input type="date" class="form-control" [(ngModel)]="f.date" aria-describedby="basic-addon2">
+                            <input type="date" class="form-control" [(ngModel)]="date" aria-describedby="basic-addon2">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-3">
@@ -48,7 +48,9 @@
 
                             <tbody>
 <!--                            <tr ng-repeat="activity in activities | orderBy:sortTypeActivities:sortReverseActivities | filter:searchQueryActivities">-->
-                            <tr *ngFor="let activity of activities | filterPipe : activityCallback : searchQueryActivities">
+                            <tr *ngFor="let activity of archive |
+                                    filterPipe : activityCallback : searchQueryActivities |
+                                    filterPipe : dateCallback : date">
                                 <td><a href="/activities/{{activity.id}}#signup">{{activity.name}}</a></td>
                                 <td>{{activity.date | date:'yyyy-MM-dd'}}</td>
                                 <td>{{activity.Organizer.displayName}}</td>

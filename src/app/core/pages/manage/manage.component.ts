@@ -3,6 +3,7 @@ import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../services/activities/activities.service";
 import {FilterPipe} from "../../pipes/filter.pipe";
+import {SortPipe} from "../../pipes/sort.pipe";
 
 @Component({
     selector: 'app-manage',
@@ -13,8 +14,8 @@ export class ManageComponent implements OnInit {
 
     user: any;
     loading: boolean;
-    f: { date: Date };
-    private archive: any[];
+    date = new Date().setDate((new Date()).getDate() - 1);
+    archive: any[];
     users: any[];
     groups: any[];
     activities: any[];
@@ -22,6 +23,7 @@ export class ManageComponent implements OnInit {
     sortTypeActivities = 'id';
     sortReverseActivities = false;
     searchQueryActivities = "";
+    sortCallbackActivities: any;
 
     sortTypeUsers = 'id';
     sortReverseUsers = false;
@@ -43,11 +45,9 @@ export class ManageComponent implements OnInit {
     constructor(private activatedRoute: ActivatedRoute,
                 public authService: AuthService,
                 private activitiesService: ActivitiesService,
-                private filterPipe: FilterPipe) {
+                public filterPipe: FilterPipe,
+                public sortPipe: SortPipe) {
         this.loading = true;
-        this.f = {
-            date: new Date()
-        };
 
         // Variables for tracking search & sorting in activities tab
         this.sortTypeActivities = 'id';
@@ -73,9 +73,11 @@ export class ManageComponent implements OnInit {
             if (this.user.isAdmin) {
                 this.users = this.activatedRoute.snapshot.data.allUsers;
                 this.groups = this.activatedRoute.snapshot.data.allGroups;
-            }
 
-            this.filter();
+                console.log(this.users);
+                console.log(this.groups);
+                console.log(this.archive);
+            }
 
             this.loading = false;
         });
@@ -90,47 +92,8 @@ export class ManageComponent implements OnInit {
         });
     }
 
-    // $scope.$watch("f.date", function (newDate) {
-    //     $scope.filter();
-    // });
-
-    filter() {
-        const date = this.f.date;
-        date.setDate(date.getDate() - 1);
-        this.activities = [];
-        for (const activity of this.archive) {
-            if (activity.date >= date) {
-                this.activities.push(activity);
-            }
-        }
-    }
-
-    // Ugly repeated code
     sortActivities(type) {
-        if (this.sortTypeActivities === type) {
-            this.sortReverseActivities = !this.sortReverseActivities;
-        } else {
-            this.sortReverseActivities = false;
-        }
-        this.sortTypeActivities = type;
-    }
-
-    sortUsers(type) {
-        if (this.sortTypeUsers === type) {
-            this.sortReverseUsers = !this.sortReverseUsers;
-        } else {
-            this.sortReverseUsers = false;
-        }
-        this.sortTypeUsers = type;
-    }
-
-    sortGroups(type) {
-        if (this.sortTypeGroups === type) {
-            this.sortReverseGroups = !this.sortReverseGroups;
-        } else {
-            this.sortReverseGroups = false;
-        }
-        this.sortTypeGroups = type;
+        
     }
 
     activityCallback(activity, query) {
@@ -148,8 +111,31 @@ export class ManageComponent implements OnInit {
             || group.email.toLowerCase().includes(query.toLowerCase());
     }
 
-    // function for using datepicker in form for creating activities
-    openDatePicker() {
-        this.datepicker.open = true;
+    dateCallback(activity, query) {
+        return activity.date >= new Date(query);
+    }
+
+    lexicographicSort(valueA: string, valueB: string) {
+        return valueA.localeCompare(valueB);
+    }
+
+    booleanSort(valueA: boolean, valueB: boolean) {
+        if (valueA === valueB) {
+            return 0;
+        } else if (valueA && !valueB) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    dateSort(valueA: Date, valueB: Date) {
+        if (valueA.getTime() === valueB.getTime()) {
+            return 0;
+        } else if (valueA.getTime() >= valueB.getTime()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }

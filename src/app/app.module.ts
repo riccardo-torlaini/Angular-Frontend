@@ -57,6 +57,7 @@ import { GroupDeleteComponent } from './core/templates/groups/group-delete/group
 import { ActivityDeleteComponent } from './core/templates/activities/activity-delete/activity-delete.component';
 import { ChangePasswordComponent } from './core/templates/users/change-password/change-password.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
+import { SortPipe } from './core/pipes/sort.pipe';
 
 @NgModule({
     declarations: [
@@ -109,6 +110,7 @@ import { FilterPipe } from './core/pipes/filter.pipe';
         ActivityDeleteComponent,
         ChangePasswordComponent,
         FilterPipe,
+        SortPipe,
     ],
     imports: [
         BrowserModule,
@@ -120,7 +122,8 @@ import { FilterPipe } from './core/pipes/filter.pipe';
         CookieService,
         AuthService,
         AuthResolverService,
-        FilterPipe
+        FilterPipe,
+        SortPipe
     ],
     bootstrap: [AppComponent],
 })
