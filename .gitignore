@@ -44,3 +44,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Database pictures
+src/assets/img/activities/*.jpeg
+
+# secrets file
+src/environments/environment.prod.ts

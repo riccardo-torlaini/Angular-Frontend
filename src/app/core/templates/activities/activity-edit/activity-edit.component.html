@@ -5,7 +5,7 @@
         <li class="active">Edit event</li>
     </ol>
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" [formGroup]="uploadForm">
         <header>
             <h1>Edit event</h1>
         </header>
@@ -67,8 +67,8 @@
                         <label for="activityEdit-organize" class="col-xs-12 col-sm-2 col-md-5 control-label">Organized
                             by</label>
                         <div class="col-xs-12 col-sm-10 col-md-7">
-                            <select [(ngModel)]="activity.organizer" [ngModelOptions]="{standalone: true}" class="form-control" id="activityEdit-organize">
-                                <option *ngFor="let group of userGroups" [value]="group">{{group}}</option>
+                            <select [(ngModel)]="activity.OrganizerId" [ngModelOptions]="{standalone: true}" class="form-control" id="activityEdit-organize">
+                                <option *ngFor="let group of user.groups | filter : groupFilterCallback : 'nonEmptyQuery'" [value]="group.id">{{group.fullName}}</option>
                             </select>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                                                                        [checked]="keepCurrent" type="checkbox">Keep
                                 current picture
                             </div>
-                            <input id="activityEdit-cover" type="file" accept=".jpeg,.jpg,.png" fileread="uploadme"/>
+                            <input id="activityEdit-cover" name="image" (change)="onFileSelect($event)" type="file" accept=".jpeg,.jpg,.png" [disabled]="keepCurrent"/>
                         </div>
                     </div>
                 </div>
@@ -108,11 +108,11 @@
                         </label>
                     </div>
 
-                    <div class="form-group section" *ngIf="activity.canSubscribe">
+                    <div class="form-group section">
                         <label for="subscriptionDeadline-date" class="col-xs-12 col-sm-2 col-md-5 control-label">Deadline</label>
                         <div class="col-xs-12 col-sm-10 col-md-7">
                             <input type="date" [(ngModel)]="deadline.subscriptionDeadline" [ngModelOptions]="{standalone: true}" class="form-control"
-                                   id="subscriptionDeadline-date"/>
+                                   id="subscriptionDeadline-date" [disabled]="!activity.canSubscribe"/>
                         </div>
                     </div>
                 </div>

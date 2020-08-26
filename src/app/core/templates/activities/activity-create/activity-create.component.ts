@@ -1,20 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivitiesService} from "../../../services/activities/activities.service";
-import {AuthService} from "../../../services/auth.service";
+import {ActivatedRoute} from "@angular/router";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {DatePipe} from "@angular/common";
+import {FilterPipe} from "../../../pipes/filter.pipe";
 
 @Component({
     selector: 'app-activity-create',
     templateUrl: './activity-create.component.html',
+    providers: [DatePipe],
     styleUrls: ['./activity-create.component.css']
 })
 export class ActivityCreateComponent implements OnInit {
+
     loading = false;
 
-    uploadme: any = "No Image";
+    uploadForm: FormGroup;
 
     // setting standard deadline for subscription deadline field
     deadline = {
-        subscriptionDeadline: new Date()
+        subscriptionDeadline: this.datePipe.transform(new Date(), "yyyy-MM-dd")
     };
 
     // setting standard inputs for subscription form (first two questions are mandatory)
@@ -28,39 +33,38 @@ export class ActivityCreateComponent implements OnInit {
     name: string;
     description: string;
     organizer: string;
-    date: any;
+    date = this.datePipe.transform(new Date(), "yyyy-MM-dd");
     startTime: string;
     endTime: string;
     location: string;
     participationFee: string;
     published: boolean;
     hasCoverImage: any;
+    image: any;
 
     // options for question types
     types = ["☰ text", "◉ multiple choice", "☑ checkboxes"];
 
     datepicker = {open: false};
 
-    dateOptions = {
-        formatYear: 'yy',
-        maxDate: new Date().setFullYear(new Date().getFullYear() + 10), // maximum date for datepicker
-        minDate: new Date(), // minimum date for datepicker
-        startingDay: 1
-    };
-
     private empty: boolean;
     private wrongCharacters: boolean;
     user: any;
 
     constructor(private activitiesService: ActivitiesService,
-                public authService: AuthService) {
+                private activatedRoute: ActivatedRoute,
+                private formBuilder: FormBuilder,
+                private datePipe: DatePipe,
+                private filterPipe: FilterPipe) {
         this.loading = true;
+
+        this.uploadForm = this.formBuilder.group({
+            image: 'No Image'
+        });
     }
 
     ngOnInit(): void {
-        this.authService.user.subscribe(user => {
-            this.user = user;
-        });
+        this.user = this.activatedRoute.snapshot.data.currentUser;
 
         this.loading = false;
     }
@@ -103,14 +107,22 @@ export class ActivityCreateComponent implements OnInit {
         }
     }
 
-    // function for using datepicker in form for creating activities
-    openDatePicker() {
-        this.datepicker.open = true;
-    }
-
     wrongInput(ErrorMessage) {
         this.loading = false;
         return alert(ErrorMessage);
+    }
+
+    onFileSelect(event) {
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            this.uploadForm.get('image').setValue(file);
+        } else {
+            this.uploadForm.get('image').setValue('No Image');
+        }
+    }
+
+    groupFilterCallback(group, query) {
+        return group.canOrganize === true;
     }
 
     // function called when a new activity is submitted
@@ -118,14 +130,14 @@ export class ActivityCreateComponent implements OnInit {
         this.loading = true;
 
         let hasCoverImage = false;
-        if (this.uploadme !== "No Image") {
+        if (this.uploadForm.get('image').value !== 'No Image') {
             hasCoverImage = true;
         }
 
         const fd = new FormData();
         if (hasCoverImage) {
-            // @ts-ignore
-            const file = $('#activityCreate-cover')[0].files[0];
+            const file = this.uploadForm.get('image').value;
+
             if (!file.type.startsWith('image/')) {
                 return this.wrongInput('Non-image formats are not supported as pictures for activities!');
             }
@@ -142,7 +154,7 @@ export class ActivityCreateComponent implements OnInit {
                 }
             };
 
-            fd.append('image', file);
+            fd.append('image', this.uploadForm.get('image').value);
         }
 
         // constructing standard activity object
@@ -189,8 +201,12 @@ export class ActivityCreateComponent implements OnInit {
                 let optionString = dataObj.options[0];
                 for (let i = 1; i < dataObj.options.length; i++) {
                     optionString += "#;#" + dataObj.options[i];
-                    if (dataObj.options[i].includes("#;#")) { this.wrongCharacters = true; }
-                    if (dataObj.options[i].includes("#,#")) { this.wrongCharacters = true; }
+                    if (dataObj.options[i].includes("#;#")) {
+                        this.wrongCharacters = true;
+                    }
+                    if (dataObj.options[i].includes("#,#")) {
+                        this.wrongCharacters = true;
+                    }
                 }
                 allOptions.push(optionString);
 
@@ -203,13 +219,19 @@ export class ActivityCreateComponent implements OnInit {
                     this.empty = true;
                 }
 
-                if (dataObj.fullQuestion.includes("#,#")) { this.wrongCharacters = true; }
-                if (dataObj.fullQuestion.includes("#;#")) { this.wrongCharacters = true; }
+                if (dataObj.fullQuestion.includes("#,#")) {
+                    this.wrongCharacters = true;
+                }
+                if (dataObj.fullQuestion.includes("#;#")) {
+                    this.wrongCharacters = true;
+                }
 
                 // Check whether choices of multiple choice questions are empty
                 if (dataObj.type !== "☰ text" && dataObj.type !== "name" && dataObj.type !== "TU/e email") {
                     for (const option of dataObj.options) {
-                        if (option === "" || !dataObj.options) { this.empty = true; }
+                        if (option === "" || !dataObj.options) {
+                            this.empty = true;
+                        }
                     }
                 }
             });
@@ -233,7 +255,7 @@ export class ActivityCreateComponent implements OnInit {
         }
 
         // create new activity from variables as put on the $scope by the form
-        this.activitiesService.create(fd, act).subscribe(activity => {
+        this.activitiesService.create(fd, act).subscribe((activity: any) => {
             this.loading = false;
 
             // redirect to new activity

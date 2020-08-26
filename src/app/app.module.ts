@@ -10,8 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import { LoginComponent } from './core/pages/login/login.component';
 import { HomeComponent } from './core/pages/home/home.component';
-import {FormsModule} from "@angular/forms";
-import {AuthService} from "./core/services/auth.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AlumniComponent } from './core/pages/about/alumni/alumni.component';
 import { AssociationComponent } from './core/pages/about/association/association.component';
 import { CommitteesComponent } from './core/pages/about/committees/committees.component';
@@ -56,8 +55,15 @@ import { UserDeleteComponent } from './core/templates/users/user-delete/user-del
 import { GroupDeleteComponent } from './core/templates/groups/group-delete/group-delete.component';
 import { ActivityDeleteComponent } from './core/templates/activities/activity-delete/activity-delete.component';
 import { ChangePasswordComponent } from './core/templates/users/change-password/change-password.component';
+import { InternshipCreateComponent } from './core/templates/partners/internships/internship-create/internship-create.component';
+import { InternshipEditComponent } from './core/templates/partners/internships/internship-edit/internship-edit.component';
+import { InternshipDetailsComponent } from './core/templates/partners/internships/internship-details/internship-details.component';
+import { InternshipDeleteComponent } from './core/templates/partners/internships/internship-delete/internship-delete.component';
+import { InternshipOverviewComponent } from './core/templates/partners/internships/internship-overview/internship-overview.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
 import { SortPipe } from './core/pipes/sort.pipe';
+import { MarkdownComponent } from './core/snippets/markdown/markdown.component';
+import { BaseComponent } from './core/base/base.component';
 
 @NgModule({
     declarations: [
@@ -109,18 +115,25 @@ import { SortPipe } from './core/pipes/sort.pipe';
         GroupDeleteComponent,
         ActivityDeleteComponent,
         ChangePasswordComponent,
+        InternshipCreateComponent,
+        InternshipEditComponent,
+        InternshipDetailsComponent,
+        InternshipDeleteComponent,
+        InternshipOverviewComponent,
         FilterPipe,
         SortPipe,
+        MarkdownComponent,
+        BaseComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
     ],
     providers: [
         CookieService,
-        AuthService,
         AuthResolverService,
         FilterPipe,
         SortPipe

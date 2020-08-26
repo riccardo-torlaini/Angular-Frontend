@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {AuthService} from "../../../services/auth.service";
 import {ActivitiesService} from "../../../services/activities/activities.service";
 import {TableExport} from "tableexport";
 
@@ -24,16 +23,13 @@ export class ActivityDetailsComponent implements OnInit {
     clickedExport: boolean;
 
     constructor(private activatedRoute: ActivatedRoute,
-                public authService: AuthService,
                 private activitiesService: ActivitiesService) {
         this.loading = true;
         this.activityId = this.activatedRoute.snapshot.params.activityId;
     }
 
     ngOnInit(): void {
-        this.authService.user.subscribe(user => {
-            this.user = user;
-        });
+        this.user = this.activatedRoute.snapshot.data.currentUser;
 
         this.activity = this.activatedRoute.snapshot.data.activity;
 
@@ -94,7 +90,7 @@ export class ActivityDetailsComponent implements OnInit {
     exportTable() {
         this.clickedExport = true;
         // @ts-ignore
-        const table = new TableExport(document.getElementsByTagName("table"));
+        TableExport(document.getElementsByTagName("table"));
         // @ts-ignore
         TableExport.prototype.typeConfig.date.assert = () => false;
     }
@@ -102,7 +98,7 @@ export class ActivityDetailsComponent implements OnInit {
     // unsubscribes the user from the activity
     remove() {
         this.loading = true;
-        this.activitiesService.deleteSubscription(this.activityId).subscribe(res => {
+        this.activitiesService.deleteSubscription(this.activityId).subscribe((_) => {
             this.loading = false;
 
             // reload page to show deletion
@@ -116,7 +112,7 @@ export class ActivityDetailsComponent implements OnInit {
 
         // Set organizer to displayName of Organizer (required for API)
         activityToBePublished.organizer = activityToBePublished.Organizer.displayName;
-        this.activitiesService.edit(activityToBePublished, true, null).subscribe(res => {
+        this.activitiesService.edit(activityToBePublished, true, null).subscribe((_) => {
             window.location.reload();
         });
     }
@@ -127,7 +123,7 @@ export class ActivityDetailsComponent implements OnInit {
 
         // Set organizer to displayName of Organizer (required for API)
         activityToBeUnpublished.organizer = activityToBeUnpublished.Organizer.displayName;
-        this.activitiesService.edit(activityToBeUnpublished, true, null).subscribe(res => {
+        this.activitiesService.edit(activityToBeUnpublished, true, null).subscribe((_) => {
             window.location.reload();
         });
     }
@@ -171,7 +167,7 @@ export class ActivityDetailsComponent implements OnInit {
             }
         }
 
-        this.activitiesService.subscribe(this.answers, this.activityId).subscribe(res => {
+        this.activitiesService.subscribe(this.answers, this.activityId).subscribe((_) => {
             this.loading = false;
 
             // reload page to show submission

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {WebRequestService} from '../web-request.service';
 import {of} from "rxjs";
-import {catchError, map} from "rxjs/operators";
+import {catchError, map, mergeMap} from "rxjs/operators";
 import {HttpResponse} from "@angular/common/http";
 
 @Injectable({
@@ -86,13 +86,17 @@ export class ActivitiesService {
     /**
      * Function for submitting created activity to backend.
      * @param coverImage    The coverImage of the new activity.
-     * @returns activity    The object representing the activity.
+     * @param activity      The object representing the activity.
      */
     create(coverImage, activity) {
         return this.webRequestService.post("api/activities", activity).pipe(
-            map((res: HttpResponse<any>) => {
-                // TODO DO IMAGES
-                return res.body;
+            mergeMap((act: HttpResponse<any>) => {
+                if (act.body.hasCoverImage) {
+                    this.webRequestService.post("api/activities/pictures/" + act.body.id, coverImage).subscribe();
+                    return of(act.body);
+                } else {
+                    return of(act.body);
+                }
             }),
             catchError(err => {
                 console.error('ActivitiesService.post: Error when creating activity.');
@@ -110,20 +114,15 @@ export class ActivitiesService {
      * @returns submitted   edited activity (except the picture)
      */
     edit(activity, keepCurrent, coverImage) {
-        return this.webRequestService.put("api/activities/" + activity.id, activity,
-            {observe: 'response', withCredentials: true, responseType: 'text'})
+        return this.webRequestService.put("api/activities/" + activity.id, activity)
             .pipe(
-                map((res: HttpResponse<any>) => {
-                    // TODO MAKE PICTURE EDITING WORK
-                    // if (!keepCurrent) {
-                    //     this.webRequestService.put("api/activities/pictures/" + activity.id, coverImage, {
-                    //         transformRequest: angular.identity,
-                    //         headers: {
-                    //             'Content-Type': undefined
-                    //         }
-                    //     })
-                    // }
-                    return res.body;
+                mergeMap((res: HttpResponse<any>) => {
+                    if (!keepCurrent) {
+                        this.webRequestService.put("api/activities/pictures/" + activity.id, coverImage).subscribe();
+                        return of(res.body);
+                    } else {
+                        return of(res.body);
+                    }
                 }),
                 catchError(err => {
                     console.error('ActivitiesService.edit: Error when editing activity with id: ' + activity.id);

@@ -1,29 +1,31 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../services/activities/activities.service";
-import {FilterPipe} from "../../pipes/filter.pipe";
 import {SortPipe} from "../../pipes/sort.pipe";
+import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'app-manage',
     templateUrl: './manage.component.html',
+    providers: [DatePipe],
     styleUrls: ['./manage.component.css']
 })
 export class ManageComponent implements OnInit {
 
     user: any;
     loading: boolean;
-    date = new Date().setDate((new Date()).getDate() - 1);
+    isUserInAcquisition = false;
+    date;
     archive: any[];
+
     users: any[];
     groups: any[];
     activities: any[];
+    internships: any[];
 
     sortTypeActivities = 'id';
     sortReverseActivities = false;
     searchQueryActivities = "";
-    sortCallbackActivities: any;
 
     sortTypeUsers = 'id';
     sortReverseUsers = false;
@@ -33,14 +35,9 @@ export class ManageComponent implements OnInit {
     sortReverseGroups = false;
     searchQueryGroups = "";
 
-    private datepicker: { open: boolean };
-
-    dateOptions = {
-        formatYear: 'yy',
-        maxDate: new Date().setFullYear(new Date().getFullYear() + 10), // maximum date for datepicker
-        minDate: new Date(), // minimum date for datepicker
-        startingDay: 1
-    };
+    sortTypeInternships = 'id';
+    sortReverseInternships = false;
+    searchQueryInternships = "";
 
     typeSortMap = new Map([
         ['id', this.sortPipe.numberSort],
@@ -53,19 +50,24 @@ export class ManageComponent implements OnInit {
         ['isAdmin', this.sortPipe.booleanSort],
         ['fullName', this.sortPipe.lexicographicSort],
         ['email', this.sortPipe.lexicographicSort],
-        ['canOrganize', this.sortPipe.booleanSort]
+        ['canOrganize', this.sortPipe.booleanSort],
+        ['title', this.sortPipe.lexicographicSort],
+        ['companyName', this.sortPipe.lexicographicSort],
+        ['educationLevel', this.sortPipe.lexicographicSort]
     ]);
 
     constructor(private activatedRoute: ActivatedRoute,
-                public authService: AuthService,
                 private activitiesService: ActivitiesService,
-                public filterPipe: FilterPipe,
-                public sortPipe: SortPipe) {
+                public sortPipe: SortPipe,
+                private datePipe: DatePipe) {
         this.loading = true;
 
         // Variables for tracking search & sorting in activities tab
         this.sortTypeActivities = 'id';
         this.sortReverseActivities = false;
+
+        const today = new Date();
+        this.date = this.datePipe.transform(new Date(today.setDate(today.getDate() - 1)), "yyyy-MM-dd");
 
         // Variables for tracking search & sorting in users tab
         this.sortTypeUsers = 'id';
@@ -74,32 +76,40 @@ export class ManageComponent implements OnInit {
         // Variables for tracking search & sorting in groups tab
         this.sortTypeGroups = 'id';
         this.sortReverseGroups = false;
-
-        this.datepicker = {open: false};
     }
 
     ngOnInit(): void {
-        this.authService.user.subscribe(user => {
-            this.user = user;
+        this.user = this.activatedRoute.snapshot.data.currentUser;
 
-            this.archive = this.activatedRoute.snapshot.data.allActivities;
+        if (!this.user.loggedIn) {
+            return;
+        }
 
-            if (this.user.isAdmin) {
-                this.users = this.activatedRoute.snapshot.data.allUsers;
-                this.groups = this.activatedRoute.snapshot.data.allGroups;
+        this.archive = this.activatedRoute.snapshot.data.allActivities;
+
+        if (this.user.isAdmin) {
+            this.users = this.activatedRoute.snapshot.data.allUsers;
+            this.groups = this.activatedRoute.snapshot.data.allGroups;
+        }
+
+        for (const group of this.user.groups) {
+            if (group.email === "acquisition@hsaconfluente.nl") {
+                this.isUserInAcquisition = true;
             }
+        }
 
-            this.loading = false;
-        });
+        if (this.isUserInAcquisition || this.user.isAdmin) {
+            this.internships = this.activatedRoute.snapshot.data.allInternships;
+        }
+
+        this.loading = false;
     }
 
     // Allow toggling the 'published' attribute of activities
     togglePublishedActivity(activityToBeToggled) {
         activityToBeToggled.published = !activityToBeToggled.published;
-        activityToBeToggled.organizer = activityToBeToggled.Organizer.displayName;
-        this.activitiesService.edit(activityToBeToggled, true, null).subscribe(res => {
-            return;
-        });
+        activityToBeToggled.organizer = activityToBeToggled.Organizer.fullName;
+        this.activitiesService.edit(activityToBeToggled, true, null).subscribe();
     }
 
     activityCallback(activity, query) {
@@ -119,6 +129,12 @@ export class ManageComponent implements OnInit {
     groupCallback(group, query) {
         return group.fullName.toLowerCase().includes(query.toLowerCase())
             || group.email.toLowerCase().includes(query.toLowerCase());
+    }
+
+    internshipCallback(internship, query) {
+        return internship.title.toLowerCase().includes(query.toLowerCase())
+            || internship.companyName.toLowerCase().includes(query.toLowerCase())
+            || internship.educationLevel.toLowerCase().includes(query.toLowerCase());
     }
 
     // Ugly repeated code
@@ -147,5 +163,14 @@ export class ManageComponent implements OnInit {
             this.sortReverseGroups = false;
         }
         this.sortTypeGroups = type;
+    }
+
+    sortInternships(type) {
+        if (this.sortTypeInternships === type) {
+            this.sortReverseInternships = !this.sortReverseInternships;
+        } else {
+            this.sortReverseInternships = false;
+        }
+        this.sortTypeInternships = type;
     }
 }

@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../../services/activities/activities.service";
-import {AuthService} from "../../../services/auth.service";
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {DatePipe} from "@angular/common";
+import {FilterPipe} from "../../../pipes/filter.pipe";
 
 @Component({
     selector: 'app-activity-edit',
     templateUrl: './activity-edit.component.html',
+    providers: [DatePipe],
     styleUrls: ['./activity-edit.component.css']
 })
 export class ActivityEditComponent implements OnInit {
@@ -13,18 +16,19 @@ export class ActivityEditComponent implements OnInit {
     activity;
     user;
 
+    uploadForm: FormGroup;
+
     loading: boolean;
 
     inputs = [];
 
-    uploadme = "Did not change image";
     keepCurrent = false;
 
     userGroups = [];
 
     // setting standard deadline for subscription deadline field
     deadline = {
-        subscriptionDeadline: new Date()
+        subscriptionDeadline: this.datePipe.transform(new Date(), "yyyy-MM-dd")
     };
 
     dateOptions = {
@@ -38,21 +42,27 @@ export class ActivityEditComponent implements OnInit {
     types = ["☰ text", "◉ multiple choice", "☑ checkboxes"];
 
     constructor(private activatedRoute: ActivatedRoute,
-                private authService: AuthService,
-                private activitiesService: ActivitiesService) {
+                private activitiesService: ActivitiesService,
+                private formBuilder: FormBuilder,
+                private datePipe: DatePipe,
+                private filterPipe: FilterPipe) {
         this.loading = true;
+
+        this.uploadForm = this.formBuilder.group({
+            image: 'No Image'
+        });
     }
 
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
-        this.activity.organizer = this.activity.Organizer.displayName;
+        this.activity.date = this.datePipe.transform(this.activity.date, "yyyy-MM-dd");
 
-        this.authService.user.subscribe(user => {
-            this.user = user;
-        });
+        this.user = this.activatedRoute.snapshot.data.currentUser;
 
         for (const group of this.user.groups) {
-            this.userGroups.push(group.displayName);
+            if (group.canOrganize) {
+                this.userGroups.push(group.fullName);
+            }
         }
 
         // formatting the form to inputs such that it can be interactive with angular
@@ -137,19 +147,32 @@ export class ActivityEditComponent implements OnInit {
         return alert(ErrorMessage);
     }
 
+    onFileSelect(event) {
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            this.uploadForm.get('image').setValue(file);
+        } else {
+            this.uploadForm.get('image').setValue('No Image');
+        }
+    }
+
+    groupFilterCallback(group, query) {
+        return group.canOrganize === true;
+    }
+
     submit() {
         this.loading = true;
 
         let changedCoverImage = false;
-        if (this.uploadme !== "Did not change image") {
+        if (this.uploadForm.get('image').value !== 'No Image' && !this.keepCurrent) {
             this.activity.hasCoverImage = true;
             changedCoverImage = true;
         }
 
         const fd = new FormData();
         if (changedCoverImage) {
-            // @ts-ignore
-            const [file] = $('#activityEdit-cover')[0].files;
+            const file = this.uploadForm.get('image').value;
+
             if (!file.type.startsWith('image/')) {
                 return this.wrongInput('Non-image formats are not supported as pictures for activities!');
             }
@@ -166,7 +189,7 @@ export class ActivityEditComponent implements OnInit {
                 }
             };
 
-            fd.append('image', file);
+            fd.append('image', this.uploadForm.get('image').value);
         }
 
         // Checks whether required fields are empty
@@ -236,7 +259,7 @@ export class ActivityEditComponent implements OnInit {
             this.activity.hasCoverImage = false;
         }
 
-        this.activitiesService.edit(this.activity, this.keepCurrent, fd).subscribe(result => {
+        this.activitiesService.edit(this.activity, this.keepCurrent, fd).subscribe((result) => {
             this.loading = false;
 
             // redirect to edited activity
