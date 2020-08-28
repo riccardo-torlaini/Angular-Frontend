@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NotificationsService} from "../../services/notifications/notifications.service";
 import {ActivatedRoute} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-consent-portrait-right',
@@ -11,8 +12,10 @@ export class ConsentPortraitRightComponent implements OnInit {
 
     private user;
 
-    constructor(private notificationsService: NotificationsService,
+    constructor(titleService: Title,
+                private notificationsService: NotificationsService,
                 private activatedRoute: ActivatedRoute) {
+        titleService.setTitle("Portrait Right");
     }
 
     ngOnInit(): void {

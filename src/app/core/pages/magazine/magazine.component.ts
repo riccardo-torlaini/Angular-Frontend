@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-magazine',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MagazineComponent implements OnInit {
 
-  constructor() { }
+  constructor(titleService: Title) {
+      titleService.setTitle("Magazine");
+  }
 
   ngOnInit(): void {
       // after coming from homepage, page is scrolled down (bug?)

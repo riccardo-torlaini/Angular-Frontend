@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-submitted-registration',
@@ -7,7 +8,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SubmittedRegistrationComponent implements OnInit {
 
-    constructor() {
+    constructor(titleService: Title) {
+        titleService.setTitle("Registration Submitted!");
     }
 
     ngOnInit(): void {

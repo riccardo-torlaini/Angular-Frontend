@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-user-details',
@@ -11,7 +12,8 @@ export class UserDetailsComponent implements OnInit {
     user: any;
     loading: boolean;
 
-    constructor(private activatedRoute: ActivatedRoute) {
+    constructor(private titleService: Title,
+                private activatedRoute: ActivatedRoute) {
         this.loading = true;
     }
 
@@ -21,6 +23,9 @@ export class UserDetailsComponent implements OnInit {
         } else {
             this.user = this.activatedRoute.snapshot.data.user;
         }
+
+        this.titleService.setTitle("Profile of " + this.user.firstName);
+
         this.loading = false;
     }
 }

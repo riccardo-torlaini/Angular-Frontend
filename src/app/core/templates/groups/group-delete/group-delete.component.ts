@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GroupsService} from "../../../services/groups/groups.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-group-delete',
@@ -12,9 +13,12 @@ export class GroupDeleteComponent implements OnInit {
     loading: boolean;
     group;
 
-    constructor(private activatedRoute: ActivatedRoute,
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute,
                 private groupsService: GroupsService) {
         this.loading = true;
+
+        titleService.setTitle("Delete Group");
     }
 
     ngOnInit(): void {

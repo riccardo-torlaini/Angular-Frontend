@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-group-details',
@@ -11,8 +12,11 @@ export class GroupDetailsComponent implements OnInit {
     loading: boolean;
     group: any;
 
-    constructor(private activatedRoute: ActivatedRoute) {
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute) {
         this.loading = true;
+
+        titleService.setTitle("Group Details");
     }
 
     ngOnInit(): void {

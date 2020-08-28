@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-association',
@@ -7,7 +8,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AssociationComponent implements OnInit {
 
-    constructor() {
+    constructor(titleService: Title) {
+        titleService.setTitle("Association");
     }
 
     ngOnInit(): void {

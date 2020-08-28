@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {UsersService} from "../../../services/users/users.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-user-delete',
@@ -12,9 +13,12 @@ export class UserDeleteComponent implements OnInit {
     user;
     loading: boolean;
 
-    constructor(private activatedRoute: ActivatedRoute,
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute,
                 private usersService: UsersService) {
         this.loading = true;
+
+        titleService.setTitle("Delete User");
     }
 
     ngOnInit(): void {

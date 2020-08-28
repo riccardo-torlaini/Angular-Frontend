@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PartnersService} from "../../../../services/partners/partners.service";
 import {ActivatedRoute} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-internship-edit',
@@ -20,9 +21,12 @@ export class InternshipEditComponent implements OnInit {
     // Categories that can be chosen
     categories = ["internship"];
 
-    constructor(private partnersService: PartnersService,
+    constructor(titleService: Title,
+                private partnersService: PartnersService,
                 private activatedRoute: ActivatedRoute) {
         this.loading = true;
+
+        titleService.setTitle("Edit Internship");
     }
 
     ngOnInit(): void {

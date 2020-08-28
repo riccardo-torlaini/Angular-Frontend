@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-committees',
@@ -11,8 +12,11 @@ export class CommitteesComponent implements OnInit {
     private loading: boolean;
     committees;
 
-    constructor(private activatedRoute: ActivatedRoute) {
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute) {
         this.loading = true;
+
+        titleService.setTitle("Committees");
     }
 
     ngOnInit(): void {

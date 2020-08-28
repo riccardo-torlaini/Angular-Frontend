@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {UsersService} from "../../../services/users/users.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-change-password',
@@ -15,9 +16,12 @@ export class ChangePasswordComponent implements OnInit {
     passwordNew2;
     password;
 
-    constructor(private activatedRoute: ActivatedRoute,
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute,
                 private usersService: UsersService) {
         this.loading = true;
+
+        titleService.setTitle("Change Password");
     }
 
     ngOnInit(): void {

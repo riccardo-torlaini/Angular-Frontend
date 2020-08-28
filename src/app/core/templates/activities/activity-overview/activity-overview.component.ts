@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivitiesService} from "../../../services/activities/activities.service";
 import {ActivatedRoute} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-activity-overview',
@@ -14,8 +15,11 @@ export class ActivityOverviewComponent implements OnInit {
     activities;
     user;
 
-    constructor(private activatedRoute: ActivatedRoute) {
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute) {
         this.loading = true;
+
+        titleService.setTitle("Activity Overview");
     }
 
     ngOnInit(): void {

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-energy-transition',
@@ -7,7 +8,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class EnergyTransitionComponent implements OnInit {
 
-    constructor() {
+    constructor(titleService: Title) {
+        titleService.setTitle("Energy Transition");
+
     }
 
     ngOnInit(): void {

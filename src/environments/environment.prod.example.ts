@@ -5,5 +5,5 @@
 
 export const environment = {
     production: true,
-    ROOT_URL: "https://www.hsaconfluente.nl:81",
+    ROOT_URL: "",
 };

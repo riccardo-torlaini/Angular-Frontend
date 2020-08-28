@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UsersService} from "../../../services/users/users.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-user-create',
@@ -36,8 +37,11 @@ export class UserCreateComponent implements OnInit {
     password;
     portraitRight;
 
-    constructor(private usersService: UsersService) {
+    constructor(titleService: Title,
+                private usersService: UsersService) {
         this.loading = true;
+
+        titleService.setTitle("Register!");
     }
 
     ngOnInit(): void {

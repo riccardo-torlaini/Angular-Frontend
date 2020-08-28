@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-competitive-programming-and-problem-solving',
@@ -7,7 +8,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CompetitiveProgrammingAndProblemSolvingComponent implements OnInit {
 
-    constructor() {
+    constructor(titleService: Title) {
+        titleService.setTitle("Competitive Programming and Problem Solving");
     }
 
     ngOnInit(): void {
