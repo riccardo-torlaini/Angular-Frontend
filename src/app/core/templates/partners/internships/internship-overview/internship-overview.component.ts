@@ -10,6 +10,8 @@ export class InternshipOverviewComponent implements OnInit {
 
     loading: boolean;
     internships: any[];
+    user: any;
+    isUserInAcquisition: boolean;
 
     constructor(private activatedRoute: ActivatedRoute) {
         this.loading = true;
@@ -17,6 +19,15 @@ export class InternshipOverviewComponent implements OnInit {
 
     ngOnInit(): void {
         this.internships = this.activatedRoute.snapshot.data.allInternships;
+        this.user = this.activatedRoute.snapshot.data.currentUser;
+
+        for (const group of this.user.groups) {
+            if (group.email === "acquisition@hsaconfluente.nl") {
+                this.isUserInAcquisition = true;
+            }
+        }
+
+        this.loading = false;
     }
 
 }
