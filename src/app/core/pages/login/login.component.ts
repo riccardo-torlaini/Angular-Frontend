@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-login',
@@ -13,9 +14,12 @@ export class LoginComponent implements OnInit {
     public loading: boolean;
     user: any;
 
-    constructor(private authService: AuthService,
+    constructor(titleService: Title,
+                private authService: AuthService,
                 private activatedRoute: ActivatedRoute) {
         this.loading = true;
+
+        titleService.setTitle("Login");
     }
 
     ngOnInit(): void {

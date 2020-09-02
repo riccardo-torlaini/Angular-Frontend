@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../../services/activities/activities.service";
 import {TableExport} from "tableexport";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-activity-details',
@@ -22,9 +23,13 @@ export class ActivityDetailsComponent implements OnInit {
     deadlinePassed: boolean;
     clickedExport: boolean;
 
-    constructor(private activatedRoute: ActivatedRoute,
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute,
                 private activitiesService: ActivitiesService) {
         this.loading = true;
+
+        titleService.setTitle("Activity Details");
+
         this.activityId = this.activatedRoute.snapshot.params.activityId;
     }
 

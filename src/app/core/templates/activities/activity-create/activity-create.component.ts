@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {DatePipe} from "@angular/common";
 import {FilterPipe} from "../../../pipes/filter.pipe";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-activity-create',
@@ -51,12 +52,15 @@ export class ActivityCreateComponent implements OnInit {
     private wrongCharacters: boolean;
     user: any;
 
-    constructor(private activitiesService: ActivitiesService,
+    constructor(titleService: Title,
+                private activitiesService: ActivitiesService,
                 private activatedRoute: ActivatedRoute,
                 private formBuilder: FormBuilder,
                 private datePipe: DatePipe,
                 private filterPipe: FilterPipe) {
         this.loading = true;
+
+        titleService.setTitle("Create Activity");
 
         this.uploadForm = this.formBuilder.group({
             image: 'No Image'

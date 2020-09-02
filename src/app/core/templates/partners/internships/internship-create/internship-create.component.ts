@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PartnersService} from "../../../../services/partners/partners.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-internship-create',
@@ -25,8 +26,11 @@ export class InternshipCreateComponent implements OnInit {
     link: any;
     educationLevel: any;
 
-    constructor(private partnersService: PartnersService) {
+    constructor(titleService: Title,
+                private partnersService: PartnersService) {
         this.loading = true;
+
+        titleService.setTitle("Create Internship");
     }
 
     ngOnInit(): void {

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, Title} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-internship-details',
@@ -14,9 +14,12 @@ export class InternshipDetailsComponent implements OnInit {
     user: any;
     isUserInAcquisition = false;
 
-    constructor(private activatedRoute: ActivatedRoute,
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute,
                 private sanitizer: DomSanitizer) {
         this.loading = true;
+
+        titleService.setTitle("Internship Details");
     }
 
     ngOnInit(): void {

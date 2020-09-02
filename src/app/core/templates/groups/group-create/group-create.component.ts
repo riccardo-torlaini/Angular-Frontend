@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GroupsService} from "../../../services/groups/groups.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-group-create',
@@ -17,8 +18,11 @@ export class GroupCreateComponent implements OnInit {
     type;
     differentType;
 
-    constructor(private groupsService: GroupsService) {
+    constructor(titleService: Title,
+                private groupsService: GroupsService) {
         this.loading = true;
+
+        titleService.setTitle("Create Group");
     }
 
     ngOnInit(): void {

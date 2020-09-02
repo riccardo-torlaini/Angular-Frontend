@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../services/activities/activities.service";
 import {SortPipe} from "../../pipes/sort.pipe";
 import {DatePipe} from "@angular/common";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-manage',
@@ -56,11 +57,14 @@ export class ManageComponent implements OnInit {
         ['educationLevel', this.sortPipe.lexicographicSort]
     ]);
 
-    constructor(private activatedRoute: ActivatedRoute,
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute,
                 private activitiesService: ActivitiesService,
                 public sortPipe: SortPipe,
                 private datePipe: DatePipe) {
         this.loading = true;
+
+        titleService.setTitle("Manage Panel");
 
         // Variables for tracking search & sorting in activities tab
         this.sortTypeActivities = 'id';

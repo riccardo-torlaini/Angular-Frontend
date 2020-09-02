@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivitiesService} from "../../services/activities/activities.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-home',
@@ -12,9 +13,13 @@ export class HomeComponent implements OnInit {
     public acts: any[];
     public loading: boolean;
 
-    constructor(private activitiesService: ActivitiesService) {
-        this.acts = [];
+    constructor(titleService: Title,
+                private activitiesService: ActivitiesService) {
         this.loading = true;
+
+        titleService.setTitle("Home");
+
+        this.acts = [];
     }
 
     // JQUERY code to enable the scroll animation triggering

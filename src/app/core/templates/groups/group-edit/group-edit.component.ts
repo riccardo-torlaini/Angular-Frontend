@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GroupsService} from "../../../services/groups/groups.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-group-edit',
@@ -23,9 +24,12 @@ export class GroupEditComponent implements OnInit {
 
     loading: boolean;
 
-    constructor(private activatedRoute: ActivatedRoute,
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute,
                 private groupsService: GroupsService) {
         this.loading = true;
+
+        titleService.setTitle("Edit Group");
     }
 
     ngOnInit(): void {

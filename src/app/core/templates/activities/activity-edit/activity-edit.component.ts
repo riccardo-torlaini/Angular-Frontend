@@ -4,6 +4,7 @@ import {ActivitiesService} from "../../../services/activities/activities.service
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {DatePipe} from "@angular/common";
 import {FilterPipe} from "../../../pipes/filter.pipe";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-activity-edit',
@@ -41,12 +42,15 @@ export class ActivityEditComponent implements OnInit {
     // options for question types
     types = ["☰ text", "◉ multiple choice", "☑ checkboxes"];
 
-    constructor(private activatedRoute: ActivatedRoute,
+    constructor(titleService: Title,
+                private activatedRoute: ActivatedRoute,
                 private activitiesService: ActivitiesService,
                 private formBuilder: FormBuilder,
                 private datePipe: DatePipe,
                 private filterPipe: FilterPipe) {
         this.loading = true;
+
+        titleService.setTitle("Edit Activity");
 
         this.uploadForm = this.formBuilder.group({
             image: 'No Image'
