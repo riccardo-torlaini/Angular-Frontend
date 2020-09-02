@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="pull-right">
-        <a class="btn btn-default" href="/manage/partners/internships/create" ng-if="user.canOrganize">Add Internship</a>
+        <a class="btn btn-default" href="/manage/partners/internships/create" *ngIf="user.isAdmin || isUserInAcquisition">Add Internship</a>
     </div>
 
     <h1>Internships</h1>
