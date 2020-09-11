@@ -4,81 +4,234 @@
         Edit user
     </h1>
 
-    <form>
+    <form class="form-horizontal">
 
-        <div class="form-group">
-            <label for="userCreate-firstName">First name (required)</label>
-            <input type="text" [(ngModel)]="user.firstName" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-firstName">
-        </div>
+        <fieldset class="section">
+            <legend class="h4 block">First, the basics.</legend>
 
-        <div class="form-group">
-            <label for="userCreate-lastName">Family name (required)</label>
-            <input type="text" [(ngModel)]="user.lastName" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-lastName">
-        </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
 
-        <div class="form-group">
-            <label for="userCreate-email">TU/e Email address (required)</label>
-            <input type="text" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-email">
-        </div>
+                    <div class="form-group">
+                        <label for="userEdit-firstName" class="col-xs-12 col-sm-3 control-label">Name</label>
+                        <div class="col-xs-6 col-sm-4">
+                            <input placeholder="First name" type="text" [(ngModel)]="user.firstName"
+                                   class="form-control" id="userEdit-firstName" required [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="col-xs-6 col-sm-5">
+                            <input placeholder="Family name" type="text" [(ngModel)]="user.lastName"
+                                   class="form-control" id="userEdit-lastName" required [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <label for="userCreate-major">Major</label>
-            <input type="text" [(ngModel)]="user.major" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-major">
-        </div>
-
-        <div class="form-group">
-            <label for="userCreate-address">Address (Netherlands, optional)</label>
-            <input type="text" [(ngModel)]="user.address" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-address">
-        </div>
-
-        <b>Which honors track are you in:</b>
-        <select [(ngModel)]="user.track" [ngModelOptions]="{standalone: true}">
-            <option *ngFor="let track of tracks" [value]="track">{{track}}</option>
-        </select><br>
-
-        <b>In which year did you start at the honors academy</b>
-        <select [(ngModel)]="user.honorsGeneration" [ngModelOptions]="{standalone: true}">
-            <option *ngFor="let generation of generations" [value]="generation">{{generation}}</option>
-        </select><br>
-
-        <b>What is your membership status?</b>
-        <select [(ngModel)]="user.honorsMembership" [ngModelOptions]="{standalone: true}">
-            <option *ngFor="let membership of memberships" [value]="membership">{{membership}}</option>
-        </select><br>
-
-        <div class="form-group">
-            <label for="userCreate-cardNumber">What is your campuscard number? (needed to give you access to the honors
-                room door)</label>
-            <input type="text" [(ngModel)]="user.campusCardNumber" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-cardNumber">
-        </div>
-
-        <div class="form-group">
-            <label for="userCreate-phone">Mobile phone number</label>
-            <input type="text" [(ngModel)]="user.mobilePhoneNumber" [ngModelOptions]="{standalone: true}" class="form-control" id="userCreate-phone">
-        </div>
-
-
-        <label>Role</label>
-        <div>
-            <div *ngFor="let r of role.roles">
-                <input type="radio" [(ngModel)]="selectedRole.id" [ngModelOptions]="{standalone: true}" value="{{r.id}}"/>
-                <span>{{r.id}}</span>
+                </div>
             </div>
-        </div>
 
-        <label>Groups</label>
-        <div *ngFor="let group of groupSelection">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="selectedGroups[]" value="{{group.fullName}}" [(ngModel)]="group.selected" [ngModelOptions]="{standalone: true}"> {{group.fullName}}
-                    <select [(ngModel)]="group.role" [ngModelOptions]="{standalone: true}">
-                        <option *ngFor="let role of groupRoles" [value]="role">{{role}}</option>
-                    </select><br>
-                </label>
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="userEdit-email" class="col-xs-12 col-sm-3 control-label">Email address</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input placeholder="@student.tue.nl" type="email" [(ngModel)]="user.email"
+                                   class="form-control" id="userEdit-email" required [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                </div>
+
+                <p class="hidden-sm col-xs-12 col-md-4 control-label text-left small">
+                    Essential communication will proceed through email, as well as the promotion of events.
+                </p>
+
             </div>
-        </div>
 
-        <button type="submit" class="btn btn-default" (click)="submit()" [disabled]="loading">Save</button>
+            <div class="clearfix block"></div>
 
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="userCreate-member" class="col-xs-12 col-sm-3 control-label">Membership</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <select [(ngModel)]="user.honorsMembership" class="form-control" id="userCreate-member" [ngModelOptions]="{standalone: true}">
+                                <option *ngFor="let ms of memberships" [value]="ms">{{ms}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+        </fieldset>
+
+        <hr>
+
+        <fieldset class="section">
+            <legend class="h4 block">Additional information. This part is <span class="text-primary">optional</span>.</legend>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="userEdit-major" class="col-xs-12 col-sm-3 control-label">
+                            <span *ngIf="user.honorsMembership == memberships[1] || user.honorsMembership == memberships[2]">(old) </span>TU/e Major</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="text" [(ngModel)]="user.major" class="form-control" id="userEdit-major" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="userCreate-track" class="col-xs-12 col-sm-3 control-label">
+                            <span *ngIf="user.honorsMembership == memberships[1] || user.honorsMembership == memberships[2]">(old) </span>Honors track</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <select [(ngModel)]="user.track" class="form-control" id="userCreate-track" [ngModelOptions]="{standalone: true}">
+                                <option *ngFor="let track of tracks" [value]="track">{{track}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="userEdit-trackstart" class="col-xs-12 col-sm-3 col-sm-offset-1 control-label">started in</label>
+                        <div class="col-xs-12 col-sm-4">
+                            <select [(ngModel)]="user.honorsGeneration" class="form-control" id="userEdit-trackstart" [ngModelOptions]="{standalone: true}">
+                                <option *ngFor="let gen of generations" [value]="gen">{{gen}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix block"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="userEdit-cardNumber" class="col-xs-12 col-sm-3 control-label">Card number</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="tel" [disabled]="user.honorsMembership == memberships[1] || user.honorsMembership == memberships[2]" [(ngModel)]="user.campusCardNumber" class="form-control" id="userEdit-cardNumber" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                </div>
+
+                <p class="hidden-sm col-xs-12 col-md-4 control-label text-left small" *ngIf="!(user.honorsMembership == memberships[1] || user.honorsMembership == memberships[2])">
+                    This will be used to grant you access to the Honors Room.
+                </p>
+            </div>
+
+            <div class="clearfix block"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="userEdit-phone" class="col-xs-12 col-sm-3 control-label">Mobile phone</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="tel" [(ngModel)]="user.mobilePhoneNumber" class="form-control" id="userEdit-phone" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                </div>
+                <p class="hidden-sm col-xs-12 col-md-4 control-label text-left small">
+                    This will be used for quick contact for activities if needed.
+                </p>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="userEdit-address" class="col-xs-12 col-sm-3 control-label">Address</label>
+                        <div class="col-xs-12 col-sm-9">
+                            <input type="text" [(ngModel)]="user.address" class="form-control" id="userEdit-address" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+
+                </div>
+                <p class="hidden-sm col-xs-12 col-md-4 control-label text-left small">
+                    This enables the board to send an association update through post, or to send you a gift.
+                </p>
+            </div>
+
+            <div class="clearfix"></div>
+        </fieldset>
+
+        <hr>
+
+        <fieldset class="section">
+            <legend class="h4 block">Website</legend>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <label for="userEdit-role" class="col-xs-12 col-sm-3 control-label" style="padding-top: 0">Role</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <div *ngFor="let r of role.roles" id="userEdit-role">
+                            <input type="radio" [(ngModel)]="selectedRole.id" [ngModelOptions]="{standalone: true}" value="{{r.id}}"/>
+                            <span> {{r.id}} </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </fieldset>
+
+        <hr>
+
+        <fieldset class="section">
+            <legend class="h4 block">Committees</legend>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <label for="userEdit-groups" class="col-xs-12 col-sm-3 control-label">Groups</label>
+
+                    <div class="col-xs-12 col-sm-9" id="userEdit-groups">
+
+                        <div *ngFor="let group of groupSelection">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="selectedGroups[]" value="{{group.fullName}}" [(ngModel)]="group.selected" [ngModelOptions]="{standalone: true}"> {{group.fullName}}<br>
+                                    <select [(ngModel)]="group.role" [ngModelOptions]="{standalone: true}">
+                                        <option *ngFor="let role of groupRoles" [value]="role">{{role}}</option>
+                                    </select><br>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="loading">Save</button>
     </form>
 </div>
