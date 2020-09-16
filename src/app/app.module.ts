@@ -60,6 +60,7 @@ import { FilterPipe } from './core/pipes/filter.pipe';
 import { SortPipe } from './core/pipes/sort.pipe';
 import { MarkdownComponent } from './core/snippets/markdown/markdown.component';
 import { BaseComponent } from './core/base/base.component';
+import { OptiverComponent } from './core/pages/partners/sponsors/optiver/optiver.component';
 
 @NgModule({
     declarations: [
@@ -116,6 +117,7 @@ import { BaseComponent } from './core/base/base.component';
         SortPipe,
         MarkdownComponent,
         BaseComponent,
+        OptiverComponent,
     ],
     imports: [
         BrowserModule,
