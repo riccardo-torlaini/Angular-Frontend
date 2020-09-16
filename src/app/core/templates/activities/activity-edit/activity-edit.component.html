@@ -144,7 +144,7 @@
                         <div class="col-xs-6 col-sm-4 col-lg-3">
                             <select [(ngModel)]="input.type" class="form-control" [ngModelOptions]="{standalone: true}"
                                     [disabled]="input.type === 'name' || input.type === 'TU/e email'">
-                                <option *ngFor="let type in types" [value]="type">{{type}}</option>
+                                <option *ngFor="let type of types">{{type}}</option>
                             </select>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
                             <div class="form-group" *ngFor="let option of input.options; index as j">
 
                                 <div class="col-xs-9 col-xs-offset-1 col-sm-5 col-sm-offset-3">
-                                    <input type="text" [(ngModel)]="input.options[j]" [ngModelOptions]="{standalone: true}" class="form-control">
+                                    <input type="text" [(ngModel)]="input.options[j].op" [ngModelOptions]="{standalone: true}" class="form-control">
                                 </div>
                                 <button class="btn btn-link" (click)="removeOption(i, j)"><i
                                     class="fa fa-trash-o"></i></button>
@@ -239,7 +239,7 @@
 
         <div class="section">
             <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="loading">
-                Publish event
+                Save event
             </button>
         </div>
 
