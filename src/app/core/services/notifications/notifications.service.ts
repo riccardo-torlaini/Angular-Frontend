@@ -26,7 +26,7 @@ export class NotificationsService {
                 console.error('NotificationsService.portraitRight: Error when changing portraitRight for user ' +
                     'with id ' + userId);
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }

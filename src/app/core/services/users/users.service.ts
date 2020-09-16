@@ -23,7 +23,7 @@ export class UsersService {
             catchError(err => {
                 console.error('UsersService.getAll: Error when getting all users from backend');
                 console.error(err);
-                return of();
+                return of([]);
             })
         );
     }
@@ -54,7 +54,7 @@ export class UsersService {
             catchError(err => {
                 console.error('UsersService.get: Error when getting user from backend with id ' + userId);
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }
@@ -76,7 +76,7 @@ export class UsersService {
                     return of({error: err.status, data: err.data});
                 }
 
-                return of();
+                return of({});
             })
         );
     }
@@ -96,7 +96,7 @@ export class UsersService {
                 console.error('UsersService.edit: Error when editing user in backend with id ' + user.id);
                 console.error(err);
 
-                return of();
+                return of({});
             })
         );
     }
@@ -114,7 +114,7 @@ export class UsersService {
                 console.error('UsersService.changePassword: Error when changing password in the backend for user ' +
                     'with id ' + user.id);
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }
@@ -131,7 +131,7 @@ export class UsersService {
             catchError(err => {
                 console.error('UsersService.delete: Error when deleting user in the backend with id ' + userId);
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }
