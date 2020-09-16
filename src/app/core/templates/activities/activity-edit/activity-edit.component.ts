@@ -74,7 +74,7 @@ export class ActivityEditComponent implements OnInit {
             for (let i = 0; i < this.activity.numberOfQuestions; i++) {
                 const options = [];
                 for (const option of this.activity.formOptions[i]) {
-                    options.push(option);
+                    options.push({op: option});
                 }
                 this.inputs.push({
                     fullQuestion: this.activity.questionDescriptions[i],
@@ -91,8 +91,9 @@ export class ActivityEditComponent implements OnInit {
         // If not subscription form was submitted initially then add the standard two questions to input
         if (this.inputs.length === 0) {
             this.inputs = [
-                {fullQuestion: 'Name', type: "name", options: [''], required: 'true', privacyOfQuestion: 'false'},
-                {fullQuestion: 'TU/e email', type: "TU/e email", options: [''], required: 'true', privacyOfQuestion: 'false'}
+                {fullQuestion: 'Name', type: "name", options: [{op: ''}], required: 'true', privacyOfQuestion: 'false'},
+                {fullQuestion: 'TU/e email', type: "TU/e email", options: [{op: ''}],
+                    required: 'true', privacyOfQuestion: 'false'}
             ];
         }
 
@@ -105,7 +106,7 @@ export class ActivityEditComponent implements OnInit {
 
     // adds an element to the inputs variable
     add() {
-        const dataObj = {fullQuestion: '', type: "☰ text", options: ['option 1'], required: '', privacyOfQuestion: ''};
+        const dataObj = {fullQuestion: '', type: "☰ text", options: [{op: 'Option 1'}], required: '', privacyOfQuestion: ''};
         this.inputs.push(dataObj);
     }
 
@@ -118,7 +119,7 @@ export class ActivityEditComponent implements OnInit {
 
     // Adds an option to a multiple choice question
     addOption(input) {
-        const option = 'option ' + (input.options.length + 1).toString();
+        const option = {op: 'option ' + (input.options.length + 1).toString()};
         input.options.push(option);
     }
 
@@ -199,6 +200,8 @@ export class ActivityEditComponent implements OnInit {
         // Checks whether required fields are empty
         let empty = !this.activity.name || !this.activity.description || !this.activity.Organizer;
 
+        this.activity.organizer = this.activity.Organizer.fullName;
+
         let wrongCharacters = false;
 
         if (this.activity.canSubscribe) {
@@ -215,10 +218,11 @@ export class ActivityEditComponent implements OnInit {
                 let optionString = "";
                 for (let i = 0; i < dataObj.options.length; i++) {
                     if (i !== 0) { optionString += "#;#"; }
-                    optionString += dataObj.options[i];
-                    if (dataObj.options[i].includes("#;#")) { wrongCharacters = true; }
-                    if (dataObj.options[i].includes("#,#")) { wrongCharacters = true; }
+                    optionString += dataObj.options[i].op;
+                    if (dataObj.options[i].op.includes("#;#")) { wrongCharacters = true; }
+                    if (dataObj.options[i].op.includes("#,#")) { wrongCharacters = true; }
                 }
+
                 allOptions.push(optionString);
 
                 allRequired.push(dataObj.required.toString());
@@ -229,13 +233,14 @@ export class ActivityEditComponent implements OnInit {
                 if (!dataObj.fullQuestion || dataObj.fullQuestion === "") {
                     empty = true;
                 }
+
                 if (dataObj.fullQuestion.includes("#,#")) { wrongCharacters = true; }
                 if (dataObj.fullQuestion.includes("#;#")) { wrongCharacters = true; }
 
                 // Checks whether options of multiple choice questions are empty
                 if (dataObj.type !== "☰ text" && dataObj.type !== "name" && dataObj.type !== "TU/e email") {
                     for (const option of dataObj.options) {
-                        if (option === "" || !dataObj.options) { empty = true; }
+                        if (option.op === "" || !dataObj.options) { empty = true; }
                     }
                 }
             });

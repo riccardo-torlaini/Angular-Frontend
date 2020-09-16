@@ -25,8 +25,8 @@ export class ActivityCreateComponent implements OnInit {
 
     // setting standard inputs for subscription form (first two questions are mandatory)
     inputs = [
-        {fullQuestion: 'Name', type: "name", options: [''], required: 'true', privacyOfQuestion: 'false'},
-        {fullQuestion: 'TU/e email', type: "TU/e email", options: [''], required: 'true', privacyOfQuestion: 'false'}
+        {fullQuestion: 'Name', type: "name", options: [{op: ''}], required: 'true', privacyOfQuestion: 'false'},
+        {fullQuestion: 'TU/e email', type: "TU/e email", options: [{op: ''}], required: 'true', privacyOfQuestion: 'false'}
     ];
 
     // declaring variables in used in form;
@@ -75,7 +75,7 @@ export class ActivityCreateComponent implements OnInit {
 
     // Each time a question is added, this creates a new empty object in the inputs variable
     add() {
-        const dataObj = {fullQuestion: '', type: "☰ text", options: ['option 1'], required: '', privacyOfQuestion: ''};
+        const dataObj = {fullQuestion: '', type: "☰ text", options: [{op: 'option 1'}], required: '', privacyOfQuestion: ''};
         this.inputs.push(dataObj);
     }
 
@@ -88,7 +88,7 @@ export class ActivityCreateComponent implements OnInit {
 
     // Adds option for multiple choice questions
     addOption(input) {
-        const option = 'option ' + (input.options.length + 1).toString();
+        const option = {op: 'option ' + (input.options.length + 1).toString()};
         input.options.push(option);
     }
 
@@ -202,13 +202,13 @@ export class ActivityCreateComponent implements OnInit {
 
                 // SQlite database can't handle strings therefore lists are stored as , seperated lists
                 // and ; seperated lists
-                let optionString = dataObj.options[0];
+                let optionString = dataObj.options[0].op;
                 for (let i = 1; i < dataObj.options.length; i++) {
-                    optionString += "#;#" + dataObj.options[i];
-                    if (dataObj.options[i].includes("#;#")) {
+                    optionString += "#;#" + dataObj.options[i].op;
+                    if (dataObj.options[i].op.includes("#;#")) {
                         this.wrongCharacters = true;
                     }
-                    if (dataObj.options[i].includes("#,#")) {
+                    if (dataObj.options[i].op.includes("#,#")) {
                         this.wrongCharacters = true;
                     }
                 }
@@ -233,7 +233,7 @@ export class ActivityCreateComponent implements OnInit {
                 // Check whether choices of multiple choice questions are empty
                 if (dataObj.type !== "☰ text" && dataObj.type !== "name" && dataObj.type !== "TU/e email") {
                     for (const option of dataObj.options) {
-                        if (option === "" || !dataObj.options) {
+                        if (option.op === "" || !dataObj.options) {
                             this.empty = true;
                         }
                     }
