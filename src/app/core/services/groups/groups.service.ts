@@ -23,7 +23,7 @@ export class GroupsService {
             catchError(err => {
                 console.error('GroupsService.getAll: Error when getting all groups');
                 console.error(err);
-                return of();
+                return of([]);
             })
         );
     }
@@ -40,7 +40,7 @@ export class GroupsService {
             catchError(err => {
                 console.error('GroupsService.getAllOfType: Error when getting all groups of type ' + type);
                 console.error(err);
-                return of();
+                return of([]);
             })
         );
     }
@@ -57,7 +57,7 @@ export class GroupsService {
             catchError(err => {
                 console.error('GroupsService.get: Error when getting group with id ' + groupId);
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }
@@ -74,7 +74,7 @@ export class GroupsService {
             catchError(err => {
                 console.error('GroupsService.create: Error when creating group');
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }
@@ -94,7 +94,7 @@ export class GroupsService {
                 console.error(group);
                 console.error(userGroup);
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }
@@ -111,7 +111,7 @@ export class GroupsService {
             catchError(err => {
                 console.error('GroupsService.delete: Error when deleting group with id ' + groupId);
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }

@@ -23,7 +23,7 @@ export class PartnersService {
             catchError(err => {
                 console.error('PartnersService.getAllInternships: Error when getting all internships.');
                 console.error(err);
-                return of();
+                return of([]);
             })
         );
     }
@@ -40,7 +40,7 @@ export class PartnersService {
             catchError(err => {
                 console.error('PartnersService.getInternship: Error when getting internship with id ' + id);
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }
@@ -57,7 +57,7 @@ export class PartnersService {
             catchError(err => {
                 console.error('PartnersService.createInternship: Error when creating internship');
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }
@@ -74,7 +74,7 @@ export class PartnersService {
             catchError(err => {
                 console.error('PartnersService.editInternship: Error when editing internship with id ' + internship.id);
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }
@@ -91,7 +91,7 @@ export class PartnersService {
             catchError(err => {
                 console.error('PartnersService.deleteInternship: Error when deleting internship with id ' + id);
                 console.error(err);
-                return of();
+                return of({});
             })
         );
     }
