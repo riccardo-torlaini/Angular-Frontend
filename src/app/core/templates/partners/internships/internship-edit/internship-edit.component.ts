@@ -41,7 +41,7 @@ export class InternshipEditComponent implements OnInit {
         this.internship.category = this.categories[0];
         this.internship.imageUrl = this.companies[this.internship.company];
 
-        this.partnersService.editInternship(this.internship).subscribe(internship => {
+        this.partnersService.editCompanyOpportunity(this.internship).subscribe(internship => {
             this.loading = false;
 
             // redirect to edited internship

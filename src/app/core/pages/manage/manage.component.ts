@@ -201,7 +201,7 @@ export class ManageComponent implements OnInit {
     }
 
     deleteInternship(internship) {
-        this.partnersService.deleteInternship(internship.id).subscribe();
+        this.partnersService.deleteCompanyOpportunity(internship.id).subscribe();
         this.internships.splice(this.internships.indexOf(internship), 1);
     }
 }

@@ -40,7 +40,7 @@ export class InternshipCreateComponent implements OnInit {
     submit() {
         this.loading = true;
 
-        this.partnersService.createInternship({
+        this.partnersService.createCompanyOpportunity({
             title: this.title,
             companyName: this.company,
             description: this.description,

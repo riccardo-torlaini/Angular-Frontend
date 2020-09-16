@@ -13,9 +13,9 @@ export class PartnersService {
     }
 
     /**
-     * Function for retrieving all internships from backend.
+     * Function for retrieving all company opportunities from backend.
      */
-    getAllInternships() {
+    getAllCompanyOpportunities() {
         return this.webRequestService.get("api/partners/internships").pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
@@ -29,10 +29,10 @@ export class PartnersService {
     }
 
     /**
-     * Function for retrieving a single internship from the backend.
-     * @param id    The id of the internship to retrieve.
+     * Function for retrieving a single company opportunity from the backend.
+     * @param id    The id of the company opportunity to retrieve.
      */
-    getInternship(id) {
+    getCompanyOpportunity(id) {
         return this.webRequestService.get("api/partners/internships/" + id).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
@@ -46,16 +46,16 @@ export class PartnersService {
     }
 
     /**
-     * Function for submitting an internship for creation in the backend.
-     * @param internship    Object representing the internship to be created.
+     * Function for submitting a company opportunity for creation in the backend.
+     * @param companyOpportunity    Object representing the company opportunity to be created.
      */
-    createInternship(internship) {
-        return this.webRequestService.post("api/partners/internships", internship).pipe(
+    createCompanyOpportunity(companyOpportunity) {
+        return this.webRequestService.post("api/partners/internships", companyOpportunity).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
             catchError(err => {
-                console.error('PartnersService.createInternship: Error when creating internship');
+                console.error('PartnersService.createInternship: Error when creating companyOpportunity');
                 console.error(err);
                 return of({});
             })
@@ -63,16 +63,17 @@ export class PartnersService {
     }
 
     /**
-     * Function for submitting an internship to be edited in the backend.
-     * @param internship    Object representing the (edited) internship.
+     * Function for submitting an company opportunity to be edited in the backend.
+     * @param companyOpportunity    Object representing the (edited) company opportunity.
      */
-    editInternship(internship) {
-        return this.webRequestService.put("api/partners/internships/" + internship.id, internship).pipe(
+    editCompanyOpportunity(companyOpportunity) {
+        return this.webRequestService.put("api/partners/internships/" + companyOpportunity.id, companyOpportunity).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
             catchError(err => {
-                console.error('PartnersService.editInternship: Error when editing internship with id ' + internship.id);
+                console.error('PartnersService.editInternship: Error when editing companyOpportunity with id '
+                    + companyOpportunity.id);
                 console.error(err);
                 return of({});
             })
@@ -80,10 +81,10 @@ export class PartnersService {
     }
 
     /**
-     * Function for deleting an internship in the backend.
-     * @param id    Id of the internship to be deleted.
+     * Function for deleting a company opportunity in the backend.
+     * @param id    Id of the company opportunity to be deleted.
      */
-    deleteInternship(id) {
+    deleteCompanyOpportunity(id) {
         return this.webRequestService.delete("api/partners/internships/" + id).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;

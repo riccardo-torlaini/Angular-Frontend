@@ -51,9 +51,9 @@ import {CompletedRegistrationComponent} from "./core/pages/completed-registratio
 import {CommitteesResolverService} from "./core/services/groups/committees-resolver.service";
 import {ChangePasswordComponent} from "./core/templates/users/change-password/change-password.component";
 import {InternshipOverviewComponent} from "./core/templates/partners/internships/internship-overview/internship-overview.component";
-import {AllInternshipsResolverService} from "./core/services/partners/all-internships-resolver.service";
+import {AllCompanyOpportunitiesResolverService} from "./core/services/partners/all-company-opportunities-resolver.service";
 import {InternshipDetailsComponent} from "./core/templates/partners/internships/internship-details/internship-details.component";
-import {SpecificInternshipResolverService} from "./core/services/partners/specific-internship-resolver.service";
+import {SpecificCompanyOpportunityResolverService} from "./core/services/partners/specific-company-opportunity-resolver.service";
 import {InternshipCreateComponent} from "./core/templates/partners/internships/internship-create/internship-create.component";
 import {InternshipEditComponent} from "./core/templates/partners/internships/internship-edit/internship-edit.component";
 import {CurrentUserResolverService} from "./core/services/users/current-user-resolver.service";
@@ -77,7 +77,7 @@ const routes: Routes = [
                     allActivities: AllActivitiesManageResolverService,
                     allUsers: AllUsersResolverService,
                     allGroups: AllGroupsResolverService,
-                    allInternships: AllInternshipsResolverService,
+                    allInternships: AllCompanyOpportunitiesResolverService,
                     currentUser: CurrentUserResolverService
                 }
             },
@@ -136,18 +136,18 @@ const routes: Routes = [
             {
                 path: 'partners/internships',
                 component: InternshipOverviewComponent,
-                resolve: {allInternships: AllInternshipsResolverService}
+                resolve: {allInternships: AllCompanyOpportunitiesResolverService}
             },
             {
                 path: 'partners/internships/:internshipId',
                 component: InternshipDetailsComponent,
-                resolve: {internship: SpecificInternshipResolverService}
+                resolve: {internship: SpecificCompanyOpportunityResolverService}
             },
             {path: 'manage/partners/internships/create', component: InternshipCreateComponent},
             {
                 path: 'manage/partners/internships/edit/:internshipId',
                 component: InternshipEditComponent,
-                resolve: {internship: SpecificInternshipResolverService}
+                resolve: {internship: SpecificCompanyOpportunityResolverService}
             },
 
             // Pages
