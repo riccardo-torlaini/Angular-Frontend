@@ -50,12 +50,12 @@ import {SubmittedRegistrationComponent} from "./core/pages/submitted-registratio
 import {CompletedRegistrationComponent} from "./core/pages/completed-registration/completed-registration.component";
 import {CommitteesResolverService} from "./core/services/groups/committees-resolver.service";
 import {ChangePasswordComponent} from "./core/templates/users/change-password/change-password.component";
-import {InternshipOverviewComponent} from "./core/templates/partners/internships/internship-overview/internship-overview.component";
+import {CompanyOpportunityOverviewComponent} from "./core/templates/partners/company-opportunity-overview/company-opportunity-overview.component";
 import {AllCompanyOpportunitiesResolverService} from "./core/services/partners/all-company-opportunities-resolver.service";
-import {InternshipDetailsComponent} from "./core/templates/partners/internships/internship-details/internship-details.component";
+import {CompanyOpportunityDetailsComponent} from "./core/templates/partners/company-opportunity-details/company-opportunity-details.component";
 import {SpecificCompanyOpportunityResolverService} from "./core/services/partners/specific-company-opportunity-resolver.service";
-import {InternshipCreateComponent} from "./core/templates/partners/internships/internship-create/internship-create.component";
-import {InternshipEditComponent} from "./core/templates/partners/internships/internship-edit/internship-edit.component";
+import {CompanyOpportunityCreateComponent} from "./core/templates/partners/company-opportunity-create/company-opportunity-create.component";
+import {CompanyOpportunityEditComponent} from "./core/templates/partners/company-opportunity-edit/company-opportunity-edit.component";
 import {CurrentUserResolverService} from "./core/services/users/current-user-resolver.service";
 import {BaseComponent} from "./core/base/base.component";
 
@@ -77,7 +77,7 @@ const routes: Routes = [
                     allActivities: AllActivitiesManageResolverService,
                     allUsers: AllUsersResolverService,
                     allGroups: AllGroupsResolverService,
-                    allInternships: AllCompanyOpportunitiesResolverService,
+                    allCompanyOpportunities: AllCompanyOpportunitiesResolverService,
                     currentUser: CurrentUserResolverService
                 }
             },
@@ -132,22 +132,22 @@ const routes: Routes = [
             },
             {path: 'group/:groupId', component: GroupDetailsComponent, resolve: {group: SpecificGroupResolverService}},
 
-            // Internships
+            // Company Opportunities
             {
-                path: 'partners/internships',
-                component: InternshipOverviewComponent,
-                resolve: {allInternships: AllCompanyOpportunitiesResolverService}
+                path: 'partners/company_opportunities',
+                component: CompanyOpportunityOverviewComponent,
+                resolve: {allCompanyOpportunity: AllCompanyOpportunitiesResolverService}
             },
             {
-                path: 'partners/internships/:internshipId',
-                component: InternshipDetailsComponent,
-                resolve: {internship: SpecificCompanyOpportunityResolverService}
+                path: 'partners/company_opportunities/:companyOpportunityId',
+                component: CompanyOpportunityDetailsComponent,
+                resolve: {companyOpportunity: SpecificCompanyOpportunityResolverService}
             },
-            {path: 'manage/partners/internships/create', component: InternshipCreateComponent},
+            {path: 'manage/partners/company_opportunities/create', component: CompanyOpportunityCreateComponent},
             {
-                path: 'manage/partners/internships/edit/:internshipId',
-                component: InternshipEditComponent,
-                resolve: {internship: SpecificCompanyOpportunityResolverService}
+                path: 'manage/partners/company_opportunities/edit/:companyOpportunityId',
+                component: CompanyOpportunityEditComponent,
+                resolve: {companyOpportunity: SpecificCompanyOpportunityResolverService}
             },
 
             // Pages

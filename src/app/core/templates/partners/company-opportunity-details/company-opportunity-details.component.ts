@@ -3,14 +3,14 @@ import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer, Title} from '@angular/platform-browser';
 
 @Component({
-    selector: 'app-internship-details',
-    templateUrl: './internship-details.component.html',
-    styleUrls: ['./internship-details.component.css']
+    selector: 'app-company-opportunity-details',
+    templateUrl: './company-opportunity-details.component.html',
+    styleUrls: ['./company-opportunity-details.component.css']
 })
-export class InternshipDetailsComponent implements OnInit {
+export class CompanyOpportunityDetailsComponent implements OnInit {
 
     loading: boolean;
-    internship: any;
+    companyOpportunity: any;
     user: any;
     isUserInAcquisition = false;
 
@@ -19,13 +19,13 @@ export class InternshipDetailsComponent implements OnInit {
                 private sanitizer: DomSanitizer) {
         this.loading = true;
 
-        titleService.setTitle("Internship Details");
+        titleService.setTitle("Company Opportunity Details");
     }
 
     ngOnInit(): void {
-        this.internship = this.activatedRoute.snapshot.data.internship;
+        this.companyOpportunity = this.activatedRoute.snapshot.data.companyOpportunity;
 
-        this.internship.link = this.sanitizer.bypassSecurityTrustUrl(this.internship.link);
+        this.companyOpportunity.link = this.sanitizer.bypassSecurityTrustUrl(this.companyOpportunity.link);
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 

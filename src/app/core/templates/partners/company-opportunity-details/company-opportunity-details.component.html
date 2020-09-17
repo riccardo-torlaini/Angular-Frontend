@@ -1,0 +1,54 @@
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-xs-6">
+            <ol class="breadcrumb small">
+                <li><a href="/partners/company_opportunities"><b>&lt; Back to internships</b></a></li>
+            </ol>
+        </div>
+
+        <div *ngIf="isUserInAcquisition || user.isAdmin" class="col-xs-6">
+            <ol class="breadcrumb small text-right">
+                <li><a href="/manage/partners/company_opportunities/edit/{{companyOpportunity.id}}"><b>Edit Internship</b></a></li>
+            </ol>
+        </div>
+
+    </div>
+
+    <section class="row">
+
+        <div class="col-xs-12">
+
+            <h1>{{companyOpportunity.title}} <small>at {{companyOpportunity.companyName}}</small></h1>
+
+            <ul class="breadcrumb">
+                <li *ngIf="companyOpportunity.educationLevel">{{companyOpportunity.educationLevel}}</li>
+                <li *ngIf="companyOpportunity.contactEmail">
+                    <a href="mailto:{{companyOpportunity.contactEmail}}">{{companyOpportunity.contactEmail}}</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </section>
+
+    <div class="clearfix"></div>
+
+    <hr>
+
+    <section class="row">
+
+        <div class="col-xs-12 col-md-8 col-lg-6">
+
+            <markdown [text]="companyOpportunity.description"></markdown>
+
+            <div class="block">
+                <a [href]="companyOpportunity.link" target="_blank" class="btn btn-primary">
+                    <i class="fa fa-external-link" aria-hidden="true"></i> Learn more</a>
+            </div>
+
+        </div>
+
+    </section>
+</div>

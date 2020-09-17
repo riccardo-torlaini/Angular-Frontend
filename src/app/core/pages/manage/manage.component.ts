@@ -109,7 +109,7 @@ export class ManageComponent implements OnInit {
         }
 
         if (this.isUserInAcquisition || this.user.isAdmin) {
-            this.internships = this.activatedRoute.snapshot.data.allInternships;
+            this.internships = this.activatedRoute.snapshot.data.allCompanyOpportunities;
         }
 
         this.loading = false;

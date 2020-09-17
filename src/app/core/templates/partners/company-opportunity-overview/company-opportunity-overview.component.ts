@@ -3,14 +3,14 @@ import {ActivatedRoute} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 
 @Component({
-    selector: 'app-internship-overview',
-    templateUrl: './internship-overview.component.html',
-    styleUrls: ['./internship-overview.component.css']
+    selector: 'app-company-opportunity-overview',
+    templateUrl: './company-opportunity-overview.component.html',
+    styleUrls: ['./company-opportunity-overview.component.css']
 })
-export class InternshipOverviewComponent implements OnInit {
+export class CompanyOpportunityOverviewComponent implements OnInit {
 
     loading: boolean;
-    internships: any[];
+    companyOpportunities: any[];
     user: any;
     isUserInAcquisition: boolean;
 
@@ -18,11 +18,11 @@ export class InternshipOverviewComponent implements OnInit {
                 private activatedRoute: ActivatedRoute) {
         this.loading = true;
 
-        titleService.setTitle("Internship Overview");
+        titleService.setTitle("Company Opportunities Overview");
     }
 
     ngOnInit(): void {
-        this.internships = this.activatedRoute.snapshot.data.allInternships;
+        this.companyOpportunities = this.activatedRoute.snapshot.data.allCompanyOpportunity;
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
         for (const group of this.user.groups) {

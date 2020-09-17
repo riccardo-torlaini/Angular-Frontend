@@ -1,7 +1,7 @@
 <div class="container">
     <form class="form-horizontal">
         <header>
-            <h1>Add internship</h1>
+            <h1>Add company opportunity</h1>
         </header>
 
         <fieldset class="section">
@@ -11,9 +11,9 @@
                 <div class="col-xs-12 col-md-8 col-lg-6">
 
                     <div class="form-group">
-                        <label for="internshipCreate-title" class="col-xs-12 col-sm-3 control-label">Title</label>
+                        <label for="companyOpportunityCreate-title" class="col-xs-12 col-sm-3 control-label">Title</label>
                         <div class="col-xs-12 col-sm-9">
-                            <input type="text" [(ngModel)]="title" [ngModelOptions]="{standalone: true}" class="form-control" id="internshipCreate-title"
+                            <input type="text" [(ngModel)]="title" [ngModelOptions]="{standalone: true}" class="form-control" id="companyOpportunityCreate-title"
                                    required>
                         </div>
                     </div>
@@ -27,10 +27,10 @@
                 <div class="col-xs-12 col-md-8 col-lg-6">
 
                     <div class="form-group">
-                        <label for="internshipCreate-companyName"
+                        <label for="companyOpportunityCreate-companyName"
                                class="col-xs-12 col-sm-3 control-label">Company</label>
                         <div class="col-xs-12 col-sm-9">
-                            <select [(ngModel)]="company" [ngModelOptions]="{standalone: true}" class="form-control" id="internshipCreate-companyName">
+                            <select [(ngModel)]="company" [ngModelOptions]="{standalone: true}" class="form-control" id="companyOpportunityCreate-companyName">
                                 <option *ngFor="let recipient of companies | keyvalue" [value]="recipient.key">{{recipient.key}}</option>
                             </select>
                         </div>
@@ -45,9 +45,11 @@
                 <div class="col-xs-12 col-md-8 col-lg-6">
 
                     <div class="form-group">
-                        <label for="internshipCreate-category" class="col-xs-12 col-sm-3 control-label">Category</label>
+                        <label for="companyOpportunityCreate-category" class="col-xs-12 col-sm-3 control-label">Category</label>
                         <div class="col-xs-12 col-sm-9">
-                            <input type="text" class="form-control" [value]="categories[0]" id="internshipCreate-category" [disabled]="true">
+                            <select [(ngModel)]="category" [ngModelOptions]="{standalon: true}" class="form-control" id="companyOpportunityCreate-category">
+                                <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+                            </select>
                         </div>
                     </div>
 

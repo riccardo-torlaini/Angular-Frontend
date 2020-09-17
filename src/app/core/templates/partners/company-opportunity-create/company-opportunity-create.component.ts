@@ -1,36 +1,37 @@
 import {Component, OnInit} from '@angular/core';
-import {PartnersService} from "../../../../services/partners/partners.service";
+import {PartnersService} from "../../../services/partners/partners.service";
 import {Title} from "@angular/platform-browser";
 
 @Component({
-    selector: 'app-internship-create',
-    templateUrl: './internship-create.component.html',
-    styleUrls: ['./internship-create.component.css']
+    selector: 'app-company-opportunity-create',
+    templateUrl: './company-opportunity-create.component.html',
+    styleUrls: ['./company-opportunity-create.component.css']
 })
-export class InternshipCreateComponent implements OnInit {
+export class CompanyOpportunityCreateComponent implements OnInit {
 
     loading: boolean;
 
-    // Different companies for which internships are supported
+    // Different companies for which company opportunities are supported
     companies = new Map([
         ["Optiver", "./assets/img/partners/optiver.png"],
     ]);
 
     // Categories that can be chosen
-    categories = ["internship"];
+    categories = ["internship", "vacancy"];
 
-    title: any;
-    company: any;
-    description: any;
-    email: any;
-    link: any;
-    educationLevel: any;
+    title: string;
+    company: string;
+    description: string;
+    email: string;
+    link: string;
+    educationLevel: string;
+    category: string;
 
     constructor(titleService: Title,
                 private partnersService: PartnersService) {
         this.loading = true;
 
-        titleService.setTitle("Create Internship");
+        titleService.setTitle("Create Company Opportunity");
     }
 
     ngOnInit(): void {
@@ -48,12 +49,12 @@ export class InternshipCreateComponent implements OnInit {
             contactEmail: this.email,
             link: this.link,
             educationLevel: this.educationLevel,
-            category: this.categories[0]
-        }).subscribe(internship => {
+            category: this.category
+        }).subscribe(companyOpportunity => {
             this.loading = false;
 
-            // redirect to created internship
-            window.location.href = "/partners/internships/" + internship.id;
+            // redirect to created companyOpportunity
+            window.location.href = "/partners/company_opportunities/" + companyOpportunity.id;
         });
     }
 

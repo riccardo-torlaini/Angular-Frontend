@@ -11,7 +11,7 @@
             <a class="btn btn-default" href="manage/groups/create">+ Group</a>
         </div>
         <div class="btn-group" role="group" *ngIf="user.isAdmin || isUserInAcquisition">
-            <a class="btn btn-default" href="manage/partners/internships/create">+ Internship</a>
+            <a class="btn btn-default" href="manage/partners/company_opportunities/create">+ Company Opportunity</a>
         </div>
     </div>
 
@@ -283,12 +283,12 @@
                             <tr *ngFor="let internship of internships
                                     | filter : internshipCallback : searchQueryInternships
                                     | sort   : sortTypeInternships : typeSortMap.get(sortTypeInternships) : sortReverseInternships">
-                                <td><a href="/partners/internships/{{internship.id}}">{{internship.title}}</a></td>
+                                <td><a href="/partners/company_opportunities/{{internship.id}}">{{internship.title}}</a></td>
                                 <td>{{internship.companyName}}</td>
                                 <td>{{internship.educationLevel}}</td>
 
                                 <td class="manage-table-action text-right">
-                                    <a class="btn btn-link" href="/manage/partners/internships/edit/{{internship.id}}">
+                                    <a class="btn btn-link" href="/manage/partners/company_opportunities/edit/{{internship.id}}">
                                         <i class="fa fa-cog"></i>
                                     </a>
                                     <a class="btn btn-link" href="#del-internship-{{internship.id}}" data-toggle="collapse">

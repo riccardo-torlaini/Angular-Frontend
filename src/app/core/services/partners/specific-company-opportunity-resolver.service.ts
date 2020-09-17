@@ -12,6 +12,6 @@ export class SpecificCompanyOpportunityResolverService implements Resolve<any> {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        return this.partnersService.getCompanyOpportunity(route.paramMap.get("internshipId"));
+        return this.partnersService.getCompanyOpportunity(route.paramMap.get("companyOpportunityId"));
     }
 }
