@@ -58,6 +58,7 @@ import {InternshipCreateComponent} from "./core/templates/partners/internships/i
 import {InternshipEditComponent} from "./core/templates/partners/internships/internship-edit/internship-edit.component";
 import {CurrentUserResolverService} from "./core/services/users/current-user-resolver.service";
 import {BaseComponent} from "./core/base/base.component";
+import {OptiverComponent} from "./core/pages/partners/sponsors/optiver/optiver.component";
 
 const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -181,6 +182,7 @@ const routes: Routes = [
             {path: 'partners/sister_associations', component: SisterAssociationsComponent},
             {path: 'partners/sponsors', component: SponsorsComponent},
             {path: 'partners/sponsors/dnb', component: DnbComponent},
+            {path: 'partners/sponsors/optiver', component: OptiverComponent},
             {path: 'privacy_policy', component: PrivacyPolicyComponent},
             {path: 'magazine', component: MagazineComponent},
             {path: 'consent_portrait_right', component: ConsentPortraitRightComponent},
