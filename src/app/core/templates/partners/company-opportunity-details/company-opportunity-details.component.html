@@ -23,6 +23,7 @@
             <h1>{{companyOpportunity.title}} <small>at {{companyOpportunity.companyName}}</small></h1>
 
             <ul class="breadcrumb">
+                <li>{{companyOpportunity.category}}</li>
                 <li *ngIf="companyOpportunity.educationLevel">{{companyOpportunity.educationLevel}}</li>
                 <li *ngIf="companyOpportunity.contactEmail">
                     <a href="mailto:{{companyOpportunity.contactEmail}}">{{companyOpportunity.contactEmail}}</a>

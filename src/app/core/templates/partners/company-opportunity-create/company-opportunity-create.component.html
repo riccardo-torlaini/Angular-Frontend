@@ -47,7 +47,7 @@
                     <div class="form-group">
                         <label for="companyOpportunityCreate-category" class="col-xs-12 col-sm-3 control-label">Category</label>
                         <div class="col-xs-12 col-sm-9">
-                            <select [(ngModel)]="category" [ngModelOptions]="{standalon: true}" class="form-control" id="companyOpportunityCreate-category">
+                            <select [(ngModel)]="category" [ngModelOptions]="{standalone: true}" class="form-control" id="companyOpportunityCreate-category">
                                 <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
                             </select>
                         </div>
@@ -140,7 +140,7 @@
             </div>
         </fieldset>
 
-        <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="loading">Create internship
+        <button type="submit" class="btn btn-primary" (click)="submit()" [disabled]="loading">Create company opportunity
         </button>
 
     </form>

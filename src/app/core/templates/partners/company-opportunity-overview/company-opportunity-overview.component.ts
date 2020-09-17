@@ -14,6 +14,8 @@ export class CompanyOpportunityOverviewComponent implements OnInit {
     user: any;
     isUserInAcquisition: boolean;
 
+    categories = ["internship", "vacancy"];
+
     constructor(titleService: Title,
                 private activatedRoute: ActivatedRoute) {
         this.loading = true;
