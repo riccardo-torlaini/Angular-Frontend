@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PartnersService} from "../../../services/partners/partners.service";
 import {ActivatedRoute} from "@angular/router";
 import {Title} from "@angular/platform-browser";
+import {AppConstants} from "../../../../app.constants";
 
 @Component({
     selector: 'app-company-opportunity-edit',
@@ -19,7 +20,7 @@ export class CompanyOpportunityEditComponent implements OnInit {
     ]);
 
     // Categories that can be chosen
-    categories = ["internship", "vacancy"];
+    categories = AppConstants.companyOpportunityCategories;
 
     constructor(titleService: Title,
                 private partnersService: PartnersService,

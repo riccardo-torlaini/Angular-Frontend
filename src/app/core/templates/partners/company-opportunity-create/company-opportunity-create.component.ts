@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PartnersService} from "../../../services/partners/partners.service";
 import {Title} from "@angular/platform-browser";
+import {AppConstants} from "../../../../app.constants";
 
 @Component({
     selector: 'app-company-opportunity-create',
@@ -17,7 +18,7 @@ export class CompanyOpportunityCreateComponent implements OnInit {
     ]);
 
     // Categories that can be chosen
-    categories = ["internship", "vacancy"];
+    categories = AppConstants.companyOpportunityCategories;
 
     title: string;
     company: string;

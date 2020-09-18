@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Title} from "@angular/platform-browser";
+import {AppConstants} from "../../../../app.constants";
 
 @Component({
     selector: 'app-company-opportunity-overview',
@@ -14,7 +15,7 @@ export class CompanyOpportunityOverviewComponent implements OnInit {
     user: any;
     isUserInAcquisition: boolean;
 
-    categories = ["internship", "vacancy"];
+    categories = AppConstants.companyOpportunityCategories;
 
     constructor(titleService: Title,
                 private activatedRoute: ActivatedRoute) {
