@@ -15,9 +15,7 @@ export class CompanyOpportunityEditComponent implements OnInit {
     loading: boolean;
 
     // Different companies for which internships are supported
-    companies = new Map([
-        ["Optiver", "./assets/img/partners/optiver.png"]
-    ]);
+    companies = AppConstants.companyOpportunityCompanies;
 
     // Categories that can be chosen
     categories = AppConstants.companyOpportunityCategories;

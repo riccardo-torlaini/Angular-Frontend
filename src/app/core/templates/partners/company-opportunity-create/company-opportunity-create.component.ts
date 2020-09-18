@@ -13,9 +13,7 @@ export class CompanyOpportunityCreateComponent implements OnInit {
     loading: boolean;
 
     // Different companies for which company opportunities are supported
-    companies = new Map([
-        ["Optiver", "./assets/img/partners/optiver.png"],
-    ]);
+    companies = AppConstants.companyOpportunityCompanies;
 
     // Categories that can be chosen
     categories = AppConstants.companyOpportunityCategories;
