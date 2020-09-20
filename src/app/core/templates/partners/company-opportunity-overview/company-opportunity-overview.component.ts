@@ -16,6 +16,7 @@ export class CompanyOpportunityOverviewComponent implements OnInit {
     isUserInAcquisition: boolean;
 
     categories = AppConstants.companyOpportunityCategories;
+    private companyOpportunitiesByCat: any;
 
     constructor(titleService: Title,
                 private activatedRoute: ActivatedRoute) {
@@ -27,10 +28,14 @@ export class CompanyOpportunityOverviewComponent implements OnInit {
     ngOnInit(): void {
         this.companyOpportunities = this.activatedRoute.snapshot.data.allCompanyOpportunity;
         this.user = this.activatedRoute.snapshot.data.currentUser;
+        // this.companyOpportunitiesByCat = this.activatedRoute.snapshot.data.allCompanyOpportunitiesByCat;
+        // console.log(this.companyOpportunitiesByCat);
 
-        for (const group of this.user.groups) {
-            if (group.email === "acquisition@hsaconfluente.nl") {
-                this.isUserInAcquisition = true;
+        if (this.user) {
+            for (const group of this.user.groups) {
+                if (group.email === "acquisition@hsaconfluente.nl") {
+                    this.isUserInAcquisition = true;
+                }
             }
         }
 

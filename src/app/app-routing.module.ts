@@ -58,6 +58,7 @@ import {CompanyOpportunityCreateComponent} from "./core/templates/partners/compa
 import {CompanyOpportunityEditComponent} from "./core/templates/partners/company-opportunity-edit/company-opportunity-edit.component";
 import {CurrentUserResolverService} from "./core/services/users/current-user-resolver.service";
 import {BaseComponent} from "./core/base/base.component";
+import {AllCompanyOpportunitiesByCategoryService} from "./core/services/partners/all-company-opportunities-by-category.service";
 
 const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -136,7 +137,10 @@ const routes: Routes = [
             {
                 path: 'partners/company_opportunities',
                 component: CompanyOpportunityOverviewComponent,
-                resolve: {allCompanyOpportunity: AllCompanyOpportunitiesResolverService}
+                resolve: {
+                    allCompanyOpportunity: AllCompanyOpportunitiesResolverService,
+                    // allCompanyOpportunitiesByCat: AllCompanyOpportunitiesByCategoryService
+                }
             },
             {
                 path: 'partners/company_opportunities/:companyOpportunityId',

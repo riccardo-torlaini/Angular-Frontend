@@ -19,7 +19,7 @@ export class AuthService {
         return this.webService.post("api/auth/login/", {email, password})
             .pipe(catchError(err => {
                 alert(err.error.data);
-                return of();
+                return of({});
             }))
             .subscribe((_) => {
                 window.location.reload();

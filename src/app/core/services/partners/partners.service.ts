@@ -3,6 +3,7 @@ import {WebRequestService} from "../web-request.service";
 import {HttpResponse} from "@angular/common/http";
 import {catchError, map} from "rxjs/operators";
 import {of} from "rxjs";
+import {AppConstants} from "../../../app.constants";
 
 @Injectable({
     providedIn: 'root'
