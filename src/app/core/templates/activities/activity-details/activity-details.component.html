@@ -120,7 +120,7 @@
                                     </label>
                                     <div class="radio" *ngFor="let option of activity.formOptions[i]; index as j">
                                         <label>
-                                            <input type="radio" value="{{option}}" [(ngModel)]="answers[i]" [ngModelOptions]="{standalone: true}">{{option}}
+                                            <input type="radio" value="{{option}}" [(ngModel)]="answers[i]" name="{{i}}-{{j}}">{{option}}
                                         </label>
                                     </div>
                                 </div>
