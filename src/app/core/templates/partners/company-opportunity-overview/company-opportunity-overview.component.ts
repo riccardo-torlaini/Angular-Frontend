@@ -16,7 +16,9 @@ export class CompanyOpportunityOverviewComponent implements OnInit {
     isUserInAcquisition: boolean;
 
     categories = AppConstants.companyOpportunityCategories;
-    private companyOpportunitiesByCat: any;
+
+    nonEmptyCategories = ["all"];
+    opportunityQuery = "all";
 
     constructor(titleService: Title,
                 private activatedRoute: ActivatedRoute) {
@@ -28,10 +30,8 @@ export class CompanyOpportunityOverviewComponent implements OnInit {
     ngOnInit(): void {
         this.companyOpportunities = this.activatedRoute.snapshot.data.allCompanyOpportunity;
         this.user = this.activatedRoute.snapshot.data.currentUser;
-        // this.companyOpportunitiesByCat = this.activatedRoute.snapshot.data.allCompanyOpportunitiesByCat;
-        // console.log(this.companyOpportunitiesByCat);
 
-        if (this.user) {
+        if (this.user.loggedIn) {
             for (const group of this.user.groups) {
                 if (group.email === "acquisition@hsaconfluente.nl") {
                     this.isUserInAcquisition = true;
@@ -39,7 +39,17 @@ export class CompanyOpportunityOverviewComponent implements OnInit {
             }
         }
 
+        this.categories = ['all'].concat(this.categories);
+
         this.loading = false;
+    }
+
+    toggleQuery(query) {
+        this.opportunityQuery = query;
+    }
+
+    categoryCallback(opportunity, query) {
+        return opportunity.category === query || query === "all";
     }
 
 }

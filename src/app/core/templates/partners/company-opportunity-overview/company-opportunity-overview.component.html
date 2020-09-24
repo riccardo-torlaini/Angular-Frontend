@@ -6,9 +6,14 @@
 
     <h1>Company Opportunities</h1>
 
+    <div *ngFor="let cat of categories" style="display: inline-block; margin-right: 10px">
+        <button class="btn btn-default" (click)="toggleQuery(cat)" *ngIf="cat === 'all'">Show all</button>
+        <button class="btn btn-default" (click)="toggleQuery(cat)" *ngIf="cat !== 'all'">Show only {{cat}}</button>
+    </div>
+
     <div class="row">
 
-        <div class="col-xs-12 col-md-4" style="padding: 15px" *ngFor="let companyOpportunity of companyOpportunities">
+        <div class="col-xs-12 col-md-4" style="padding: 15px" *ngFor="let companyOpportunity of companyOpportunities | filter : categoryCallback : opportunityQuery">
             <div class="partner-box">
 
                 <div class="partner-img-container" style="background-image: url({{companyOpportunity.imageUrl}})"></div>
