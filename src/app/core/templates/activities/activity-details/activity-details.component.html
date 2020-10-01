@@ -11,10 +11,10 @@
             <ol class="breadcrumb small text-right">
                 <li><a href="/manage/activities/edit/{{activity.id}}"><b>Edit activity</b></a></li>
                 <li *ngIf="isUserOrganizing && !activity.published">
-                    <a (click)="publishActivity(activity)" href="/"><b>Publish Activity</b></a>
+                    <a (click)="publishActivity(activity)" href="javascript:void(0);"><b>Publish Activity</b></a>
                 </li>
                 <li *ngIf="isUserOrganizing && activity.published">
-                    <a (click)="unpublishActivity(activity)" href="/"><b>Unpublish Activity</b></a>
+                    <a (click)="unpublishActivity(activity)" href="javascript:void(0);"><b>Unpublish Activity</b></a>
                 </li>
             </ol>
         </div>
