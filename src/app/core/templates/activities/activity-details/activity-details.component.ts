@@ -114,12 +114,9 @@ export class ActivityDetailsComponent implements OnInit {
     // Allow setting the 'published' attribute of activities to true
     publishActivity(activityToBePublished) {
         activityToBePublished.published = true;
-
         // Set organizer to displayName of Organizer (required for API)
-        activityToBePublished.organizer = activityToBePublished.Organizer.displayName;
-        this.activitiesService.edit(activityToBePublished, true, null).subscribe((_) => {
-            window.location.reload();
-        });
+        activityToBePublished.organizer = activityToBePublished.Organizer.fullName;
+        this.activitiesService.edit(activityToBePublished, true, null).subscribe();
     }
 
     // Allow setting the 'published' attribute of activities to false
@@ -127,10 +124,8 @@ export class ActivityDetailsComponent implements OnInit {
         activityToBeUnpublished.published = false;
 
         // Set organizer to displayName of Organizer (required for API)
-        activityToBeUnpublished.organizer = activityToBeUnpublished.Organizer.displayName;
-        this.activitiesService.edit(activityToBeUnpublished, true, null).subscribe((_) => {
-            window.location.reload();
-        });
+        activityToBeUnpublished.organizer = activityToBeUnpublished.Organizer.fullName;
+        this.activitiesService.edit(activityToBeUnpublished, true, null).subscribe();
     }
 
     submit() {
