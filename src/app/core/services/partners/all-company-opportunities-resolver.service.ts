@@ -7,12 +7,12 @@ import {PartnersService} from "./partners.service";
 @Injectable({
     providedIn: 'root'
 })
-export class AllInternshipsResolverService implements Resolve<any> {
+export class AllCompanyOpportunitiesResolverService implements Resolve<any> {
 
     constructor(private partnersService: PartnersService) {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        return this.partnersService.getAllInternships();
+        return this.partnersService.getAllCompanyOpportunities();
     }
 }

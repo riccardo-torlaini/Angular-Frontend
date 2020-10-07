@@ -11,7 +11,7 @@
             <a class="btn btn-default" href="manage/groups/create">+ Group</a>
         </div>
         <div class="btn-group" role="group" *ngIf="user.isAdmin || isUserInAcquisition">
-            <a class="btn btn-default" href="manage/partners/internships/create">+ Internship</a>
+            <a class="btn btn-default" href="manage/partners/company_opportunities/create">+ Company opportunity</a>
         </div>
     </div>
 
@@ -31,7 +31,7 @@
                 <a href="#groups" data-toggle="tab">Groups</a>
             </li>
             <li *ngIf="user.isAdmin || isUserInAcquisition">
-                <a href="#internships" data-toggle="tab">Internships</a>
+                <a href="#companyOpportunities" data-toggle="tab">Company opportunities</a>
             </li>
         </ul>
         <div class="tab-content clearfix">
@@ -108,7 +108,7 @@
                                     </a>
 
                                     <div id="del-act-{{activity.id}}" class="collapse">
-                                        <button class="btn btn-danger" (click)="deleteAct(activity)">Delete Permanently</button>
+                                        <button class="btn btn-danger" (click)="deleteActivity(activity)">Delete Permanently</button>
                                     </div>
                                 </td>
                             </tr>
@@ -245,12 +245,12 @@
             </div>
 
 
-            <div class="tab-pane" id="internships" *ngIf="user.isAdmin || isUserInAcquisition">
+            <div class="tab-pane" id="companyOpportunities" *ngIf="user.isAdmin || isUserInAcquisition">
 
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
-                        <input type="text" class="form-control" placeholder="Search internships"
-                               [(ngModel)]="searchQueryInternships">
+                        <input type="text" class="form-control" placeholder="Search opportunities"
+                               [(ngModel)]="searchQueryCompanyOpportunities">
                     </div>
                 </div>
 
@@ -260,43 +260,43 @@
 
                             <thead>
                             <tr>
-                                <th class="col-xs-5" (click)="sortInternships('title')">Title<i
-                                    *ngIf="(sortTypeInternships == 'title') && sortReverseInternships"
+                                <th class="col-xs-5" (click)="sortCompanyOpportunities('title')">Title<i
+                                    *ngIf="(sortTypeCompanyOpportunities == 'title') && sortReverseCompanyOpportunities"
                                     class="fa fa-angle-down"></i><i
-                                    *ngIf="(sortTypeInternships == 'title') && !sortReverseInternships"
+                                    *ngIf="(sortTypeCompanyOpportunities == 'title') && !sortReverseCompanyOpportunities"
                                     class="fa fa-angle-up"></i></th>
                                 <th class="col-xs-4" (click)="sortGroups('companyName')">Company<i
-                                    *ngIf="(sortTypeInternships == 'companyName') && sortReverseInternships"
+                                    *ngIf="(sortTypeCompanyOpportunities == 'companyName') && sortReverseCompanyOpportunities"
                                     class="fa fa-angle-down"></i><i
-                                    *ngIf="(sortTypeInternships == 'companyName') && !sortReverseInternships"
+                                    *ngIf="(sortTypeCompanyOpportunities == 'companyName') && !sortReverseCompanyOpportunities"
                                     class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-1" (click)="sortGroups('educationLevel')">Education Level<i
-                                    *ngIf="(sortTypeInternships == 'educationLevel') && sortReverseInternships"
+                                <th class="col-xs-1" (click)="sortGroups('educationLevel')">Category<i
+                                    *ngIf="(sortTypeCompanyOpportunities == 'category') && sortReverseCompanyOpportunities"
                                     class="fa fa-angle-down"></i><i
-                                    *ngIf="(sortTypeInternships == 'educationLevel') && !sortReverseInternships"
+                                    *ngIf="(sortTypeCompanyOpportunities == 'category') && !sortReverseCompanyOpportunities"
                                     class="fa fa-angle-up"></i></th>
                                 <th class="col-xs-2"></th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <tr *ngFor="let internship of internships
-                                    | filter : internshipCallback : searchQueryInternships
-                                    | sort   : sortTypeInternships : typeSortMap.get(sortTypeInternships) : sortReverseInternships">
-                                <td><a href="/partners/internships/{{internship.id}}">{{internship.title}}</a></td>
-                                <td>{{internship.companyName}}</td>
-                                <td>{{internship.educationLevel}}</td>
+                            <tr *ngFor="let opportunity of companyOpportunities
+                                    | filter : companyOpportunityCallback : searchQueryCompanyOpportunities
+                                    | sort   : sortTypeCompanyOpportunities : typeSortMap.get(sortTypeCompanyOpportunities) : sortReverseCompanyOpportunities">
+                                <td><a href="/partners/company_opportunities/{{opportunity.id}}">{{opportunity.title}}</a></td>
+                                <td>{{opportunity.companyName}}</td>
+                                <td>{{opportunity.category}}</td>
 
                                 <td class="manage-table-action text-right">
-                                    <a class="btn btn-link" href="/manage/partners/internships/edit/{{internship.id}}">
+                                    <a class="btn btn-link" href="/manage/partners/company_opportunities/edit/{{opportunity.id}}">
                                         <i class="fa fa-cog"></i>
                                     </a>
-                                    <a class="btn btn-link" href="#del-internship-{{internship.id}}" data-toggle="collapse">
+                                    <a class="btn btn-link" href="#del-opportunity-{{opportunity.id}}" data-toggle="collapse">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
 
-                                    <div id="del-internship-{{internship.id}}" class="collapse">
-                                        <button class="btn btn-danger" (click)="deleteInternship(internship)">Delete Permanently</button>
+                                    <div id="del-opportunity-{{opportunity.id}}" class="collapse">
+                                        <button class="btn btn-danger" (click)="deleteCompanyOpportunity(opportunity)">Delete Permanently</button>
                                     </div>
                                 </td>
                             </tr>
