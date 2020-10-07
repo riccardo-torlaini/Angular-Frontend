@@ -64,6 +64,11 @@ export class ActivityEditComponent implements OnInit {
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
+        // If user is admin, then user can organize with all committees (that can organize)
+        if (this.user.isAdmin) {
+            this.user.groups = this.activatedRoute.snapshot.data.allGroups;
+        }
+
         for (const group of this.user.groups) {
             if (group.canOrganize) {
                 this.userGroups.push(group.fullName);

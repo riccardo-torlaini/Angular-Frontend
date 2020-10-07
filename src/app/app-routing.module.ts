@@ -96,11 +96,16 @@ const routes: Routes = [
                     activity: SpecificActivityResolverService,
                 }
             },
-            {path: 'manage/activities/create', component: ActivityCreateComponent},
+            {path: 'manage/activities/create', component: ActivityCreateComponent,
+                resolve: {allGroups: AllGroupsResolverService}
+            },
             {
                 path: 'manage/activities/edit/:activityId',
                 component: ActivityEditComponent,
-                resolve: {activity: SpecificActivityResolverService}
+                resolve: {
+                    activity: SpecificActivityResolverService,
+                    allGroups: AllGroupsResolverService
+                }
             },
 
             // Users
@@ -194,7 +199,7 @@ const routes: Routes = [
             // Error pages
             {path: '403', component: ForbiddenComponent},
             {path: '404', component: NotFoundComponent},
-            { path: '**', redirectTo: '/home', pathMatch: 'full' }
+            {path: '**', redirectTo: '/home', pathMatch: 'full'}
         ]
     }
 ];
