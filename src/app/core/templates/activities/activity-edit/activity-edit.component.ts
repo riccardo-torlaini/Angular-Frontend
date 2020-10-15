@@ -60,8 +60,14 @@ export class ActivityEditComponent implements OnInit {
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
         this.activity.date = this.datePipe.transform(this.activity.date, "yyyy-MM-dd");
+        this.activity.organizer = this.activity.Organizer.fullName;
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
+
+        // If user is admin, then user can organize with all committees (that can organize)
+        if (this.user.isAdmin) {
+            this.user.groups = this.activatedRoute.snapshot.data.allGroups;
+        }
 
         for (const group of this.user.groups) {
             if (group.canOrganize) {
@@ -198,9 +204,7 @@ export class ActivityEditComponent implements OnInit {
         }
 
         // Checks whether required fields are empty
-        let empty = !this.activity.name || !this.activity.description || !this.activity.Organizer;
-
-        this.activity.organizer = this.activity.Organizer.fullName;
+        let empty = !this.activity.name || !this.activity.description || !this.activity.organizer;
 
         let wrongCharacters = false;
 

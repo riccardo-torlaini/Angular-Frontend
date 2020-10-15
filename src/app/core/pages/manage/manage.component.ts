@@ -25,7 +25,7 @@ export class ManageComponent implements OnInit {
     users: any[];
     groups: any[];
     activities: any[];
-    internships: any[];
+    companyOpportunities: any[];
 
     sortTypeActivities = 'id';
     sortReverseActivities = false;
@@ -39,9 +39,9 @@ export class ManageComponent implements OnInit {
     sortReverseGroups = false;
     searchQueryGroups = "";
 
-    sortTypeInternships = 'id';
-    sortReverseInternships = false;
-    searchQueryInternships = "";
+    sortTypeCompanyOpportunities = 'id';
+    sortReverseCompanyOpportunities = false;
+    searchQueryCompanyOpportunities = "";
 
     typeSortMap = new Map([
         ['id', this.sortPipe.numberSort],
@@ -57,7 +57,7 @@ export class ManageComponent implements OnInit {
         ['canOrganize', this.sortPipe.booleanSort],
         ['title', this.sortPipe.lexicographicSort],
         ['companyName', this.sortPipe.lexicographicSort],
-        ['educationLevel', this.sortPipe.lexicographicSort]
+        ['category', this.sortPipe.lexicographicSort]
     ]);
 
     constructor(titleService: Title,
@@ -109,7 +109,7 @@ export class ManageComponent implements OnInit {
         }
 
         if (this.isUserInAcquisition || this.user.isAdmin) {
-            this.internships = this.activatedRoute.snapshot.data.allInternships;
+            this.companyOpportunities = this.activatedRoute.snapshot.data.allCompanyOpportunities;
         }
 
         this.loading = false;
@@ -141,10 +141,10 @@ export class ManageComponent implements OnInit {
             || group.email.toLowerCase().includes(query.toLowerCase());
     }
 
-    internshipCallback(internship, query) {
-        return internship.title.toLowerCase().includes(query.toLowerCase())
-            || internship.companyName.toLowerCase().includes(query.toLowerCase())
-            || internship.educationLevel.toLowerCase().includes(query.toLowerCase());
+    companyOpportunityCallback(opportunity, query) {
+        return opportunity.title.toLowerCase().includes(query.toLowerCase())
+            || opportunity.companyName.toLowerCase().includes(query.toLowerCase())
+            || opportunity.educationLevel.toLowerCase().includes(query.toLowerCase());
     }
 
     // Ugly repeated code
@@ -175,13 +175,13 @@ export class ManageComponent implements OnInit {
         this.sortTypeGroups = type;
     }
 
-    sortInternships(type) {
-        if (this.sortTypeInternships === type) {
-            this.sortReverseInternships = !this.sortReverseInternships;
+    sortCompanyOpportunities(type) {
+        if (this.sortTypeCompanyOpportunities === type) {
+            this.sortReverseCompanyOpportunities = !this.sortReverseCompanyOpportunities;
         } else {
-            this.sortReverseInternships = false;
+            this.sortReverseCompanyOpportunities = false;
         }
-        this.sortTypeInternships = type;
+        this.sortTypeCompanyOpportunities = type;
     }
 
     // Delete functions
@@ -200,8 +200,8 @@ export class ManageComponent implements OnInit {
         this.groups.splice(this.groups.indexOf(group), 1);
     }
 
-    deleteInternship(internship) {
-        this.partnersService.deleteInternship(internship.id).subscribe();
-        this.internships.splice(this.internships.indexOf(internship), 1);
+    deleteCompanyOpportunity(opportunity) {
+        this.partnersService.deleteCompanyOpportunity(opportunity.id).subscribe();
+        this.companyOpportunities.splice(this.companyOpportunities.indexOf(opportunity), 1);
     }
 }

@@ -1,0 +1,49 @@
+<div class="container">
+
+    <div class="pull-right">
+        <a class="btn btn-default" href="/manage/partners/company_opportunities/create"
+           *ngIf="user.isAdmin || isUserInAcquisition">Add Opportunity</a>
+    </div>
+
+    <h1>Company Opportunities</h1>
+
+    <div>
+        <h4 style="display: inline-block; margin-right: 10px">Filter on</h4>
+        <div *ngFor="let cat of categories" style="display: inline-block; margin-right: 10px">
+            <button class="btn btn-default" (click)="toggleQuery(cat)" *ngIf="cat === 'all'">Show all</button>
+            <button class="btn btn-default" (click)="toggleQuery(cat)" *ngIf="cat !== 'all'">{{cat}}</button>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-md-4" style="padding: 15px"
+             *ngFor="let companyOpportunity of companyOpportunities | filter : categoryCallback : opportunityQuery">
+            <div class="partner-box">
+
+                <div class="opportunity-img-container" style="background-image: url({{companyOpportunity.imageUrl}})"></div>
+
+                <div class="opportunity-title">
+                    {{companyOpportunity.title}}
+                </div>
+
+                <p class="opportunity-company">{{companyOpportunity.companyName}}</p>
+
+                <div class="opportunity-footer">
+                    <ul class="partner-btnlist">
+                        <li>
+                            <a href="/partners/company_opportunities/{{companyOpportunity.id}}"
+                               class="btn btn-default partner-btn-small">
+                                <i class="fa fa-ellipsis-h"></i>&nbsp;&nbsp;Read more
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

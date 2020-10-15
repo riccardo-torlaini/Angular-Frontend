@@ -70,6 +70,11 @@ export class ActivityCreateComponent implements OnInit {
     ngOnInit(): void {
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
+        // If user is admin, then user can organize with all committees (that can organize)
+        if (this.user.isAdmin) {
+            this.user.groups = this.activatedRoute.snapshot.data.allGroups;
+        }
+
         this.loading = false;
     }
 

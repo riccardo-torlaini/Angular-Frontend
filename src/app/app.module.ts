@@ -52,10 +52,10 @@ import { ConsentPortraitRightComponent } from './core/pages/consent-portrait-rig
 import { SubmittedRegistrationComponent } from './core/pages/submitted-registration/submitted-registration.component';
 import { CompletedRegistrationComponent } from './core/pages/completed-registration/completed-registration.component';
 import { ChangePasswordComponent } from './core/templates/users/change-password/change-password.component';
-import { InternshipCreateComponent } from './core/templates/partners/internships/internship-create/internship-create.component';
-import { InternshipEditComponent } from './core/templates/partners/internships/internship-edit/internship-edit.component';
-import { InternshipDetailsComponent } from './core/templates/partners/internships/internship-details/internship-details.component';
-import { InternshipOverviewComponent } from './core/templates/partners/internships/internship-overview/internship-overview.component';
+import { CompanyOpportunityCreateComponent } from './core/templates/partners/company-opportunity-create/company-opportunity-create.component';
+import { CompanyOpportunityEditComponent } from './core/templates/partners/company-opportunity-edit/company-opportunity-edit.component';
+import { CompanyOpportunityDetailsComponent } from './core/templates/partners/company-opportunity-details/company-opportunity-details.component';
+import { CompanyOpportunityOverviewComponent } from './core/templates/partners/company-opportunity-overview/company-opportunity-overview.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
 import { SortPipe } from './core/pipes/sort.pipe';
 import { MarkdownComponent } from './core/snippets/markdown/markdown.component';
@@ -109,10 +109,10 @@ import { OptiverComponent } from './core/pages/partners/sponsors/optiver/optiver
         SubmittedRegistrationComponent,
         CompletedRegistrationComponent,
         ChangePasswordComponent,
-        InternshipCreateComponent,
-        InternshipEditComponent,
-        InternshipDetailsComponent,
-        InternshipOverviewComponent,
+        CompanyOpportunityCreateComponent,
+        CompanyOpportunityEditComponent,
+        CompanyOpportunityDetailsComponent,
+        CompanyOpportunityOverviewComponent,
         FilterPipe,
         SortPipe,
         MarkdownComponent,

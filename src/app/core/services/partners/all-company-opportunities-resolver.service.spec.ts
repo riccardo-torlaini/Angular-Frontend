@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AllInternshipsResolverService } from './all-internships-resolver.service';
+import { AllCompanyOpportunitiesResolverService } from './all-company-opportunities-resolver.service';
 
 describe('AllInternshipsResolverService', () => {
-  let service: AllInternshipsResolverService;
+  let service: AllCompanyOpportunitiesResolverService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AllInternshipsResolverService);
+    service = TestBed.inject(AllCompanyOpportunitiesResolverService);
   });
 
   it('should be created', () => {
