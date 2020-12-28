@@ -112,6 +112,10 @@ export class ManageComponent implements OnInit {
             this.companyOpportunities = this.activatedRoute.snapshot.data.allCompanyOpportunities;
         }
 
+
+        this.sortUsers('displayName');
+        this.sortGroups('fullName');
+
         this.loading = false;
     }
 
