@@ -11,7 +11,6 @@ import {Title} from "@angular/platform-browser";
 export class LoginComponent implements OnInit {
     email: string;
     password: string;
-    returnURL: string;
     public loading: boolean;
     user: any;
 
