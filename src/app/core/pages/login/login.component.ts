@@ -11,6 +11,7 @@ import {Title} from "@angular/platform-browser";
 export class LoginComponent implements OnInit {
     email: string;
     password: string;
+    returnURL: string;
     public loading: boolean;
     user: any;
 
@@ -25,10 +26,32 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
+        const returnURL = localStorage.getItem('savedReturnURL');
+
+        // If the user is logged in, redirect to the return URL when it was not the login page.
+        if ((this.user.loggedIn) && (returnURL !== ""))
+        {
+            window.location.replace(returnURL);
+            localStorage.setItem('savedReturnURL', "");
+        }
+
         this.loading = false;
     }
 
     login(email, password) {
+
+        const returnURL = document.referrer;
+        const previousPage = returnURL.substring(returnURL.lastIndexOf('/') + 1);
+
+        if ((previousPage === "") || (previousPage === "login")) {
+            // If the previous page was void or the login page, save an empty string
+            localStorage.setItem('savedReturnURL', "");
+        }
+        else {
+            // Else, save the return URL
+            localStorage.setItem('savedReturnURL', returnURL);
+        }
+
         this.authService.login(email, password);
     }
 
