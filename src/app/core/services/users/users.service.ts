@@ -16,7 +16,7 @@ export class UsersService {
      * Function for retrieving all users from backend.
      */
     getAll() {
-        return this.webRequestService.get("api/user").pipe(
+        return this.webRequestService.get("api/users").pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
@@ -33,10 +33,11 @@ export class UsersService {
      * @param userId    The id of the user to retrieve.
      */
     get(userId) {
-        return this.webRequestService.get("api/user/" + userId).pipe(
+        return this.webRequestService.get("api/users/" + userId).pipe(
             map((res: HttpResponse<any>) => {
-                const user = res.body[0];
-                user.groups = res.body[1];
+                console.log(res);
+                const user = res.body;
+                user.groups = res.body.groups;
                 user.loggedIn = true;
 
                 for (const group of user.groups) {
@@ -64,7 +65,7 @@ export class UsersService {
      * @param user  Object representing the user to be created.
      */
     create(user) {
-        return this.webRequestService.post("api/user", user).pipe(
+        return this.webRequestService.post("api/users", user).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
@@ -88,7 +89,7 @@ export class UsersService {
      *                              {full name of group, id of group, whether the group is selected, role}
      */
     edit(user, groupSelection) {
-        return this.webRequestService.put("api/user/" + user.id, [user, groupSelection]).pipe(
+        return this.webRequestService.put("api/users/" + user.id, [user, groupSelection]).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
@@ -106,7 +107,7 @@ export class UsersService {
      * @param user      Object representing the user to be edited
      */
     changePassword(user) {
-        return this.webRequestService.put("api/user/changePassword/" + user.id, user).pipe(
+        return this.webRequestService.put("api/users/changePassword/" + user.id, user).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
@@ -124,7 +125,7 @@ export class UsersService {
      * @param userId    Id of the user to be deleted.
      */
     delete(userId) {
-        return this.webRequestService.delete("api/user/" + userId).pipe(
+        return this.webRequestService.delete("api/users/" + userId).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
