@@ -23,7 +23,6 @@ export class UserCreateComponent implements OnInit {
     memberships = ["Member", "Alumni", "Associate member"];
 
     // declare form fields for ng model bindings
-    displayName;
     email;
     firstName;
     lastName;
@@ -62,7 +61,6 @@ export class UserCreateComponent implements OnInit {
         }
 
         this.usersService.create({
-            displayName: this.firstName + " " + this.lastName,
             email: this.email,
             firstName: this.firstName,
             lastName: this.lastName,
