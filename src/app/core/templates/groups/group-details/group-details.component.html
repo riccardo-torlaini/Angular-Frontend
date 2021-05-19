@@ -10,11 +10,10 @@
         <div class="col-sm-6 col-md-6">
             <h2>{{group.fullName}}</h2>
             <p>{{group.description}}</p>
-            <i>Since {{group.createdAt | date: 'dd MMM, yyyy'}}</i>
             <h4>Contact details</h4>
             <p><a href="mailto:{{group.email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{group.email}}</a></p>
             <h4>Current members</h4>
-            <p *ngFor="let member of group.members">{{member.displayName}} ({{member.user_group.func}})</p>
+            <p *ngFor="let member of group.members">{{member.user.displayName}} ({{member.func}})</p>
             <div class="no-committees" *ngIf="!group.members.length">
                 <i>No members yet</i>
             </div>
