@@ -123,7 +123,6 @@ export class UserEditComponent implements OnInit {
         }
 
         this.user.isAdmin = this.selectedRole.id === "Admin";
-        this.user.displayName = this.user.firstName + " " + this.user.lastName;
 
         this.usersService.edit(this.user, this.groupSelection).subscribe((_) => {
             this.loading = false;
