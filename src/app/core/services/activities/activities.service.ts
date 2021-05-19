@@ -18,7 +18,8 @@ export class ActivitiesService {
     getAll() {
         return this.webRequestService.get("api/activities").pipe(
             map((res: HttpResponse<any>) => {
-                (res.body as any[]).map(activity => {
+                console.log(res);
+                (res.body).map(activity => {
                     activity.date = !isNaN(Date.parse(activity.date)) ? new Date(activity.date) : null;
                     activity.subscriptionDeadline = !isNaN(Date.parse(activity.subscriptionDeadline)) ?
                         new Date(activity.subscriptionDeadline) : null;
