@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit(): void {
         this.user = this.activatedRoute.snapshot.data.currentUser;
+        console.log(this.user.role);
 
         this.loading = false;
     }

@@ -63,8 +63,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="/user/profile"><span class="fa fa-user-circle"></span>Profile</a></li>
-                        <li *ngIf="user.isAdmin || user.canOrganize"><a href="/manage"><span
-                            class="fa fa-sliders"></span>Manage</a>
+                        <li *ngIf="user.role.ACTIVITY_MANAGE || user.role.GROUP_MANAGE || user.role.PAGE_MANAGE || user.role.ROLE_MANAGE || user.role.USER_MANAGE">
+                            <a href="/manage"><span class="fa fa-sliders"></span>Manage</a>
                         </li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#" (click)="logout()"><span class="fa fa-sign-out"></span>Logout</a></li>

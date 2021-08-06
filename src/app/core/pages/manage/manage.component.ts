@@ -96,6 +96,7 @@ export class ManageComponent implements OnInit {
         }
 
         this.archive = this.activatedRoute.snapshot.data.allActivities;
+        console.log(this.archive);
 
         if (this.user.isAdmin) {
             this.users = this.activatedRoute.snapshot.data.allUsers;

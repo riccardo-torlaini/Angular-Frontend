@@ -4,13 +4,13 @@
         <div class="btn-group" role="group" *ngIf="user.canOrganize">
             <a class="btn btn-default" href="manage/activities/create">+ Activity</a>
         </div>
-        <div class="btn-group" role="group" *ngIf="user.isAdmin">
+        <div class="btn-group" role="group" *ngIf="user.role.USER_MANAGE">
             <a class="btn btn-default" href="register_new_member">+ User</a>
         </div>
-        <div class="btn-group" role="group" *ngIf="user.isAdmin">
+        <div class="btn-group" role="group" *ngIf="user.role.GROUP_MANAGE">
             <a class="btn btn-default" href="manage/groups/create">+ Group</a>
         </div>
-        <div class="btn-group" role="group" *ngIf="user.isAdmin || isUserInAcquisition">
+        <div class="btn-group" role="group" *ngIf="user.role.USER_MANAGE || isUserInAcquisition">
             <a class="btn btn-default" href="manage/partners/company_opportunities/create">+ Company opportunity</a>
         </div>
     </div>
@@ -24,13 +24,13 @@
             <li class="active" *ngIf="user.canOrganize">
                 <a href="#activities" data-toggle="tab">Activities</a>
             </li>
-            <li *ngIf="user.isAdmin">
+            <li *ngIf="user.role.USER_MANAGE">
                 <a href="#users" data-toggle="tab">Users</a>
             </li>
-            <li *ngIf="user.isAdmin">
+            <li *ngIf="user.role.GROUP_MANAGE">
                 <a href="#groups" data-toggle="tab">Groups</a>
             </li>
-            <li *ngIf="user.isAdmin || isUserInAcquisition">
+            <li *ngIf="user.role.USER_MANAGE || isUserInAcquisition">
                 <a href="#companyOpportunities" data-toggle="tab">Company opportunities</a>
             </li>
         </ul>
