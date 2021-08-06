@@ -10,7 +10,7 @@
 
         <div class="activity row" *ngFor="let activity of activities">
             <div class="activity-title col-xs-12">
-                <a href="/activities/{{activity.id}}#signup"><h3 class="nospace">{{activity.name}} ({{activity.Organizer.fullName}})</h3><span
+                <a href="/activities/{{activity.id}}#signup"><h3 class="nospace">{{activity.name}} ({{activity.organizer.fullName}})</h3><span
                     *ngIf="!activity.published">(Unpublished)</span></a>
             </div>
             <div class="activity-content col-md-8 col-xs-12">
