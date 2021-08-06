@@ -71,9 +71,11 @@ export class ActivityDetailsComponent implements OnInit {
         }
 
         // check whether the user that is logged in is already subscribed to the activity
-        for (const participant of this.activity.participants) {
-            if (participant.id === this.user.id) {
-                this.subscribed = true;
+        if (this.activity.canSubscribe) {
+            for (const participant of this.activity.participants) {
+                if (participant.id === this.user.id) {
+                    this.subscribed = true;
+                }
             }
         }
 

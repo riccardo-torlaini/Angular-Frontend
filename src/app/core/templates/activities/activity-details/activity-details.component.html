@@ -36,7 +36,7 @@
                 <li *ngIf="activity.location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{activity.location}}
                 </li>
 
-                <li class="pull-right"><span class="small">Organized by </span><span class="hsa small">{{activity.Organizer.fullName}}</span>
+                <li class="pull-right"><span class="small">Organized by </span><span class="hsa small">{{activity.organizer.fullName}}</span>
                 </li>
             </ul>
 
@@ -185,7 +185,7 @@
                 <tbody>
                 <tr *ngFor="let participant of activity.participants; index as i">
                     <td>{{i + 1}}</td>
-                    <td *ngFor="let answer of participant.subscription.answers; index as j">
+                    <td *ngFor="let answer of participant.answers; index as j">
                         <ng-container *ngIf="activity.privacyOfQuestions[j] || isUserOrganizing">
                             <div>{{answer}}</div>
                         </ng-container>
