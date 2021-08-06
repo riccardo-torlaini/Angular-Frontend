@@ -87,7 +87,7 @@
                                     sort : sortTypeActivities : typeSortMap.get(sortTypeActivities) : sortReverseActivities">
                                 <td><a href="/activities/{{activity.id}}#signup">{{activity.name}}</a></td>
                                 <td>{{activity.date | date:'yyyy-MM-dd'}}</td>
-                                <td>{{activity.Organizer.displayName}}</td>
+                                <td>{{activity.organizer.displayName}}</td>
                                 <td class="manage-table-action">
                                     <a *ngIf="activity.published" class="btn btn-link"
                                        (click)="togglePublishedActivity(activity)">
@@ -120,7 +120,7 @@
 
             </div>
 
-            <div class="tab-pane" id="users" *ngIf="user.isAdmin">
+            <div class="tab-pane" id="users" *ngIf="user.role.USER_MANAGE">
 
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
@@ -140,14 +140,14 @@
                                     class="fa fa-angle-down"></i><i
                                     *ngIf="(sortTypeUsers == 'displayName') && !sortReverseUsers"
                                     class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-4" (click)="sortUsers('email')">Email<i
+                                <th class="col-xs-3" (click)="sortUsers('email')">Email<i
                                     *ngIf="(sortTypeUsers == 'email') && sortReverseUsers" class="fa fa-angle-down"></i><i
                                     *ngIf="(sortTypeUsers == 'email') && !sortReverseUsers" class="fa fa-angle-up"></i>
                                 </th>
-                                <th class="col-xs-1" (click)="sortUsers('isAdmin')">Admin<i
-                                    *ngIf="(sortTypeUsers == 'isAdmin') && sortReverseUsers"
+                                <th class="col-xs-2" (click)="sortUsers('role.name')">Role<i
+                                    *ngIf="(sortTypeUsers == 'role.name') && sortReverseUsers"
                                     class="fa fa-angle-down"></i><i
-                                    *ngIf="(sortTypeUsers == 'isAdmin') && !sortReverseUsers"
+                                    *ngIf="(sortTypeUsers == 'role.name') && !sortReverseUsers"
                                     class="fa fa-angle-up"></i></th>
                                 <th class="col-xs-2"></th>
                             </tr>
@@ -159,8 +159,7 @@
                                     sort   : sortTypeUsers : typeSortMap.get(sortTypeUsers) : sortReverseUsers">
                                 <td><a href="/user/{{user.id}}">{{user.displayName}}</a></td>
                                 <td>{{user.email}}</td>
-                                <td *ngIf="user.isAdmin"><i class="fa fa-check"></i></td>
-                                <td *ngIf="!user.isAdmin"></td>
+                                <td>{{user.role.name}}</td>
                                 <td class="manage-table-action text-right">
                                     <a class="btn btn-link" href="/manage/users/edit/{{user.id}}">
                                         <i class="fa fa-cog"></i>
@@ -182,7 +181,7 @@
 
             </div>
 
-            <div class="tab-pane" id="groups" *ngIf="user.isAdmin">
+            <div class="tab-pane" id="groups" *ngIf="user.role.GROUP_MANAGE">
 
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
@@ -245,7 +244,7 @@
             </div>
 
 
-            <div class="tab-pane" id="companyOpportunities" *ngIf="user.isAdmin || isUserInAcquisition">
+            <div class="tab-pane" id="companyOpportunities" *ngIf="user.role.PAGE_MANAGE || isUserInAcquisition">
 
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">

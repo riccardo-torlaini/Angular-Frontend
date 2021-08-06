@@ -35,7 +35,6 @@ export class UsersService {
     get(userId) {
         return this.webRequestService.get("api/users/" + userId).pipe(
             map((res: HttpResponse<any>) => {
-                console.log(res);
                 const user = res.body;
                 user.groups = res.body.groups;
                 user.loggedIn = true;

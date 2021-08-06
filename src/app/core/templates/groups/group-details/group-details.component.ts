@@ -29,7 +29,6 @@ export class GroupDetailsComponent implements OnInit {
 
     ngOnInit(): void {
         const group = this.activatedRoute.snapshot.data.group;
-        console.log(group);
 
         group.members.sort((a, b) =>
             (((this.priorityDict)[a.func] < this.priorityDict[b.func]) ?

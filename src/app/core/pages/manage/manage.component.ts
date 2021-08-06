@@ -51,7 +51,7 @@ export class ManageComponent implements OnInit {
         ['published', this.sortPipe.booleanSort],
         ['displayName', this.sortPipe.lexicographicSort],
         ['email', this.sortPipe.lexicographicSort],
-        ['isAdmin', this.sortPipe.booleanSort],
+        ['role.name', this.sortPipe.lexicographicSort],
         ['fullName', this.sortPipe.lexicographicSort],
         ['email', this.sortPipe.lexicographicSort],
         ['canOrganize', this.sortPipe.booleanSort],
@@ -96,10 +96,12 @@ export class ManageComponent implements OnInit {
         }
 
         this.archive = this.activatedRoute.snapshot.data.allActivities;
-        console.log(this.archive);
 
-        if (this.user.isAdmin) {
+        if (this.user.role.USER_MANAGE) {
             this.users = this.activatedRoute.snapshot.data.allUsers;
+        }
+
+        if (this.user.role.GROUP_MANAGE) {
             this.groups = this.activatedRoute.snapshot.data.allGroups;
         }
 
@@ -109,7 +111,7 @@ export class ManageComponent implements OnInit {
             }
         }
 
-        if (this.isUserInAcquisition || this.user.isAdmin) {
+        if (this.isUserInAcquisition || this.user.role.PAGE_MANAGE) {
             this.companyOpportunities = this.activatedRoute.snapshot.data.allCompanyOpportunities;
         }
 
