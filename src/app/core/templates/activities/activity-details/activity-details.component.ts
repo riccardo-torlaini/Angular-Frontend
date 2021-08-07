@@ -66,7 +66,7 @@ export class ActivityDetailsComponent implements OnInit {
             }
         }
 
-        if (this.user.isAdmin) {
+        if (this.user.role.ACTIVITY_MANAGE) {
             this.isUserOrganizing = true;
         }
 
@@ -117,7 +117,7 @@ export class ActivityDetailsComponent implements OnInit {
     publishActivity(activityToBePublished) {
         activityToBePublished.published = true;
         // Set organizer to displayName of Organizer (required for API)
-        activityToBePublished.organizer = activityToBePublished.Organizer.fullName;
+        activityToBePublished.organizerId = activityToBePublished.organizer.id;
         this.activitiesService.edit(activityToBePublished, true, null).subscribe();
     }
 
@@ -126,7 +126,7 @@ export class ActivityDetailsComponent implements OnInit {
         activityToBeUnpublished.published = false;
 
         // Set organizer to displayName of Organizer (required for API)
-        activityToBeUnpublished.organizer = activityToBeUnpublished.Organizer.fullName;
+        activityToBeUnpublished.organizerId = activityToBeUnpublished.organizer.id;
         this.activitiesService.edit(activityToBeUnpublished, true, null).subscribe();
     }
 

@@ -60,12 +60,12 @@ export class ActivityEditComponent implements OnInit {
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
         this.activity.date = this.datePipe.transform(this.activity.date, "yyyy-MM-dd");
-        this.activity.organizer = this.activity.Organizer.fullName;
+        this.activity.organizer = this.activity.organizer.fullName;
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
         // If user is admin, then user can organize with all committees (that can organize)
-        if (this.user.isAdmin) {
+        if (this.user.role.ACTIVITY_MANAGE) {
             this.user.groups = this.activatedRoute.snapshot.data.allGroups;
         }
 
@@ -271,6 +271,8 @@ export class ActivityEditComponent implements OnInit {
         if (this.activity.hasCoverImage && !changedCoverImage && !this.keepCurrent) {
             this.activity.hasCoverImage = false;
         }
+
+        this.activity.organizerId = +this.activity.organizerId;
 
         this.activitiesService.edit(this.activity, this.keepCurrent, fd).subscribe((result) => {
             this.loading = false;
