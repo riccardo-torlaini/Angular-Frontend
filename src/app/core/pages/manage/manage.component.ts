@@ -7,6 +7,7 @@ import {Title} from "@angular/platform-browser";
 import {UsersService} from "../../services/users/users.service";
 import {GroupsService} from "../../services/groups/groups.service";
 import {PartnersService} from "../../services/partners/partners.service";
+import {RolesService} from "src/app/core/services/roles/roles.service";
 
 @Component({
     selector: 'app-manage',
@@ -26,6 +27,7 @@ export class ManageComponent implements OnInit {
     groups: any[];
     activities: any[];
     companyOpportunities: any[];
+    roles: any[];
 
     sortTypeActivities = 'id';
     sortReverseActivities = false;
@@ -42,6 +44,10 @@ export class ManageComponent implements OnInit {
     sortTypeCompanyOpportunities = 'id';
     sortReverseCompanyOpportunities = false;
     searchQueryCompanyOpportunities = "";
+
+    sortTypeRoles = 'id';
+    sortReverseRoles = false;
+    searchQueryRoles = "";
 
     typeSortMap = new Map([
         ['id', this.sortPipe.numberSort],
@@ -66,6 +72,7 @@ export class ManageComponent implements OnInit {
                 private usersService: UsersService,
                 private groupsService: GroupsService,
                 private partnersService: PartnersService,
+                private rolesService: RolesService,
                 public sortPipe: SortPipe,
                 private datePipe: DatePipe) {
         this.loading = true;
@@ -103,6 +110,10 @@ export class ManageComponent implements OnInit {
 
         if (this.user.role.GROUP_MANAGE) {
             this.groups = this.activatedRoute.snapshot.data.allGroups;
+        }
+
+        if (this.user.role.ROLE_MANAGE) {
+            this.roles = this.activatedRoute.snapshot.data.allRoles;
         }
 
         for (const group of this.user.groups) {
@@ -154,6 +165,10 @@ export class ManageComponent implements OnInit {
             || opportunity.educationLevel.toLowerCase().includes(query.toLowerCase());
     }
 
+    roleCallback(role, query) {
+        return role.name.toLowerCase().includes(query.toLowerCase());
+    }
+
     // Ugly repeated code
     sortActivities(type) {
         if (this.sortTypeActivities === type) {
@@ -191,6 +206,16 @@ export class ManageComponent implements OnInit {
         this.sortTypeCompanyOpportunities = type;
     }
 
+    sortRoles(type) {
+        console.log(this);
+        if (this.sortTypeRoles === type) {
+            this.sortReverseRoles = !this.sortReverseRoles;
+        } else {
+            this.sortReverseRoles = false;
+        }
+        this.sortTypeRoles = type;
+    }
+
     // Delete functions
     deleteActivity(activity) {
         this.activitiesService.delete(activity.id).subscribe();
@@ -210,5 +235,10 @@ export class ManageComponent implements OnInit {
     deleteCompanyOpportunity(opportunity) {
         this.partnersService.deleteCompanyOpportunity(opportunity.id).subscribe();
         this.companyOpportunities.splice(this.companyOpportunities.indexOf(opportunity), 1);
+    }
+
+    deleteRole(role) {
+        this.rolesService.delete(role.id).subscribe();
+        this.roles.splice(this.roles.indexOf(role), 1);
     }
 }

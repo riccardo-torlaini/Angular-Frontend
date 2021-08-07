@@ -59,6 +59,7 @@ import {CompanyOpportunityEditComponent} from "./core/templates/partners/company
 import {CurrentUserResolverService} from "./core/services/users/current-user-resolver.service";
 import {BaseComponent} from "./core/base/base.component";
 import {OptiverComponent} from "./core/pages/partners/sponsors/optiver/optiver.component";
+import {AllRolesResolverService} from "src/app/core/services/roles/all-roles-resolver.service";
 
 const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -79,6 +80,7 @@ const routes: Routes = [
                     allUsers: AllUsersResolverService,
                     allGroups: AllGroupsResolverService,
                     allCompanyOpportunities: AllCompanyOpportunitiesResolverService,
+                    allRoles: AllRolesResolverService,
                     currentUser: CurrentUserResolverService
                 }
             },

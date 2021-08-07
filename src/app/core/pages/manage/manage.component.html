@@ -33,6 +33,9 @@
             <li *ngIf="user.role.USER_MANAGE || isUserInAcquisition">
                 <a href="#companyOpportunities" data-toggle="tab">Company opportunities</a>
             </li>
+            <li *ngIf="user.role.ROLE_MANAGE">
+                <a href="#roles" data-toggle="tab">Roles</a>
+            </li>
         </ul>
         <div class="tab-content clearfix">
             <div class="tab-pane active" id="activities" *ngIf="user.canOrganize">
@@ -296,6 +299,64 @@
 
                                     <div id="del-opportunity-{{opportunity.id}}" class="collapse">
                                         <button class="btn btn-danger" (click)="deleteCompanyOpportunity(opportunity)">Delete Permanently</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="tab-pane" id="roles" *ngIf="user.role.ROLE_MANAGE">
+
+                <div class="row section manage-actions">
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
+                        <input type="text" class="form-control" placeholder="Search roles"
+                               [(ngModel)]="searchQueryRoles">
+                    </div>
+                </div>
+
+                <div class="row section">
+                    <div class="table-responsive col-xs-12">
+                        <table class="table table-hover">
+
+                            <thead>
+                            <tr>
+                                <th class="col-xs-10" (click)="sortRoles('name')">Name<i
+                                    *ngIf="(sortTypeRoles == 'name') && sortReverseRoles"
+                                    class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeRoles == 'name') && !sortReverseRoles"
+                                    class="fa fa-angle-up"></i></th>
+                                <th class="col-xs-2"></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr *ngFor="let role of roles
+                                    | filter : roleCallback : searchQueryRoles
+                                    | sort   : sortTypeRoles : typeSortMap.get(sortTypeRoles) : sortReverseRoles"
+                            >
+                                <td>
+<!--                                    <a href="/partners/company_opportunities/{{opportunity.id}}">-->
+                                        {{role.name}}
+<!--                                    </a>-->
+                                </td>
+<!--                                <td>{{opportunity.companyName}}</td>-->
+<!--                                <td>{{opportunity.category}}</td>-->
+
+                                <td class="manage-table-action text-right">
+                                    <a class="btn btn-link" href="/manage/partners/company_opportunities/edit/{{role.id}}">
+                                        <i class="fa fa-cog"></i>
+                                    </a>
+                                    <a class="btn btn-link" href="#del-role-{{role.id}}" data-toggle="collapse">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+
+                                    <div id="del-role-{{role.id}}" class="collapse">
+                                        <button class="btn btn-danger" (click)="deleteRole(role)">Delete Permanently</button>
                                     </div>
                                 </td>
                             </tr>
