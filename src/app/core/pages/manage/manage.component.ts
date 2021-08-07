@@ -130,7 +130,7 @@ export class ManageComponent implements OnInit {
     }
 
     activityCallback(activity, query) {
-        return activity.Organizer.displayName.toLowerCase().includes(query.toLowerCase())
+        return activity.organizer.displayName.toLowerCase().includes(query.toLowerCase())
             || activity.name.toLowerCase().includes(query.toLowerCase());
     }
 
