@@ -84,15 +84,14 @@ export class GroupsService {
      * @param group         Object that represents the (edited) group.
      * @param userGroup    List of members of the group in format {name, function, id}.
      */
-    edit(group, userGroup) {
-        return this.webRequestService.put("api/groups/" + group.id, [group, userGroup]).pipe(
+    edit(group) {
+        return this.webRequestService.put("api/groups/" + group.id, group).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
             catchError(err => {
                 console.error('GroupsService.create: Error when editing group with id ' + group.id);
                 console.error(group);
-                console.error(userGroup);
                 console.error(err);
                 return of({});
             })
