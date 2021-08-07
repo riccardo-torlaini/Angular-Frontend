@@ -15,7 +15,7 @@ export class GroupCreateComponent implements OnInit {
     description;
     email;
     canOrganize;
-    type;
+    type = "Committee";
     differentType;
 
     constructor(titleService: Title,
