@@ -32,7 +32,7 @@ export class RolesService {
      * @param roleId    The id of the role to retrieve.
      */
     get(roleId) {
-        return this.webRequestService.get("/api/roles/" + roleId).pipe(
+        return this.webRequestService.get("api/roles/" + roleId).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),

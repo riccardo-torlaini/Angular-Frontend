@@ -341,7 +341,7 @@
                             <tr *ngFor="let role of roles
                                     | filter : roleCallback : searchQueryRoles
                                     | sort   : sortTypeRoles : typeSortMap.get(sortTypeRoles) : sortReverseRoles">
-                                <td><a href="/manage/roles/{{role.id}}">{{role.name}}</a></td>
+                                <td><a href="/manage/roles/view/{{role.id}}">{{role.name}}</a></td>
 
                                 <td class="manage-table-action text-right">
                                     <a class="btn btn-link" href="/manage/roles/edit/{{role.id}}">
