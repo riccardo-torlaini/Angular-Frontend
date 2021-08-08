@@ -17,7 +17,7 @@ export class RoleDetailsComponent implements OnInit {
                 private activatedRoute: ActivatedRoute) {
         this.loading = true;
 
-        titleService.setTitle("Role details")
+        titleService.setTitle("Role details");
     }
 
     ngOnInit(): void {
