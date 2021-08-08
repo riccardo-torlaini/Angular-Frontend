@@ -13,6 +13,9 @@
         <div class="btn-group" role="group" *ngIf="user.role.USER_MANAGE || isUserInAcquisition">
             <a class="btn btn-default" href="manage/partners/company_opportunities/create">+ Company opportunity</a>
         </div>
+        <div class="btn-group" role="group" *ngIf="user.role.ROLE_MANAGE">
+            <a class="btn btn-default" href="manage/roles/create">+ Role</a>
+        </div>
     </div>
 
     <h1>Management Dashboard</h1>
@@ -337,18 +340,11 @@
                             <tbody>
                             <tr *ngFor="let role of roles
                                     | filter : roleCallback : searchQueryRoles
-                                    | sort   : sortTypeRoles : typeSortMap.get(sortTypeRoles) : sortReverseRoles"
-                            >
-                                <td>
-<!--                                    <a href="/partners/company_opportunities/{{opportunity.id}}">-->
-                                        {{role.name}}
-<!--                                    </a>-->
-                                </td>
-<!--                                <td>{{opportunity.companyName}}</td>-->
-<!--                                <td>{{opportunity.category}}</td>-->
+                                    | sort   : sortTypeRoles : typeSortMap.get(sortTypeRoles) : sortReverseRoles">
+                                <td><a href="/manage/roles/{{role.id}}">{{role.name}}</a></td>
 
                                 <td class="manage-table-action text-right">
-                                    <a class="btn btn-link" href="/manage/partners/company_opportunities/edit/{{role.id}}">
+                                    <a class="btn btn-link" href="/manage/roles/edit/{{role.id}}">
                                         <i class="fa fa-cog"></i>
                                     </a>
                                     <a class="btn btn-link" href="#del-role-{{role.id}}" data-toggle="collapse">
