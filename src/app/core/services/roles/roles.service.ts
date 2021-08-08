@@ -66,7 +66,7 @@ export class RolesService {
      * @param role      Object representing the (edited) role.
      */
     edit(role) {
-        return this.webRequestService.put("api/role/" + role.id, role).pipe(
+        return this.webRequestService.put("api/roles/" + role.id, role).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
