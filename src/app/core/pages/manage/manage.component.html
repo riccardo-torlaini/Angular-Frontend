@@ -10,7 +10,7 @@
         <div class="btn-group" role="group" *ngIf="user.role.GROUP_MANAGE">
             <a class="btn btn-default" href="manage/groups/create">+ Group</a>
         </div>
-        <div class="btn-group" role="group" *ngIf="user.role.USER_MANAGE || isUserInAcquisition">
+        <div class="btn-group" role="group" *ngIf="user.role.PARTNER_MANAGE || isUserInAcquisition">
             <a class="btn btn-default" href="manage/partners/company_opportunities/create">+ Company opportunity</a>
         </div>
         <div class="btn-group" role="group" *ngIf="user.role.ROLE_MANAGE">
@@ -27,16 +27,16 @@
             <li class="active" *ngIf="user.canOrganize">
                 <a href="#activities" data-toggle="tab">Activities</a>
             </li>
-            <li *ngIf="user.role.USER_MANAGE">
+            <li *ngIf="user.role.USER_VIEW_ALL">
                 <a href="#users" data-toggle="tab">Users</a>
             </li>
-            <li *ngIf="user.role.GROUP_MANAGE">
+            <li *ngIf="user.role.GROUP_VIEW">
                 <a href="#groups" data-toggle="tab">Groups</a>
             </li>
-            <li *ngIf="user.role.USER_MANAGE || isUserInAcquisition">
+            <li *ngIf="user.role.PARTNER_VIEW || isUserInAcquisition">
                 <a href="#companyOpportunities" data-toggle="tab">Company opportunities</a>
             </li>
-            <li *ngIf="user.role.ROLE_MANAGE">
+            <li *ngIf="user.role.ROLE_VIEW">
                 <a href="#roles" data-toggle="tab">Roles</a>
             </li>
         </ul>
@@ -114,7 +114,9 @@
                                     </a>
 
                                     <div id="del-act-{{activity.id}}" class="collapse">
-                                        <button class="btn btn-danger" (click)="deleteActivity(activity)">Delete Permanently</button>
+                                        <button class="btn btn-danger" (click)="deleteActivity(activity)">Delete
+                                            Permanently
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -126,7 +128,7 @@
 
             </div>
 
-            <div class="tab-pane" id="users" *ngIf="user.role.USER_MANAGE">
+            <div class="tab-pane" id="users" *ngIf="user.role.USER_VIEW_ALL">
 
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
@@ -155,27 +157,30 @@
                                     class="fa fa-angle-down"></i><i
                                     *ngIf="(sortTypeUsers == 'role.name') && !sortReverseUsers"
                                     class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-2"></th>
+                                <th class="col-xs-2" *ngIf="user.role.USER_MANAGE"></th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <tr *ngFor="let user of users |
+                            <tr *ngFor="let userIter of users |
                                     filter : userCallback : searchQueryUsers |
                                     sort   : sortTypeUsers : typeSortMap.get(sortTypeUsers) : sortReverseUsers">
-                                <td><a href="/user/{{user.id}}">{{user.displayName}}</a></td>
-                                <td>{{user.email}}</td>
-                                <td>{{user.role.name}}</td>
-                                <td class="manage-table-action text-right">
-                                    <a class="btn btn-link" href="/manage/users/edit/{{user.id}}">
-                                        <i class="fa fa-cog"></i>
-                                    </a>
-                                    <a class="btn btn-link" href="#del-user-{{user.id}}" data-toggle="collapse">
-                                        <i class="fa fa-trash-o"></i>
-                                    </a>
+                                <td><a href="/user/{{userIter.id}}">{{userIter.displayName}}</a></td>
+                                <td>{{userIter.email}}</td>
+                                <td>{{userIter.role.name}}</td>
+                                <td class="manage-table-action text-right" *ngIf="user.role.USER_MANAGE">
+                                    <div>
+                                        <a class="btn btn-link" href="/manage/users/edit/{{userIter.id}}">
+                                            <i class="fa fa-cog"></i>
+                                        </a>
+                                        <a class="btn btn-link" href="#del-user-{{userIter.id}}" data-toggle="collapse">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </div>
 
-                                    <div id="del-user-{{user.id}}" class="collapse">
-                                        <button class="btn btn-danger" (click)="deleteUser(user)">Delete Permanently</button>
+                                    <div id="del-user-{{userIter.id}}" class="collapse">
+                                        <button class="btn btn-danger" (click)="deleteUser(userIter)">Delete Permanently
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -187,7 +192,7 @@
 
             </div>
 
-            <div class="tab-pane" id="groups" *ngIf="user.role.GROUP_MANAGE">
+            <div class="tab-pane" id="groups" *ngIf="user.role.GROUP_VIEW">
 
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
@@ -217,7 +222,7 @@
                                     class="fa fa-angle-down"></i><i
                                     *ngIf="(sortTypeGroups == 'canOrganize') && !sortReverseGroups"
                                     class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-2"></th>
+                                <th class="col-xs-2" *ngIf="user.role.GROUP_MANAGE"></th>
                             </tr>
                             </thead>
 
@@ -229,7 +234,7 @@
                                 <td>{{group.email}}</td>
                                 <td *ngIf="group.canOrganize"><i class="fa fa-check"></i></td>
                                 <td *ngIf="!group.canOrganize"></td>
-                                <td class="manage-table-action text-right">
+                                <td class="manage-table-action text-right" *ngIf="user.role.GROUP_MANAGE">
                                     <a class="btn btn-link" href="/manage/groups/edit/{{group.id}}">
                                         <i class="fa fa-cog"></i>
                                     </a>
@@ -238,7 +243,8 @@
                                     </a>
 
                                     <div id="del-group-{{group.id}}" class="collapse">
-                                        <button class="btn btn-danger" (click)="deleteGroup(group)">Delete Permanently</button>
+                                        <button class="btn btn-danger" (click)="deleteGroup(group)">Delete Permanently
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -250,7 +256,7 @@
             </div>
 
 
-            <div class="tab-pane" id="companyOpportunities" *ngIf="user.role.PAGE_MANAGE || isUserInAcquisition">
+            <div class="tab-pane" id="companyOpportunities" *ngIf="user.role.PARTNER_VIEW || isUserInAcquisition">
 
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
@@ -280,7 +286,7 @@
                                     class="fa fa-angle-down"></i><i
                                     *ngIf="(sortTypeCompanyOpportunities == 'category') && !sortReverseCompanyOpportunities"
                                     class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-2"></th>
+                                <th class="col-xs-2" *ngIf="user.role.PARTNER_MANAGE"></th>
                             </tr>
                             </thead>
 
@@ -288,20 +294,26 @@
                             <tr *ngFor="let opportunity of companyOpportunities
                                     | filter : companyOpportunityCallback : searchQueryCompanyOpportunities
                                     | sort   : sortTypeCompanyOpportunities : typeSortMap.get(sortTypeCompanyOpportunities) : sortReverseCompanyOpportunities">
-                                <td><a href="/partners/company_opportunities/{{opportunity.id}}">{{opportunity.title}}</a></td>
+                                <td><a
+                                    href="/partners/company_opportunities/{{opportunity.id}}">{{opportunity.title}}</a>
+                                </td>
                                 <td>{{opportunity.companyName}}</td>
                                 <td>{{opportunity.category}}</td>
 
-                                <td class="manage-table-action text-right">
-                                    <a class="btn btn-link" href="/manage/partners/company_opportunities/edit/{{opportunity.id}}">
+                                <td class="manage-table-action text-right" *ngIf="user.role.PARTNER_MANAGE">
+                                    <a class="btn btn-link"
+                                       href="/manage/partners/company_opportunities/edit/{{opportunity.id}}">
                                         <i class="fa fa-cog"></i>
                                     </a>
-                                    <a class="btn btn-link" href="#del-opportunity-{{opportunity.id}}" data-toggle="collapse">
+                                    <a class="btn btn-link" href="#del-opportunity-{{opportunity.id}}"
+                                       data-toggle="collapse">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
 
                                     <div id="del-opportunity-{{opportunity.id}}" class="collapse">
-                                        <button class="btn btn-danger" (click)="deleteCompanyOpportunity(opportunity)">Delete Permanently</button>
+                                        <button class="btn btn-danger" (click)="deleteCompanyOpportunity(opportunity)">
+                                            Delete Permanently
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -313,7 +325,7 @@
             </div>
 
 
-            <div class="tab-pane" id="roles" *ngIf="user.role.ROLE_MANAGE">
+            <div class="tab-pane" id="roles" *ngIf="user.role.ROLE_VIEW">
 
                 <div class="row section manage-actions">
                     <div class="col-xs-12 col-sm-6 col-md-3 col-sm-offset-6 col-md-offset-9">
@@ -333,7 +345,7 @@
                                     class="fa fa-angle-down"></i><i
                                     *ngIf="(sortTypeRoles == 'name') && !sortReverseRoles"
                                     class="fa fa-angle-up"></i></th>
-                                <th class="col-xs-2"></th>
+                                <th class="col-xs-2" *ngIf="user.role.ROLE_MANAGE"></th>
                             </tr>
                             </thead>
 
@@ -343,7 +355,7 @@
                                     | sort   : sortTypeRoles : typeSortMap.get(sortTypeRoles) : sortReverseRoles">
                                 <td><a href="/manage/roles/view/{{role.id}}">{{role.name}}</a></td>
 
-                                <td class="manage-table-action text-right">
+                                <td class="manage-table-action text-right" *ngIf="user.role.ROLE_MANAGE">
                                     <a class="btn btn-link" href="/manage/roles/edit/{{role.id}}">
                                         <i class="fa fa-cog"></i>
                                     </a>
@@ -352,7 +364,8 @@
                                     </a>
 
                                     <div id="del-role-{{role.id}}" class="collapse">
-                                        <button class="btn btn-danger" (click)="deleteRole(role)">Delete Permanently</button>
+                                        <button class="btn btn-danger" (click)="deleteRole(role)">Delete Permanently
+                                        </button>
                                     </div>
                                 </td>
                             </tr>

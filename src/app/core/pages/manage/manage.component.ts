@@ -104,15 +104,15 @@ export class ManageComponent implements OnInit {
 
         this.archive = this.activatedRoute.snapshot.data.allActivities;
 
-        if (this.user.role.USER_MANAGE) {
+        if (this.user.role.USER_VIEW_ALL) {
             this.users = this.activatedRoute.snapshot.data.allUsers;
         }
 
-        if (this.user.role.GROUP_MANAGE) {
+        if (this.user.role.GROUP_VIEW) {
             this.groups = this.activatedRoute.snapshot.data.allGroups;
         }
 
-        if (this.user.role.ROLE_MANAGE) {
+        if (this.user.role.ROLE_VIEW) {
             this.roles = this.activatedRoute.snapshot.data.allRoles;
         }
 
@@ -122,7 +122,7 @@ export class ManageComponent implements OnInit {
             }
         }
 
-        if (this.isUserInAcquisition || this.user.role.PAGE_MANAGE) {
+        if (this.isUserInAcquisition || this.user.role.PARTNER_VIEW) {
             this.companyOpportunities = this.activatedRoute.snapshot.data.allCompanyOpportunities;
         }
 
