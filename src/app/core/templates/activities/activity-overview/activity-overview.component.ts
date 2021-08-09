@@ -31,7 +31,7 @@ export class ActivityOverviewComponent implements OnInit {
             activity.subscribed = false;
             if (activity.canSubscribe) {
                 for (const participant of activity.participants) {
-                    if (participant.id === this.user.id) {
+                    if (participant.user.id === this.user.id) {
                         activity.subscribed = true;
                         break;
                     }
