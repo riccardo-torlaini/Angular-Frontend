@@ -60,7 +60,7 @@ export class ActivityEditComponent implements OnInit {
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
         this.activity.date = this.datePipe.transform(this.activity.date, "yyyy-MM-dd");
-        this.activity.organizer = this.activity.organizer.fullName;
+        this.activity.organizerId = this.activity.organizer.id;
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
@@ -91,7 +91,7 @@ export class ActivityEditComponent implements OnInit {
                 });
             }
 
-            this.deadline.subscriptionDeadline = this.activity.subscriptionDeadline;
+            this.deadline.subscriptionDeadline = this.datePipe.transform(this.activity.subscriptionDeadline, "yyyy-MM-dd");
         }
 
         // If not subscription form was submitted initially then add the standard two questions to input
@@ -273,6 +273,7 @@ export class ActivityEditComponent implements OnInit {
         }
 
         this.activity.organizerId = +this.activity.organizerId;
+        this.activity.participationFee = +this.activity.participationFee;
 
         this.activitiesService.edit(this.activity, this.keepCurrent, fd).subscribe((result) => {
             this.loading = false;
