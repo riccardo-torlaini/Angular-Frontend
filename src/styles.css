@@ -150,28 +150,6 @@ h5, .h5, h6, .h6 { margin-top: 0.7rem; margin-bottom: 0.1rem }
   }
 }
 
-/* MANAGEMENT DASHBOARD ----------------------------------------------------- */
-
-/* Toggle size*/
-.fa.fa-toggle-on, .fa.fa-toggle-off { font-size: 20px }
-
-/* Sorting arrow fix */
-#managePage th .fa { margin-left: 6px }
-
-/* Icons fix */
-.manage-table-action { user-select: none }
-.manage-table-action .btn {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-/* Tabs positioning */
-@media (min-width:992px) {
-  #managePage ul.nav { display: inline-block }
-  .manage-actions { margin-top: -47px }
-}
-
-
 /* FORMS -------------------------------------------------------------------- */
 
 /* Checkbox and radio fix */
@@ -238,134 +216,6 @@ legend {
 /* Text styling */
 .navbar, .dropdown-menu { font-size: 0.93rem }
 .navbar-brand { line-height: 1.1rem; font-size: 1rem; letter-spacing: 0.2px }
-
-
-/* FRONTPAGE ---------------------------------------------------------------- */
-
-/* Slogan */
-#frontpage-slogan {
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-size: 68%;
-}
-
-/* Partner bar logos */
-.img-logo { height: 26px; margin: 1rem 15px }
-#tno-logo { height: 36px; margin-top: 0; margin-bottom: 0 }
-
-/* List of activities bottom fix */
-#activity-overview { margin-bottom: 0 }
-
-
-/* FOOTER ------------------------------------------------------------------- */
-
-#footer { margin-bottom: 20px; margin-top: 40px }
-
-
-/* COMMITTEES --------------------------------------------------------------- */
-#carousel {
-  position: relative;
-  height: 400px;
-  top: 50%;
-  overflow: hidden;
-  margin-top: 20px;
-}
-
-#committees img {
-  width: 600px;
-}
-
-.committee-img-container {
-  position: relative;
-  height: calc(100% - 40px);
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  background-origin: content-box;
-  border-bottom: solid;
-  border-color: #296e82bf;
-}
-
-.committee-box {
-  height: 360px;
-  border: 1px solid #ddd;
-  padding: 0;
-}
-
-.committee-box-small {
-  height: 300px;
-  width: 300px;
-  padding: 0;
-}
-
-.committee-link {
-  text-decoration: none!important;
-  cursor: pointer;
-}
-
-.committee-text {
-  padding-left: 10px;
-  color: white!important;
-  vertical-align: middle;
-  line-height: 38px;
-  font-size: 30px;
-  font-weight: normal;
-}
-
-i.committee-text {
-  font-size: 15px!important;
-  margin-right: 10px;
-  float: right;
-}
-
-/* BOARDS ------------------------------------------------------------------- */
-
-.board-credits {
-  position: absolute;
-  right: 0;
-  font-size: 13px;
-  height: auto;
-}
-
-.board-container_img{
-	position: relative;
-}
-
-
-.board-column {
-  display: flex;
-  width: 100%;
-  height: auto;
-}
-
-.board-column img {
-  height: 100%;
-  width: 100%;
-}
-
-@media (min-width: 992px) {
-  .board-container {
-    display: flex;
-  }
-
-  .board-column {
-    width: 50%;
-    height: auto;
-  }
-}
-
-.board-content {
-  display: flex;
-  align-self: center;
-  padding-left: 20px;
-  font-size: 13px;
-}
-
-.board-content ul {
-  font-size: 20px;
-  list-style-type: none;
-}
 
 
 /* PARTNERS ----------------------------------------------------------------- */
@@ -449,54 +299,6 @@ i.committee-text {
     transform: translate(0, 80%);
 }
 
-/* EVENTS ------------------------------------------------------------------- */
-
-#activity-details .fa {
-  margin: 0 4px;
-}
-#activity-details {
-  padding: 0;
-}
-
-.activity-content .module {
-  margin: 0 0 1em 0;
-  overflow: hidden;
-}
-
-.activity-content .module p {
-  margin: 0;
-}
-
-.activity-content p {
-  line-height: 1.5em;
-}
-
-.activity-content .fade {
-  position: relative;
-  height: 6em; /* exactly 4 lines */
-  opacity: 1;
-}
-
-.activity-content .fade:after {
-  content: "";
-  text-align: right;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 70%;
-  height: 1.2em;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
-}
-
-#activity-signup .disabled-input {
-  background: none;
-  border: none;
-  font-family: inherit;
-  width: 100%;
-  color: #aaa;
-  font-style: italic;
-}
-
 /* HONORS ACADEMY (EDUCATION) ----------------------------------------------- */
 .HA-col-container {
   display: flex;
@@ -522,36 +324,6 @@ i.committee-text {
   width: 100%;
 }
 
-/* LOGIN PAGE --------------------------------------------------------------- */
-
-.login-input {
-  font-weight: bolder;
-  font-size: 15px;
-  line-height: 1.2;
-  color: #333;
-  display: block;
-  width: 100%;
-  background: #fff;
-  height: 50px;
-  border-radius: 25px;
-  padding: 0 30px 0 30px;
-}
-
-.login-input:focus {
-  padding: 0 30px 0 30px;
-}
-
-.login-btn {
-  width: 100% !important;
-  border-radius: 25px !important;
-}
-
-.login-form {
-  border: 1px solid #ccc !important;
-  padding: 10px 10px 40px 10px;
-  border-radius: 20px;
-  margin: 10px 20px 10px 20px;
-}
 
 @media (max-width: 992px) {
   .HA-col {
@@ -594,87 +366,7 @@ i.committee-text {
   }
 }
 
-/* --Subscription forms */
-.subscriptionForm {
-  width: 50%;
-  background-color: lightgray;
-  padding: 10px;
-}
-
-@media (max-width: 560px) {
-  .subscriptionForm {
-    width: 100%;
-  }
-}
-
-.overflowTableCell {
-  max-width: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-#answerTable {
-  table-layout: fixed;
-  max-width: 100%;
-  width: 100%;
-  min-width: 100%;
-}
-
-/* --Profile */
-.profileTable table {
-  border: 1px solid black;
-  border-collapse: collapse;
-  padding: 3px;
-}
-
-.profileTable td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  padding: 3px;
-}
-
-.profileTable tr {
-  border: 1px solid black;
-  border-collapse: collapse;
-  padding: 3px;
-}
-
-/* -- Frontpage */
-.home-section{
-  opacity: 0;
-  -moz-transition: all 700ms linear;
-  -webkit-transition: all 700ms linear;
-  -o-transition: all 700ms linear;
-  transition: all 700ms linear;
-  -moz-transform: translate3d(-100px, 0px, 0px);
-  -webkit-transform: translate3d(-100px, 0px, 0px);
-  -o-transform: translate(-100px, 0px);
-  -ms-transform: translate(-100px, 0px);
-  transform: translate3d(-100px, 0px, 0px);
-}
-
-.home-section.in-view{
-  opacity: 1;
-  -moz-transform: translate3d(0px, 0px, 0px);
-  -webkit-transform: translate3d(0px, 0px, 0px);
-  -o-transform: translate(0px, 0px);
-  -ms-transform: translate(0px, 0px);
-  transform: translate3d(0px, 0px, 0px);
-}
-
-#magazine_container {
-  height: calc(100vh - 8rem);
-  overflow: hidden;
-}
-
-#magazine_notification {
-  position: absolute;
-  bottom: 0; left: 0; right: 0; margin: 0;
-}
-.no-overflow {
-  overflow: hidden;
-}
+/* Magazine (also for home page) */
 .magazine div {
   background-size: contain;
   background-repeat: no-repeat

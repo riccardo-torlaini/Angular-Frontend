@@ -1,3 +1,43 @@
+/* Slogan */
+#frontpage-slogan {
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 68%;
+}
+
+/* Partner bar logos */
+.img-logo { height: 26px; margin: 1rem 15px }
+#tno-logo { height: 36px; margin-top: 0; margin-bottom: 0 }
+
+/* List of activities bottom fix */
+#activity-overview { margin-bottom: 0 }
+
+.no-overflow {
+    overflow: hidden;
+}
+
+.home-section{
+    opacity: 0;
+    -moz-transition: all 700ms linear;
+    -webkit-transition: all 700ms linear;
+    -o-transition: all 700ms linear;
+    transition: all 700ms linear;
+    -moz-transform: translate3d(-100px, 0px, 0px);
+    -webkit-transform: translate3d(-100px, 0px, 0px);
+    -o-transform: translate(-100px, 0px);
+    -ms-transform: translate(-100px, 0px);
+    transform: translate3d(-100px, 0px, 0px);
+}
+
+.home-section.in-view{
+    opacity: 1;
+    -moz-transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    -o-transform: translate(0px, 0px);
+    -ms-transform: translate(0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
+}
+
 /* Big info numbers */
 .info_graphic {
     font-size: 3rem;
