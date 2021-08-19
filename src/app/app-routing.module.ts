@@ -123,7 +123,7 @@ const routes: Routes = [
                 component: UserEditComponent,
                 resolve: {
                     user: SpecificUserResolverService,
-                    allGroups: AllGroupsResolverService
+                    allRoles: AllRolesResolverService
                 }
             },
             {

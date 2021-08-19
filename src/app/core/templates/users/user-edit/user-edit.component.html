@@ -183,7 +183,7 @@
 
         <hr>
 
-        <fieldset class="section">
+        <fieldset class="section" *ngIf="currentUser.role.USER_MANAGE && currentUser.role.ROLE_MANAGE">
             <legend class="h4 block">Website</legend>
 
             <div class="row">
@@ -191,40 +191,10 @@
 
                     <label for="userEdit-role" class="col-xs-12 col-sm-3 control-label" style="padding-top: 0">Role</label>
                     <div class="col-xs-12 col-sm-9">
-                        <div *ngFor="let r of role.roles" id="userEdit-role">
-                            <input type="radio" [(ngModel)]="selectedRole.id" [ngModelOptions]="{standalone: true}" value="{{r.id}}"/>
-                            <span> {{r.id}} </span>
+                        <div *ngFor="let r of roles.roles" id="userEdit-role">
+                            <input type="radio" [(ngModel)]="selectedRole.name" [ngModelOptions]="{standalone: true}" value="{{r.name}}"/>
+                            <span> {{r.name}} </span>
                         </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </fieldset>
-
-        <hr>
-
-        <fieldset class="section">
-            <legend class="h4 block">Committees</legend>
-
-            <div class="row">
-                <div class="col-xs-12 col-md-8 col-lg-6">
-
-                    <label for="userEdit-groups" class="col-xs-12 col-sm-3 control-label">Groups</label>
-
-                    <div class="col-xs-12 col-sm-9" id="userEdit-groups">
-
-                        <div *ngFor="let group of groupSelection">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="selectedGroups[]" value="{{group.fullName}}" [(ngModel)]="group.selected" [ngModelOptions]="{standalone: true}"> {{group.fullName}}<br>
-                                    <select [(ngModel)]="group.role" [ngModelOptions]="{standalone: true}">
-                                        <option *ngFor="let role of groupRoles" [value]="role">{{role}}</option>
-                                    </select><br>
-                                </label>
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>

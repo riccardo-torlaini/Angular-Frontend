@@ -84,11 +84,9 @@ export class UsersService {
     /**
      * Function for submitting a user to be edited, including its relation to groups.
      * @param user              Object representing the (edited) user.
-     * @param groupSelection    List of group relation objects. Group relation objects are of the form
-     *                              {full name of group, id of group, whether the group is selected, role}
      */
-    edit(user, groupSelection) {
-        return this.webRequestService.put("api/users/" + user.id, [user, groupSelection]).pipe(
+    edit(user) {
+        return this.webRequestService.put("api/users/" + user.id, user).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),

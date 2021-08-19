@@ -11,9 +11,10 @@ import {Title} from "@angular/platform-browser";
 export class UserEditComponent implements OnInit {
 
     user;
+    currentUser;
     groups;
     loading: boolean;
-    groupSelection;
+    roles;
 
     // Different tracks within the honors academy
     tracks = ["Artificial intelligence", "Competitive Programming and Problem Solving",
@@ -30,17 +31,7 @@ export class UserEditComponent implements OnInit {
     generations = [2016, 2017, 2018, 2019, 2020];
 
     // Different roles for users
-    role = {
-        roles: [{
-            id: "User"
-        }, {
-            id: "Admin"
-        }]
-    };
-
-    selectedRole = {
-        id: "User"
-    };
+    selectedRole: any = {name: "Super admin"};
 
     member;
 
@@ -54,64 +45,19 @@ export class UserEditComponent implements OnInit {
 
     ngOnInit(): void {
         this.user = this.activatedRoute.snapshot.data.user;
+        this.currentUser = this.activatedRoute.snapshot.data.currentUser;
 
-        if (this.user.isAdmin) {
-            this.selectedRole.id = "Admin";
+        if (this.currentUser.role.USER_MANAGE && this.currentUser.role.ROLE_MANAGE) {
+            this.roles = {roles: this.activatedRoute.snapshot.data.allRoles};
+
+            for (const role of this.roles.roles) {
+                if (role.id === this.user.role.id) {
+                    this.selectedRole.name = role.name;
+                }
+            }
         }
-
-        this.member = this.user.groups;
-        this.groups = this.activatedRoute.snapshot.data.allGroups;
 
         this.loading = false;
-
-        const memberGroups = [];
-
-        // get indices of groups of which user is member
-        for (const group of this.member) {
-            memberGroups.push(group.id);
-        }
-
-        this.groupSelection = [];
-        for (const group of this.groups) {
-            if (memberGroups.includes(group.id)) {
-                this.groupSelection.push({
-                    fullName: group.fullName,
-                    id: group.id,
-                    selected: true,
-                    role: this.findMemberGroup(group.id).members[0].user_group.func
-                });
-            } else {
-                this.groupSelection.push({
-                    fullName: group.fullName,
-                    id: group.id,
-                    selected: false,
-                    role: "Member"
-                });
-            }
-        }
-    }
-
-    // Function to find the user_group of one of the groups that the user is a member of
-    private findMemberGroup(id) {
-        for (const group of this.member) {
-            if (group.id === id) {
-                return group;
-            }
-        }
-
-        console.error("UserEditComponent.findMemberGroup: Error when fining member group");
-    }
-
-    // Helper method
-    selectedGroups() {
-        const filtered = [];
-        for (const group of this.groupSelection) {
-            if (group.selected) {
-                filtered.push(group);
-            }
-        }
-
-        return filtered;
     }
 
     submit() {
@@ -122,9 +68,16 @@ export class UserEditComponent implements OnInit {
             return alert("Not all required fields were filled in!");
         }
 
-        this.user.isAdmin = this.selectedRole.id === "Admin";
+        if (this.currentUser.role.USER_MANAGE && this.currentUser.role.ROLE_MANAGE) {
+            delete this.user.role;
+            for (const role of this.roles.roles) {
+                if (role.name === this.selectedRole.name) {
+                    this.user.roleId = role.id;
+                }
+            }
+        }
 
-        this.usersService.edit(this.user, this.groupSelection).subscribe((_) => {
+        this.usersService.edit(this.user).subscribe((_) => {
             this.loading = false;
 
             // redirect to '/manage'
