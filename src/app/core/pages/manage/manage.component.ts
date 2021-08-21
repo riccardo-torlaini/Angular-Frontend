@@ -136,7 +136,7 @@ export class ManageComponent implements OnInit {
     // Allow toggling the 'published' attribute of activities
     togglePublishedActivity(activityToBeToggled) {
         activityToBeToggled.published = !activityToBeToggled.published;
-        activityToBeToggled.organizer = activityToBeToggled.Organizer.fullName;
+        activityToBeToggled.organizerId = activityToBeToggled.organizer.id;
         this.activitiesService.edit(activityToBeToggled, true, null).subscribe();
     }
 

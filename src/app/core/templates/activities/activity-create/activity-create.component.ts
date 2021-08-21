@@ -73,6 +73,10 @@ export class ActivityCreateComponent implements OnInit {
         // If user is admin, then user can organize with all committees (that can organize)
         if (this.user.role.ACTIVITY_MANAGE) {
             this.user.groups = this.activatedRoute.snapshot.data.allGroups;
+        } else {
+            for (let i = 0; i < this.user.groups.length; i++) {
+                this.user.groups[i] = this.user.groups[i].group;
+            }
         }
 
         this.loading = false;
