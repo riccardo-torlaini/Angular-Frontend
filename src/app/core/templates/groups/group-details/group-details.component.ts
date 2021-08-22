@@ -19,30 +19,20 @@ export class GroupDetailsComponent implements OnInit {
         titleService.setTitle("Group Details");
     }
 
+    priorityDict: {[key: string]: number} = {
+        "Board representatitve": 5,
+        Member: 4,
+        Treasurer: 3,
+        Secretary: 2,
+        Chair: 1
+    };
+
     ngOnInit(): void {
         const group = this.activatedRoute.snapshot.data.group;
 
-        // Sorting group on 1. chair, 2. Secretary, 3. Treasurer, 4. Members, 5. Board representative
-        for (let i = 0; i < group.members.length; i++) {
-            if (group.members[i].user_group.func === "Board representatitve") {
-                this.arraymove(group.members, i, group.members.length - 1);
-            }
-        }
-        for (let i = 0; i < group.members.length; i++) {
-            if (group.members[i].user_group.func === "Treasurer") {
-                this.arraymove(group.members, i, 0);
-            }
-        }
-        for (let i = 0; i < group.members.length; i++) {
-            if (group.members[i].user_group.func === "Secretary") {
-                this.arraymove(group.members, i, 0);
-            }
-        }
-        for (let i = 0; i < group.members.length; i++) {
-            if (group.members[i].user_group.func === "Chair") {
-                this.arraymove(group.members, i, 0);
-            }
-        }
+        group.members.sort((a, b) =>
+            (((this.priorityDict)[a.func] < this.priorityDict[b.func]) ?
+                -1 : ((this.priorityDict[a.func] > this.priorityDict[b.func]) ? 1 : 0)));
 
         this.group = group;
     }

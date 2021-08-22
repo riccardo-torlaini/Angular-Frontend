@@ -16,7 +16,7 @@ export class GroupsService {
      * Function for retrieving all groups from backend.
      */
     getAll() {
-        return this.webRequestService.get("api/group").pipe(
+        return this.webRequestService.get("api/groups").pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
@@ -33,7 +33,7 @@ export class GroupsService {
      * @param type  Type of the groups to be returned.
      */
     getAllOfType(type: string) {
-        return this.webRequestService.get("api/group/type/" + type).pipe(
+        return this.webRequestService.get("api/groups/type/" + type).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
@@ -50,7 +50,7 @@ export class GroupsService {
      * @param groupId   Id of the group.
      */
     get(groupId) {
-        return this.webRequestService.get("api/group/" + groupId).pipe(
+        return this.webRequestService.get("api/groups/" + groupId).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
@@ -67,7 +67,7 @@ export class GroupsService {
      * @param group     Object that represents the group.
      */
     create(group) {
-        return this.webRequestService.post("api/group", group).pipe(
+        return this.webRequestService.post("api/groups", group).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
@@ -84,15 +84,14 @@ export class GroupsService {
      * @param group         Object that represents the (edited) group.
      * @param userGroup    List of members of the group in format {name, function, id}.
      */
-    edit(group, userGroup) {
-        return this.webRequestService.put("api/group/" + group.id, [group, userGroup]).pipe(
+    edit(group) {
+        return this.webRequestService.put("api/groups/" + group.id, group).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),
             catchError(err => {
                 console.error('GroupsService.create: Error when editing group with id ' + group.id);
                 console.error(group);
-                console.error(userGroup);
                 console.error(err);
                 return of({});
             })
@@ -104,7 +103,7 @@ export class GroupsService {
      * @param groupId     Id of the group to be deleted.
      */
     delete(groupId) {
-        return this.webRequestService.delete("api/group/" + groupId).pipe(
+        return this.webRequestService.delete("api/groups/" + groupId).pipe(
             map((res: HttpResponse<any>) => {
                 return res.body;
             }),

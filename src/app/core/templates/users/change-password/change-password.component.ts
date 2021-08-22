@@ -12,6 +12,7 @@ export class ChangePasswordComponent implements OnInit {
 
     loading;
     user;
+    currentUser;
     passwordNew;
     passwordNew2;
     password;
@@ -26,6 +27,7 @@ export class ChangePasswordComponent implements OnInit {
 
     ngOnInit(): void {
         this.user = this.activatedRoute.snapshot.data.user;
+        this.currentUser = this.activatedRoute.snapshot.data.currentUser;
         this.loading = false;
     }
 

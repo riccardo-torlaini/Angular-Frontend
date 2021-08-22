@@ -22,10 +22,9 @@ export class CurrentUserResolverService implements Resolve<any> {
                 return of(err);
             }),
             mergeMap((result: any) => {
-                if (result.error === "Unauthorized") {
+                if (result.status === 401) {
                     return of({loggedIn: false, groups: null});
                 }
-
                 return this.usersService.get(result.body.id).pipe(first());
             })
         );

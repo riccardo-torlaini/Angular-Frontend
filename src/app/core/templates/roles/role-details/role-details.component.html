@@ -1,0 +1,300 @@
+<div class="container">
+
+    <form class="form-horizontal">
+        <header>
+            <h1>Role details: {{role.name}}</h1>
+        </header>
+
+        <fieldset class="section">
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-ACTIVITY_VIEW_PUBLISHED" class="col-xs-6 col-sm-6 control-label">
+                            View published activities
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.ACTIVITY_VIEW_PUBLISHED" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-ACTIVITY_VIEW_PUBLISHED" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-ACTIVITY_VIEW_ALL_UNPUBLISHED" class="col-xs-6 col-sm-6 control-label">
+                            View all unpublished activities
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.ACTIVITY_VIEW_ALL_UNPUBLISHED" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-ACTIVITY_VIEW_ALL_UNPUBLISHED" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-ACTIVITY_MANAGE" class="col-xs-6 col-sm-6 control-label">
+                            Manage activities
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.ACTIVITY_MANAGE" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-ACTIVITY_MANAGE" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-GROUP_VIEW" class="col-xs-6 col-sm-6 control-label">
+                            View groups
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.GROUP_VIEW" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-GROUP_VIEW" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-GROUP_MANAGE" class="col-xs-6 col-sm-6 control-label">
+                            Manage groups
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.GROUP_MANAGE" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-GROUP_MANAGE" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-GROUP_ORGANIZE_WITH_ALL" class="col-xs-6 col-sm-6 control-label">
+                            Organize with all groups
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.GROUP_ORGANIZE_WITH_ALL" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-GROUP_ORGANIZE_WITH_ALL" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-USER_CREATE" class="col-xs-6 col-sm-6 control-label">
+                            Create users
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.USER_CREATE" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-USER_CREATE" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-USER_VIEW_ALL" class="col-xs-6 col-sm-6 control-label">
+                            View all users
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.USER_VIEW_ALL" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-USER_VIEW_ALL" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-USER_MANAGE" class="col-xs-6 col-sm-6 control-label">
+                            Manage users
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.USER_MANAGE" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-USER_MANAGE" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-CHANGE_ALL_PASSWORDS" class="col-xs-6 col-sm-6 control-label">
+                            Change all passwords
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.CHANGE_ALL_PASSWORDS" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-CHANGE_ALL_PASSWORDS" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-ROLE_VIEW" class="col-xs-6 col-sm-6 control-label">
+                            View roles
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.ROLE_VIEW" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-ROLE_VIEW" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-ROLE_MANAGE" class="col-xs-6 col-sm-6 control-label">
+                            Manage roles
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.ROLE_MANAGE" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-ROLE_MANAGE" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-PARTNER_VIEW" class="col-xs-6 col-sm-6 control-label">
+                            View partners
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.PARTNER_VIEW" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-PARTNER_VIEW" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-PARTNER_MANAGE" class="col-xs-6 col-sm-6 control-label">
+                            Manage partners
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.PARTNER_MANAGE" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-PARTNER_MANAGE" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-PAGE_VIEW" class="col-xs-6 col-sm-6 control-label">
+                            View pages
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.PAGE_VIEW" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-PAGE_VIEW" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-8 col-lg-6">
+
+                    <div class="form-group">
+                        <label for="roleDetails-PAGE_MANAGE" class="col-xs-6 col-sm-6 control-label">
+                            Manage pages
+                        </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="checkbox" (click)="noChange()" [(ngModel)]="role.PAGE_MANAGE" [ngModelOptions]="{standalone: true}"
+                                   class="form-control" id="roleDetails-PAGE_MANAGE" style="height: 25px">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </fieldset>
+
+    </form>
+
+</div>

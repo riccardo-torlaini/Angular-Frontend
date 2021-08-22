@@ -1,0 +1,47 @@
+/* BOARDS ------------------------------------------------------------------- */
+
+.board-credits {
+    position: absolute;
+    right: 0;
+    font-size: 13px;
+    height: auto;
+}
+
+.board-container_img{
+    position: relative;
+}
+
+
+.board-column {
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+.board-column img {
+    height: 100%;
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .board-container {
+        display: flex;
+    }
+
+    .board-column {
+        width: 50%;
+        height: auto;
+    }
+}
+
+.board-content {
+    display: flex;
+    align-self: center;
+    padding-left: 20px;
+    font-size: 13px;
+}
+
+.board-content ul {
+    font-size: 20px;
+    list-style-type: none;
+}

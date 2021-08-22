@@ -29,10 +29,12 @@ export class ActivityOverviewComponent implements OnInit {
 
         for (const activity of this.activities) {
             activity.subscribed = false;
-            for (const participant of activity.participants) {
-                if (participant.id === this.user.id) {
-                    activity.subscribed = true;
-                    break;
+            if (activity.canSubscribe) {
+                for (const participant of activity.participants) {
+                    if (participant.user.id === this.user.id) {
+                        activity.subscribed = true;
+                        break;
+                    }
                 }
             }
         }

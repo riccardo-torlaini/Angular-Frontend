@@ -33,7 +33,7 @@ export class ActivityCreateComponent implements OnInit {
     canSubscribe = false;
     name: string;
     description: string;
-    organizer: string;
+    organizerId: number;
     date = this.datePipe.transform(new Date(), "yyyy-MM-dd");
     startTime: string;
     endTime: string;
@@ -71,8 +71,12 @@ export class ActivityCreateComponent implements OnInit {
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
         // If user is admin, then user can organize with all committees (that can organize)
-        if (this.user.isAdmin) {
+        if (this.user.role.ACTIVITY_MANAGE) {
             this.user.groups = this.activatedRoute.snapshot.data.allGroups;
+        } else {
+            for (let i = 0; i < this.user.groups.length; i++) {
+                this.user.groups[i] = this.user.groups[i].group;
+            }
         }
 
         this.loading = false;
@@ -170,12 +174,12 @@ export class ActivityCreateComponent implements OnInit {
         const act = {
             name: this.name,
             description: this.description,
-            organizer: this.organizer,
+            organizerId: +this.organizerId,
             date: this.date,
             startTime: this.startTime,
             endTime: this.endTime,
             location: this.location,
-            participationFee: this.participationFee,
+            participationFee: +this.participationFee,
             published: this.published,
             canSubscribe: this.canSubscribe,
             hasCoverImage,
@@ -189,7 +193,7 @@ export class ActivityCreateComponent implements OnInit {
         };
 
         // Checking required fields
-        this.empty = !this.name || !this.description || !this.organizer;
+        this.empty = !this.name || !this.description || !this.organizerId;
         this.wrongCharacters = false;
 
         // Adding form to activity object if members can subscribe
@@ -206,7 +210,7 @@ export class ActivityCreateComponent implements OnInit {
                 allTypes.push(dataObj.type);
 
                 // SQlite database can't handle strings therefore lists are stored as , seperated lists
-                // and ; seperated lists
+                // and ; separated lists
                 let optionString = dataObj.options[0].op;
                 for (let i = 1; i < dataObj.options.length; i++) {
                     optionString += "#;#" + dataObj.options[i].op;

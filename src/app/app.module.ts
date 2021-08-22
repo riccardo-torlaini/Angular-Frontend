@@ -61,6 +61,9 @@ import { SortPipe } from './core/pipes/sort.pipe';
 import { MarkdownComponent } from './core/snippets/markdown/markdown.component';
 import { BaseComponent } from './core/base/base.component';
 import { OptiverComponent } from './core/pages/partners/sponsors/optiver/optiver.component';
+import { RoleCreateComponent } from './core/templates/roles/role-create/role-create.component';
+import { RoleDetailsComponent } from './core/templates/roles/role-details/role-details.component';
+import { RoleEditComponent } from './core/templates/roles/role-edit/role-edit.component';
 
 @NgModule({
     declarations: [
@@ -118,6 +121,9 @@ import { OptiverComponent } from './core/pages/partners/sponsors/optiver/optiver
         MarkdownComponent,
         BaseComponent,
         OptiverComponent,
+        RoleCreateComponent,
+        RoleDetailsComponent,
+        RoleEditComponent,
     ],
     imports: [
         BrowserModule,

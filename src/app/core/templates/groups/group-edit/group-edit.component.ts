@@ -13,7 +13,7 @@ export class GroupEditComponent implements OnInit {
     // Different roles in a committee
     groupRoles = ["Member", "Chair", "Secretary", "Treasurer", "Board representative"];
 
-    userGroup = [];
+    usersInGroup = [];
 
     usersNotInGroup = [];
 
@@ -35,15 +35,17 @@ export class GroupEditComponent implements OnInit {
     ngOnInit(): void {
         this.group = this.activatedRoute.snapshot.data.group;
 
+        console.log(this.group);
+
         const idsInGroup = [];
         for (const member of this.group.members) {
-            this.userGroup.push({
-                name: member.displayName,
-                func: member.user_group.func,
-                id: member.user_group.userId
+            this.usersInGroup.push({
+                name: member.user.displayName,
+                func: member.func,
+                id: member.user.id
             });
 
-            idsInGroup.push(member.user_group.userId);
+            idsInGroup.push(member.user.id);
         }
 
         this.allUsers = this.activatedRoute.snapshot.data.allUsers;
@@ -65,17 +67,17 @@ export class GroupEditComponent implements OnInit {
     }
 
     addUserToGroup(user, index) {
-        this.userGroup.push({name: user.name, func: "Member", id: user.id});
+        this.usersInGroup.push({name: user.name, func: "Member", id: user.id});
         this.usersNotInGroup.splice(index, 1);
-        this.userGroup.sort(this.compare);
+        this.usersInGroup.sort(this.compare);
         this.usersNotInGroup.sort(this.compare);
     }
 
     removeUserFromGroup(user, index) {
         this.usersNotInGroup.push({name: user.name, id: user.id});
-        this.userGroup.splice(index, 1);
+        this.usersInGroup.splice(index, 1);
         this.usersNotInGroup.sort(this.compare);
-        this.userGroup.sort(this.compare);
+        this.usersInGroup.sort(this.compare);
     }
 
     userCallbackFilter(user, query) {
@@ -84,8 +86,16 @@ export class GroupEditComponent implements OnInit {
 
     submit() {
         this.loading = true;
+        console.log(this.group);
+        console.log(this.usersInGroup);
 
-        this.groupsService.edit(this.group, this.userGroup).subscribe(_ => {
+        this.group.members = [];
+
+        this.usersInGroup.forEach((newUser: any) => {
+            this.group.members.push({id: newUser.id, func: newUser.func});
+        });
+
+        this.groupsService.edit(this.group).subscribe(_ => {
             this.loading = false;
 
             window.location.href = "/manage";

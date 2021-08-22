@@ -1,0 +1,16 @@
+#activity-details .fa {
+    margin: 0 4px;
+}
+#activity-details {
+    padding: 0;
+}
+
+
+#activity-signup .disabled-input {
+    background: none;
+    border: none;
+    font-family: inherit;
+    width: 100%;
+    color: #aaa;
+    font-style: italic;
+}

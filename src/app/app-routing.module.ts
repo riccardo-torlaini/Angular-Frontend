@@ -59,6 +59,11 @@ import {CompanyOpportunityEditComponent} from "./core/templates/partners/company
 import {CurrentUserResolverService} from "./core/services/users/current-user-resolver.service";
 import {BaseComponent} from "./core/base/base.component";
 import {OptiverComponent} from "./core/pages/partners/sponsors/optiver/optiver.component";
+import {AllRolesResolverService} from "src/app/core/services/roles/all-roles-resolver.service";
+import {RoleCreateComponent} from "src/app/core/templates/roles/role-create/role-create.component";
+import {RoleEditComponent} from "src/app/core/templates/roles/role-edit/role-edit.component";
+import {SpecificRoleResolverService} from "src/app/core/services/roles/specific-role-resolver.service";
+import {RoleDetailsComponent} from "src/app/core/templates/roles/role-details/role-details.component";
 
 const routes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -79,6 +84,7 @@ const routes: Routes = [
                     allUsers: AllUsersResolverService,
                     allGroups: AllGroupsResolverService,
                     allCompanyOpportunities: AllCompanyOpportunitiesResolverService,
+                    allRoles: AllRolesResolverService,
                     currentUser: CurrentUserResolverService
                 }
             },
@@ -117,7 +123,7 @@ const routes: Routes = [
                 component: UserEditComponent,
                 resolve: {
                     user: SpecificUserResolverService,
-                    allGroups: AllGroupsResolverService
+                    allRoles: AllRolesResolverService
                 }
             },
             {
@@ -156,6 +162,19 @@ const routes: Routes = [
                 path: 'manage/partners/company_opportunities/edit/:companyOpportunityId',
                 component: CompanyOpportunityEditComponent,
                 resolve: {companyOpportunity: SpecificCompanyOpportunityResolverService}
+            },
+
+            // Roles
+            {
+                path: 'manage/roles/view/:roleId',
+                component: RoleDetailsComponent,
+                resolve: {role: SpecificRoleResolverService}
+            },
+            {path: 'manage/roles/create', component: RoleCreateComponent},
+            {
+                path: 'manage/roles/edit/:roleId',
+                component: RoleEditComponent,
+                resolve: {role: SpecificRoleResolverService}
             },
 
             // Pages

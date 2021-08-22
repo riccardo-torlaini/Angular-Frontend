@@ -1,0 +1,47 @@
+#committees img {
+    width: 600px;
+}
+
+.committee-img-container {
+    position: relative;
+    height: calc(100% - 40px);
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-origin: content-box;
+    border-bottom: solid;
+    border-color: #296e82bf;
+}
+
+.committee-box {
+    height: 360px;
+    border: 1px solid #ddd;
+    padding: 0;
+}
+
+.committee-box-small {
+    height: 300px;
+    width: 300px;
+    padding: 0;
+}
+
+.committee-link {
+    text-decoration: none!important;
+    cursor: pointer;
+}
+
+.committee-text {
+    padding-left: 10px;
+    color: white!important;
+    vertical-align: middle;
+    line-height: 38px;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+i.committee-text {
+    font-size: 15px!important;
+    margin-right: 10px;
+    float: right;
+}

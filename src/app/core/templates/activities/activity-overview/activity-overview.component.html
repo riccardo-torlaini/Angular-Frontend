@@ -10,7 +10,7 @@
 
         <div class="activity row" *ngFor="let activity of activities">
             <div class="activity-title col-xs-12">
-                <a href="/activities/{{activity.id}}#signup"><h3 class="nospace">{{activity.name}} ({{activity.Organizer.fullName}})</h3><span
+                <a href="/activities/{{activity.id}}#signup"><h3 class="nospace">{{activity.name}} ({{activity.organizer.fullName}})</h3><span
                     *ngIf="!activity.published">(Unpublished)</span></a>
             </div>
             <div class="activity-content col-md-8 col-xs-12">
@@ -19,9 +19,9 @@
             <div class="activity-details col-md-4 col-xs-12">
                 <p *ngIf="activity.date" style="margin-bottom: 0;">When: {{activity.date | date:'d MMMM yyyy'}}</p>
                 <p *ngIf="activity.location" style="margin-bottom: 0">Where: {{activity.location}}</p>
-                <p *ngIf="activity.startTime && activity.endTime">Time: {{activity.startTime}} - {{activity.endTime}}</p>
-                <p *ngIf="activity.startTime && !activity.endTime">Time: {{activity.startTime}}</p>
-                <p *ngIf="activity.canSubscribe && activity.subscribed">Subscribed <i class="fa fa-check"></i></p>
+                <p *ngIf="activity.startTime && activity.endTime" style="margin-bottom: 0">Time: {{activity.startTime}} - {{activity.endTime}}</p>
+                <p *ngIf="activity.startTime && !activity.endTime" style="margin-bottom: 0">Time: {{activity.startTime}}</p>
+                <p *ngIf="activity.canSubscribe && activity.subscribed" style="margin-bottom: 0">Subscribed <i class="fa fa-check"></i></p>
             </div>
         </div>
         <div class="no-activities" *ngIf="!activities.length && !loading">

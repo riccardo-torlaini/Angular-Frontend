@@ -60,13 +60,17 @@ export class ActivityEditComponent implements OnInit {
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
         this.activity.date = this.datePipe.transform(this.activity.date, "yyyy-MM-dd");
-        this.activity.organizer = this.activity.Organizer.fullName;
+        this.activity.organizerId = this.activity.organizer.id;
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
         // If user is admin, then user can organize with all committees (that can organize)
-        if (this.user.isAdmin) {
+        if (this.user.role.ACTIVITY_MANAGE) {
             this.user.groups = this.activatedRoute.snapshot.data.allGroups;
+        } else {
+            for (let i = 0; i < this.user.groups.length; i++) {
+                this.user.groups[i] = this.user.groups[i].group;
+            }
         }
 
         for (const group of this.user.groups) {
@@ -91,7 +95,7 @@ export class ActivityEditComponent implements OnInit {
                 });
             }
 
-            this.deadline.subscriptionDeadline = this.activity.subscriptionDeadline;
+            this.deadline.subscriptionDeadline = this.datePipe.transform(this.activity.subscriptionDeadline, "yyyy-MM-dd");
         }
 
         // If not subscription form was submitted initially then add the standard two questions to input
@@ -271,6 +275,9 @@ export class ActivityEditComponent implements OnInit {
         if (this.activity.hasCoverImage && !changedCoverImage && !this.keepCurrent) {
             this.activity.hasCoverImage = false;
         }
+
+        this.activity.organizerId = +this.activity.organizerId;
+        this.activity.participationFee = +this.activity.participationFee;
 
         this.activitiesService.edit(this.activity, this.keepCurrent, fd).subscribe((result) => {
             this.loading = false;
