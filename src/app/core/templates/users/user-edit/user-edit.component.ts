@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {UsersService} from "../../../services/users/users.service";
+import {DatePipe} from "@angular/common";
 import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-user-edit',
     templateUrl: './user-edit.component.html',
+    providers: [DatePipe],
     styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
@@ -15,6 +17,8 @@ export class UserEditComponent implements OnInit {
     groups;
     loading: boolean;
     roles;
+    dob;
+    personalEmail;
 
     // Different tracks within the honors academy
     tracks = ["Artificial intelligence", "Competitive Programming and Problem Solving",
@@ -28,7 +32,7 @@ export class UserEditComponent implements OnInit {
     memberships = ["Member", "Alumni", "Associate member"];
 
     // Different generations in which students can say that started at honors academy
-    generations = [2016, 2017, 2018, 2019, 2020];
+    generations = [2016, 2017, 2018, 2019, 2020, 2021];
 
     // Different roles for users
     selectedRole: any = {name: "Super admin"};
@@ -37,6 +41,7 @@ export class UserEditComponent implements OnInit {
 
     constructor(titleService: Title,
                 private activatedRoute: ActivatedRoute,
+                private datePipe: DatePipe,
                 private usersService: UsersService) {
         this.loading = true;
 
@@ -46,6 +51,7 @@ export class UserEditComponent implements OnInit {
     ngOnInit(): void {
         this.user = this.activatedRoute.snapshot.data.user;
         this.currentUser = this.activatedRoute.snapshot.data.currentUser;
+        this.user.dob = this.datePipe.transform(this.user.dob, "yyyy-MM-dd");
 
         if (this.currentUser.role.USER_MANAGE && this.currentUser.role.ROLE_MANAGE) {
             this.roles = {roles: this.activatedRoute.snapshot.data.allRoles};
