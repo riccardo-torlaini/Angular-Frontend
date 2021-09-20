@@ -152,6 +152,10 @@
                                     *ngIf="(sortTypeUsers == 'email') && sortReverseUsers" class="fa fa-angle-down"></i><i
                                     *ngIf="(sortTypeUsers == 'email') && !sortReverseUsers" class="fa fa-angle-up"></i>
                                 </th>
+                                <th class="col-xs-3" (click)="sortUsers('id')">Identity Column (based on registration time)<i
+                                    *ngIf="(sortTypeUsers == 'id') && sortReverseUsers" class="fa fa-angle-down"></i><i
+                                    *ngIf="(sortTypeUsers == 'id') && !sortReverseUsers" class="fa fa-angle-up"></i>
+                                </th>
                                 <th class="col-xs-2" (click)="sortUsers('role.name')">Role<i
                                     *ngIf="(sortTypeUsers == 'role.name') && sortReverseUsers"
                                     class="fa fa-angle-down"></i><i
@@ -167,6 +171,7 @@
                                     sort   : sortTypeUsers : typeSortMap.get(sortTypeUsers) : sortReverseUsers">
                                 <td><a href="/user/{{userIter.id}}">{{userIter.displayName}}</a></td>
                                 <td>{{userIter.email}}</td>
+                                <td>{{userIter.id}}</td>
                                 <td>{{userIter.role.name}}</td>
                                 <td class="manage-table-action text-right" *ngIf="user.role.USER_MANAGE">
                                     <div>
