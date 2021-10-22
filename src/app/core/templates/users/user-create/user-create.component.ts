@@ -73,17 +73,21 @@ export class UserCreateComponent implements OnInit {
             major: this.major,
             address: this.address,
             track: this.honorsTrack,
-            honorsGeneration: this.generation,
+            honorsGeneration: +this.generation,
             campusCardNumber: this.cardNumber,
             mobilePhoneNumber: this.phone,
             password: this.password,
             consentWithPortraitRight: this.portraitRight,
             consentWithDOBRight: this.DOBRight
-        }).subscribe(activity => {
+        }).subscribe(obj => {
             this.loading = false;
 
-            // redirect
-            window.location.href = "/submitted_registration";
+            if (obj.error) {
+                window.alert(obj.message);
+            } else {
+                // redirect
+                window.location.href = "/submitted_registration";
+            }
         });
     }
 
