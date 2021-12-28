@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {OptiverComponent} from './optiver.component';
+import {FrisseBlikkenComponent} from './frisseblikken.component';
 
-describe('OptiverComponent', () => {
-    let component: OptiverComponent;
-    let fixture: ComponentFixture<OptiverComponent>;
+describe('FrisseBlikkenComponent', () => {
+    let component: FrisseBlikkenComponent;
+    let fixture: ComponentFixture<FrisseBlikkenComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [OptiverComponent]
+            declarations: [FrisseBlikkenComponent]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(OptiverComponent);
+        fixture = TestBed.createComponent(FrisseBlikkenComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
