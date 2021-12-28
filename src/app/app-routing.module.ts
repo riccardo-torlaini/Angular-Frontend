@@ -58,7 +58,7 @@ import {CompanyOpportunityCreateComponent} from "./core/templates/partners/compa
 import {CompanyOpportunityEditComponent} from "./core/templates/partners/company-opportunity-edit/company-opportunity-edit.component";
 import {CurrentUserResolverService} from "./core/services/users/current-user-resolver.service";
 import {BaseComponent} from "./core/base/base.component";
-import {OptiverComponent} from "./core/pages/partners/sponsors/optiver/optiver.component";
+import {FrisseBlikkenComponent} from "./core/pages/partners/sponsors/frisseblikken/frisseblikken.component";
 import {AllRolesResolverService} from "src/app/core/services/roles/all-roles-resolver.service";
 import {RoleCreateComponent} from "src/app/core/templates/roles/role-create/role-create.component";
 import {RoleEditComponent} from "src/app/core/templates/roles/role-edit/role-edit.component";
@@ -208,7 +208,7 @@ const routes: Routes = [
             {path: 'partners/sister_associations', component: SisterAssociationsComponent},
             {path: 'partners/sponsors', component: SponsorsComponent},
             {path: 'partners/sponsors/dnb', component: DnbComponent},
-            {path: 'partners/sponsors/optiver', component: OptiverComponent},
+            {path: 'partners/sponsors/frisseblikken', component: FrisseBlikkenComponent},
             {path: 'privacy_policy', component: PrivacyPolicyComponent},
             {path: 'magazine', component: MagazineComponent},
             {path: 'consent_portrait_right', component: ConsentPortraitRightComponent},

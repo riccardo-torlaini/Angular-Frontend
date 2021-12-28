@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
         const windowTopPosition = $(window).scrollTop();
         const windowBottomPosition = (windowTopPosition + windowHeight);
 
-        $.each($animationElements, function (): void {
+        $.each($animationElements, function(): void {
             const $element = $(this);
             const elementHeight = $element.outerHeight();
             const elementTopPosition = $element.offset().top;
