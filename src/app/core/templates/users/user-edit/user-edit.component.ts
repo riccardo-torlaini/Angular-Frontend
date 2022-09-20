@@ -22,8 +22,8 @@ export class UserEditComponent implements OnInit {
 
     // Different tracks within the honors academy
     tracks = ["Artificial intelligence", "Competitive Programming and Problem Solving",
-        "Empowerement for Healthcare and Wellbeing", "Energy Transition", "High Tech Systems", "SensUs Organization",
-        "Smart Cities", "Smart Mobility", "Master Honors"];
+        "Empowerement for Healthcare and Wellbeing", "Energy Transition", "High Tech Systems", "Networked Society",
+        "SensUs Organization", "Smart Cities", "Smart Mobility", "Master Honors"];
 
     // Different roles in a committee
     groupRoles = ["Member", "Chair", "Secretary", "Treasurer", "Board representative"];
@@ -32,7 +32,7 @@ export class UserEditComponent implements OnInit {
     memberships = ["Member", "Alumni", "Associate member"];
 
     // Different generations in which students can say that started at honors academy
-    generations = [2016, 2017, 2018, 2019, 2020, 2021];
+    generations = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
 
     // Different roles for users
     selectedRole: any = {name: "Super admin"};
