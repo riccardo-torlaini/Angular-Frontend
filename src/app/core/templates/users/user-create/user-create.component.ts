@@ -13,11 +13,11 @@ export class UserCreateComponent implements OnInit {
 
     // Different tracks within the honors academy
     tracks = ["Artificial intelligence", "Competitive Programming and Problem Solving",
-        "Empowerement for Healthcare and Wellbeing", "Energy Transition", "High Tech Systems", "SensUs Organization",
-        "Smart Cities", "Smart Mobility", "Master Honors"];
+        "Empowerement for Healthcare and Wellbeing", "Energy Transition", "High Tech Systems", "Networked Society",
+        "SensUs Organization", "Smart Cities", "Smart Mobility", "Master Honors"];
 
     // Different generations in which students can say that started at honors academy
-    generations = [2016, 2017, 2018, 2019, 2020, 2021];
+    generations = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
 
     // Different membership statuses
     memberships = ["Member", "Alumni", "Associate member"];
