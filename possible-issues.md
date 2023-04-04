@@ -7,3 +7,6 @@ None
 # Angular 13
 None
 Make sure you use Node 12.20 and up
+# Angular 14
+None
+Make sure you use Node 14.15 and up
