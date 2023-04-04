@@ -10,3 +10,6 @@ Make sure you use Node 12.20 and up
 # Angular 14
 None
 Make sure you use Node 14.15 and up
+# Angular 15
+https://update.angular.io/?v=14.0-15.0
+A bunch of stuff, have to manually check the app. Code should be fine
