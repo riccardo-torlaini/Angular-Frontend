@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivitiesService} from "../../../services/activities/activities.service";
 import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {DatePipe} from "@angular/common";
 import {FilterPipe} from "../../../pipes/filter.pipe";
 import {Title} from "@angular/platform-browser";
@@ -16,7 +16,7 @@ export class ActivityCreateComponent implements OnInit {
 
     loading = false;
 
-    uploadForm: FormGroup;
+    uploadForm: UntypedFormGroup;
 
     // setting standard deadline for subscription deadline field
     deadline = {
@@ -55,7 +55,7 @@ export class ActivityCreateComponent implements OnInit {
     constructor(titleService: Title,
                 private activitiesService: ActivitiesService,
                 private activatedRoute: ActivatedRoute,
-                private formBuilder: FormBuilder,
+                private formBuilder: UntypedFormBuilder,
                 private datePipe: DatePipe,
                 private filterPipe: FilterPipe) {
         this.loading = true;

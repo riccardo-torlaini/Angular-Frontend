@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ActivitiesService} from "../../../services/activities/activities.service";
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {DatePipe} from "@angular/common";
 import {FilterPipe} from "../../../pipes/filter.pipe";
 import {Title} from "@angular/platform-browser";
@@ -17,7 +17,7 @@ export class ActivityEditComponent implements OnInit {
     activity;
     user;
 
-    uploadForm: FormGroup;
+    uploadForm: UntypedFormGroup;
 
     loading: boolean;
 
@@ -45,7 +45,7 @@ export class ActivityEditComponent implements OnInit {
     constructor(titleService: Title,
                 private activatedRoute: ActivatedRoute,
                 private activitiesService: ActivitiesService,
-                private formBuilder: FormBuilder,
+                private formBuilder: UntypedFormBuilder,
                 private datePipe: DatePipe,
                 private filterPipe: FilterPipe) {
         this.loading = true;
