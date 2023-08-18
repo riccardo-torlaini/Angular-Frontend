@@ -60,8 +60,8 @@ export class ActivityDetailsComponent implements OnInit {
         }
 
         // check whether the logged in user is part of the group that is organizing the event
-        for (const group of this.user.groups) {
-            if (group.id === this.activity.OrganizerId) {
+        for (const userGroup of this.user.groups) {
+            if (userGroup.group.id === this.activity.organizer.id) {
                 this.isUserOrganizing = true;
             }
         }

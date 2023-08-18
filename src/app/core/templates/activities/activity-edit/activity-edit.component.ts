@@ -60,7 +60,6 @@ export class ActivityEditComponent implements OnInit {
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
         this.activity.date = this.datePipe.transform(this.activity.date, "yyyy-MM-dd");
-        this.activity.organizerId = this.activity.organizer.id;
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
@@ -276,7 +275,7 @@ export class ActivityEditComponent implements OnInit {
             this.activity.hasCoverImage = false;
         }
 
-        this.activity.organizerId = +this.activity.organizerId;
+        this.activity.organizer.id = +this.activity.organizer.id;
         this.activity.participationFee = +this.activity.participationFee;
 
         this.activitiesService.edit(this.activity, this.keepCurrent, fd).subscribe((result) => {
