@@ -89,8 +89,8 @@ export class ActivityEditComponent implements OnInit {
                     fullQuestion: this.activity.questionDescriptions[i],
                     type: this.activity.typeOfQuestion[i],
                     options,
-                    required: (this.activity.required[i] === 'true'),
-                    privacyOfQuestion: (this.activity.privacyOfQuestions[i] === 'true')
+                    required: (this.activity.required[i]),
+                    privacyOfQuestion: (this.activity.privacyOfQuestions[i])
                 });
             }
 

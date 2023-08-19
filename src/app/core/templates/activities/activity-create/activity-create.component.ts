@@ -26,7 +26,7 @@ export class ActivityCreateComponent implements OnInit {
     // setting standard inputs for subscription form (first two questions are mandatory)
     inputs = [
         {fullQuestion: 'Name', type: "name", options: [{op: ''}], required: 'true', privacyOfQuestion: 'false'},
-        {fullQuestion: 'TU/e email', type: "TU/e email", options: [{op: ''}], required: 'true', privacyOfQuestion: 'false'}
+        {fullQuestion: 'TU/e email', type: "TU/e email", options: [{op: ''}], required: 'true', privacyOfQuestion: 'true'}
     ];
 
     // declaring variables in used in form;
