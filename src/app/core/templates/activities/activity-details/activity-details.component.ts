@@ -136,7 +136,7 @@ export class ActivityDetailsComponent implements OnInit {
         // Check if all required field are filled in
         let filledIn = true;
         for (let i = 0; i < this.activity.numberOfQuestions; i++) {
-            if (this.activity.required[i] === 'true') {
+            if (this.activity.required[i]) {
                 if (this.activity.typeOfQuestion[i] === '☰ text' && this.answers[i] === "") {
                     filledIn = false;
                 } else if (this.activity.typeOfQuestion[i] === '◉ multiple choice' && this.answers[i] === "") {

@@ -207,7 +207,7 @@ export class ActivityEditComponent implements OnInit {
         }
 
         // Checks whether required fields are empty
-        let empty = !this.activity.name || !this.activity.description || !this.activity.organizer;
+        let empty = !this.activity.name || !this.activity.date || !this.activity.description || !this.activity.organizer;
 
         let wrongCharacters = false;
 

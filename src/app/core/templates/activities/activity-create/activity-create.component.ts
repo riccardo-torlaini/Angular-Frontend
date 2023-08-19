@@ -193,7 +193,7 @@ export class ActivityCreateComponent implements OnInit {
         };
 
         // Checking required fields
-        this.empty = !this.name || !this.description || !this.organizerId;
+        this.empty = !this.name || !this.date || !this.description || !this.organizerId;
         this.wrongCharacters = false;
 
         // Adding form to activity object if members can subscribe
