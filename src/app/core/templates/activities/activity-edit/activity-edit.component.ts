@@ -60,7 +60,6 @@ export class ActivityEditComponent implements OnInit {
     ngOnInit(): void {
         this.activity = this.activatedRoute.snapshot.data.activity;
         this.activity.date = this.datePipe.transform(this.activity.date, "yyyy-MM-dd");
-        this.activity.organizerId = this.activity.organizer.id;
 
         this.user = this.activatedRoute.snapshot.data.currentUser;
 
@@ -90,8 +89,8 @@ export class ActivityEditComponent implements OnInit {
                     fullQuestion: this.activity.questionDescriptions[i],
                     type: this.activity.typeOfQuestion[i],
                     options,
-                    required: (this.activity.required[i] === 'true'),
-                    privacyOfQuestion: (this.activity.privacyOfQuestions[i] === 'true')
+                    required: (this.activity.required[i]),
+                    privacyOfQuestion: (this.activity.privacyOfQuestions[i])
                 });
             }
 
@@ -208,7 +207,7 @@ export class ActivityEditComponent implements OnInit {
         }
 
         // Checks whether required fields are empty
-        let empty = !this.activity.name || !this.activity.description || !this.activity.organizer;
+        let empty = !this.activity.name || !this.activity.date || !this.activity.description || !this.activity.organizer;
 
         let wrongCharacters = false;
 
@@ -276,7 +275,7 @@ export class ActivityEditComponent implements OnInit {
             this.activity.hasCoverImage = false;
         }
 
-        this.activity.organizerId = +this.activity.organizerId;
+        this.activity.organizer.id = +this.activity.organizer.id;
         this.activity.participationFee = +this.activity.participationFee;
 
         this.activitiesService.edit(this.activity, this.keepCurrent, fd).subscribe((result) => {

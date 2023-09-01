@@ -26,7 +26,7 @@ export class ActivityCreateComponent implements OnInit {
     // setting standard inputs for subscription form (first two questions are mandatory)
     inputs = [
         {fullQuestion: 'Name', type: "name", options: [{op: ''}], required: 'true', privacyOfQuestion: 'false'},
-        {fullQuestion: 'TU/e email', type: "TU/e email", options: [{op: ''}], required: 'true', privacyOfQuestion: 'false'}
+        {fullQuestion: 'TU/e email', type: "TU/e email", options: [{op: ''}], required: 'true', privacyOfQuestion: 'true'}
     ];
 
     // declaring variables in used in form;
@@ -193,7 +193,7 @@ export class ActivityCreateComponent implements OnInit {
         };
 
         // Checking required fields
-        this.empty = !this.name || !this.description || !this.organizerId;
+        this.empty = !this.name || !this.date || !this.description || !this.organizerId;
         this.wrongCharacters = false;
 
         // Adding form to activity object if members can subscribe

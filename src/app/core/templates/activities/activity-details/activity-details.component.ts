@@ -60,8 +60,8 @@ export class ActivityDetailsComponent implements OnInit {
         }
 
         // check whether the logged in user is part of the group that is organizing the event
-        for (const group of this.user.groups) {
-            if (group.id === this.activity.OrganizerId) {
+        for (const userGroup of this.user.groups) {
+            if (userGroup.group.id === this.activity.organizer.id) {
                 this.isUserOrganizing = true;
             }
         }
@@ -136,7 +136,7 @@ export class ActivityDetailsComponent implements OnInit {
         // Check if all required field are filled in
         let filledIn = true;
         for (let i = 0; i < this.activity.numberOfQuestions; i++) {
-            if (this.activity.required[i] === 'true') {
+            if (this.activity.required[i]) {
                 if (this.activity.typeOfQuestion[i] === '☰ text' && this.answers[i] === "") {
                     filledIn = false;
                 } else if (this.activity.typeOfQuestion[i] === '◉ multiple choice' && this.answers[i] === "") {

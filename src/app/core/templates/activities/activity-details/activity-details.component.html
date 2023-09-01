@@ -108,7 +108,7 @@
 
                                 <div class="form-group" *ngIf="activity.typeOfQuestion[i] == '☰ text'">
                                     <label for="activityView{{i}}">{{activity.questionDescriptions[i]}}
-                                        <span *ngIf="activity.required[i] !== 'true'">(optional)</span>
+                                        <span *ngIf="!activity.required[i]">(optional)</span>
                                     </label>
                                     <input type="text" [(ngModel)]="answers[i]" class="form-control"
                                            id="activityView{{i}}" [ngModelOptions]="{standalone: true}"/>
@@ -116,7 +116,7 @@
 
                                 <div class="form-group" *ngIf="activity.typeOfQuestion[i] == '◉ multiple choice'">
                                     <label>{{activity.questionDescriptions[i]}}
-                                        <span *ngIf="activity.required[i] !== 'true'">(optional)</span>
+                                        <span *ngIf="!activity.required[i]">(optional)</span>
                                     </label>
                                     <div class="radio" *ngFor="let option of activity.formOptions[i]; index as j">
                                         <label>
@@ -127,8 +127,8 @@
 
                                 <div class="form-group" *ngIf="activity.typeOfQuestion[i] == '☑ checkboxes'">
                                     <label>{{activity.questionDescriptions[i]}}
-                                        <span *ngIf="activity.required[i] === 'true'">(pick at least 1)</span>
-                                        <span *ngIf="activity.required[i] !== 'true'">(optional)</span>
+                                        <span *ngIf="activity.required[i]">(pick at least 1)</span>
+                                        <span *ngIf="!activity.required[i]">(optional)</span>
                                     </label>
                                     <div class="checkbox" *ngFor="let option of activity.formOptions[i]; index as j">
                                         <label>
@@ -174,8 +174,8 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <ng-container *ngFor="let question of activity.questionDescriptions; index as i">
-                        <th *ngIf="activity.privacyOfQuestions[i] === 'false' || isUserOrganizing">
+                    <ng-container *ngFor="let question of activity.questionDescriptions">
+                        <th>
                             <div>{{question}}</div>
                         </th>
                     </ng-container>
@@ -186,7 +186,7 @@
                 <tr *ngFor="let participant of activity.participants; index as i">
                     <td>{{i + 1}}</td>
                     <td *ngFor="let answer of participant.answers; index as j">
-                        <ng-container *ngIf="activity.privacyOfQuestions[j] || isUserOrganizing">
+                        <ng-container *ngIf="!activity.privacyOfQuestions[j] || isUserOrganizing || participant.user.id === user.id">
                             <div>{{answer}}</div>
                         </ng-container>
                     </td>
