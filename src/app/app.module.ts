@@ -26,6 +26,7 @@ import { CompetitiveProgrammingAndProblemSolvingComponent } from './core/pages/e
 import { EmpowermentForHealthcareAndWellbeingComponent } from './core/pages/education/tracks/empowerment-for-healthcare-and-wellbeing/empowerment-for-healthcare-and-wellbeing.component';
 import { EnergyTransitionComponent } from './core/pages/education/tracks/energy-transition/energy-transition.component';
 import { HighTechSystemsComponent } from './core/pages/education/tracks/high-tech-systems/high-tech-systems.component';
+import { NetworkedSocietyComponent } from './core/pages/education/tracks/networked-society/networked-society.component';
 import { SensusComponent } from './core/pages/education/tracks/sensus/sensus.component';
 import { SmartCitiesComponent } from './core/pages/education/tracks/smart-cities/smart-cities.component';
 import { SmartMobilityComponent } from './core/pages/education/tracks/smart-mobility/smart-mobility.component';
@@ -87,6 +88,7 @@ import { RoleEditComponent } from './core/templates/roles/role-edit/role-edit.co
         EmpowermentForHealthcareAndWellbeingComponent,
         EnergyTransitionComponent,
         HighTechSystemsComponent,
+        NetworkedSocietyComponent,
         SensusComponent,
         SmartCitiesComponent,
         SmartMobilityComponent,

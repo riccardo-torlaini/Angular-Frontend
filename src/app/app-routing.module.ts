@@ -17,6 +17,7 @@ import {CompetitiveProgrammingAndProblemSolvingComponent} from "./core/pages/edu
 import {EmpowermentForHealthcareAndWellbeingComponent} from "./core/pages/education/tracks/empowerment-for-healthcare-and-wellbeing/empowerment-for-healthcare-and-wellbeing.component";
 import {EnergyTransitionComponent} from "./core/pages/education/tracks/energy-transition/energy-transition.component";
 import {HighTechSystemsComponent} from "./core/pages/education/tracks/high-tech-systems/high-tech-systems.component";
+import {NetworkedSocietyComponent} from './core/pages/education/tracks/networked-society/networked-society.component';
 import {SensusComponent} from "./core/pages/education/tracks/sensus/sensus.component";
 import {SmartCitiesComponent} from "./core/pages/education/tracks/smart-cities/smart-cities.component";
 import {SmartMobilityComponent} from "./core/pages/education/tracks/smart-mobility/smart-mobility.component";
@@ -205,6 +206,7 @@ const routes: Routes = [
             {path: 'education/tracks/sensus', component: SensusComponent},
             {path: 'education/tracks/smart_cities', component: SmartCitiesComponent},
             {path: 'education/tracks/smart_mobility', component: SmartMobilityComponent},
+            {path: 'education/tracks/networked_society', component: NetworkedSocietyComponent},
             {path: 'partners/sister_associations', component: SisterAssociationsComponent},
             {path: 'partners/sponsors', component: SponsorsComponent},
             {path: 'partners/sponsors/dnb', component: DnbComponent},
